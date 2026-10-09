@@ -1,0 +1,68 @@
+{"text":"İstanbul'a gezi planla","labels":["transport","hotel","weather","events","maps"]}
+{"text":"Ankara'dan İstanbul'a hafta sonu tatili ayarla","labels":["transport","hotel","weather","events","maps"]}
+{"text":"İzmir'e üç günlük şehir gezisi hazırla; kalacak yerleri ve hava durumunu da düşün","labels":["transport","hotel","weather","events","maps"]}
+{"text":"Kapadokya için uçuş, otel, hava tahmini ve gezilecek yerlerle plan yap","labels":["transport","hotel","weather","events","maps"]}
+{"text":"Antalya tatilim için nerede kalayım, ne yapayım ve hava nasıl olacak","labels":["transport","hotel","weather","events","maps"]}
+{"text":"Bursa'ya hafta sonu kaçamağı planla","labels":["transport","hotel","weather","events","maps"]}
+{"text":"Ankara'dan İzmir'e tren seferlerini bul","labels":["transport"]}
+{"text":"İstanbul Havalimanı'ndan şehir merkezine nasıl giderim","labels":["transport"]}
+{"text":"Yarın için en hızlı otobüs yolculuğunu bul","labels":["transport"]}
+{"text":"Eskişehir'den Ankara'ya ulaşım seçenekleri neler","labels":["transport"]}
+{"text":"İzmir'den Bodrum'a araba rotası çıkar","labels":["transport","maps"]}
+{"text":"Sabiha Gökçen'den Kadıköy'e ulaşım yolu göster","labels":["transport","maps"]}
+{"text":"Şehirler arası tren bileti arıyorum","labels":["transport"]}
+{"text":"Hafta sonu için uçak ve otobüs seçeneklerini karşılaştır","labels":["transport"]}
+{"text":"Beyoğlu'nda uygun fiyatlı otel bul","labels":["hotel"]}
+{"text":"Kadıköy civarında iki gece kalacak yer öner","labels":["hotel"]}
+{"text":"Sultanahmet'te aile için konaklama seçeneklerini listele","labels":["hotel"]}
+{"text":"İzmir merkezde müsait pansiyon ara","labels":["hotel"]}
+{"text":"Antalya sahile yakın hostel bul","labels":["hotel"]}
+{"text":"Yarın İstanbul'da hava kaç derece olacak","labels":["weather"]}
+{"text":"Cumartesi yağmur yağma ihtimali nedir","labels":["weather"]}
+{"text":"İzmir için gelecek haftanın sıcaklık tahminini göster","labels":["weather"]}
+{"text":"Ankara'da bugün hava güneşli mi","labels":["weather"]}
+{"text":"Bodrum'da hafta sonu yağış bekleniyor mu","labels":["weather"]}
+{"text":"Trabzon için sıcaklık ve yağmur tahmini ver","labels":["weather"]}
+{"text":"Yarın hava nasıl, şemsiye almalı mıyım","labels":["weather"]}
+{"text":"Önümüzdeki pazarın günlük hava tahminini getir","labels":["weather"]}
+{"text":"İstanbul'da bu akşam hangi konserler var","labels":["events"]}
+{"text":"Hafta sonu İzmir'deki tiyatro ve sergileri bul","labels":["events"]}
+{"text":"Ankara'da çocuklar için yaklaşan etkinlikleri listele","labels":["events"]}
+{"text":"Bodrum'da cuma günü canlı müzik etkinliği var mı","labels":["events"]}
+{"text":"Bu ay İstanbul'daki festivalleri keşfet","labels":["events"]}
+{"text":"Yakınımdaki müze etkinliklerini göster","labels":["events"]}
+{"text":"Cumartesi akşamı için tiyatro bileti etkinliği ara","labels":["events"]}
+{"text":"Konser, maç veya gösteri önerisi istiyorum","labels":["events"]}
+{"text":"Galata'dan Sultanahmet'e yürüyüş rotası çıkar","labels":["maps"]}
+{"text":"İstanbul'da müze ve tarihi yerleri haritada sırala","labels":["maps"]}
+{"text":"Otelimden en yakın vapur iskelesine yol tarifi ver","labels":["maps"]}
+{"text":"İki günde gezilecek yerler için verimli bir şehir rotası oluştur","labels":["maps"]}
+{"text":"Karaköy'den Galata Kulesi'ne yürüme mesafesini bul","labels":["maps"]}
+{"text":"Sahil boyunca bisiklet rotası göster","labels":["maps"]}
+{"text":"Karaköy'de akşam yemeği için restoran öner","labels":["food"]}
+{"text":"Kadıköy'deki en iyi kahvaltı yerlerini bul","labels":["food"]}
+{"text":"Yakınımda vegan yemek sunan lokantaları listele","labels":["food"]}
+{"text":"İzmir'de ailece gidilecek balık restoranı ara","labels":["food"]}
+{"text":"Beyoğlu'nda uygun fiyatlı kahveci bul","labels":["food"]}
+{"text":"Antalya'da yöresel yemek nerede yenir","labels":["food"]}
+{"text":"Gezi rotama öğle yemeği için bir restoran ekle","labels":["food","maps"]}
+{"text":"Otel yakını akşam yemeği mekanı bul","labels":["food","hotel"]}
+{"text":"Ankara'da yağışa göre kapalı mekan etkinliği öner","labels":["weather","events"]}
+{"text":"İstanbul'da hava durumuna göre gezi rotası hazırla","labels":["weather","maps"]}
+{"text":"Yağmurlu günde gezilecek müze ve kafeleri bul","labels":["weather","maps","food"]}
+{"text":"İzmir'de konserden sonra yakın bir otel ayarla","labels":["events","hotel"]}
+{"text":"Trenle gidip iki gece kalacağım, hava tahminini de göster","labels":["transport","hotel","weather"]}
+{"text":"Uçakla varacağım, havaalanından otele yol ve hava durumunu ver","labels":["transport","hotel","weather","maps"]}
+{"text":"Konaklayacağım yere yakın müze ve restoranları haritada bul","labels":["hotel","maps","food"]}
+{"text":"Şehir turu için toplu taşıma, yemek ve tarihi noktaları planla","labels":["transport","maps","food","events"]}
+{"text":"Bütçeme göre otel bul ve yakındaki etkinlikleri göster","labels":["hotel","events"]}
+{"text":"Yağış ihtimalini kontrol et, yağmur varsa kapalı gezi öner","labels":["weather","maps"]}
+{"text":"Ulaşım ve konaklama dahil kısa bir tatil planı hazırla","labels":["transport","hotel","weather","events","maps"]}
+{"text":"Karaköy'de otel öner","labels":["hotel"]}
+{"text":"İstanbul'da otel bul","labels":["hotel"]}
+{"text":"İstanbul'da nerede kalabilirim","labels":["hotel"]}
+{"text":"Karaköy'de restoran öner","labels":["food"]}
+{"text":"İstanbul'da akşam yemeği için mekan bul","labels":["food"]}
+{"text":"İstanbul gezimde otel ve hava durumunu göster","labels":["hotel","weather"]}
+{"text":"İstanbul gezisi için otel, ulaşım, hava ve etkinlikleri planla","labels":["transport","hotel","weather","events","maps"]}
+{"text":"İstanbul'a gezi planı hazırla","labels":["transport","hotel","weather","events","maps"]}

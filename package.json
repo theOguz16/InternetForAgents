@@ -1,0 +1,13 @@
+{
+  "name": "internet-for-agents-travel-planner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local agent-oriented travel planner prototype with dynamic capability planning and open map data.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "train": "node train-planner.js"
+  }
+}
