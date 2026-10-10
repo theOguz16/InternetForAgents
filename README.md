@@ -1,65 +1,51 @@
-# Internet for Agents — Seyahat Planı Prototipi
+# Internet for Agents
 
-Kullanıcının gezi isteğini ulaşım, konaklama, hava durumu, etkinlik ve harita ihtiyaçlarına ayıran; şehir verilerini açık kaynaklardan toplayıp harita üzerinde gösteren yerel web prototipi.
+AI agentlarının önceden entegre edilmemiş sağlayıcıları çalışma anında keşfetmesini, ortak kontratlarını anlamasını ve yetkileri kapsamında çağırmasını sağlayacak servis odaklı altyapı.
 
-## Gereksinimler
+## Amaç
 
-- Node.js 18 veya üzeri
-- İnternet bağlantısı (canlı açık veri kaynakları için)
+Yeni sağlayıcı eklemek, agent'a o sağlayıcı için özel entegrasyon yazmayı gerektirmemelidir. İlk araştırma deneyi bu iddiayı desteklenen ortak yetenek tanımı ve HTTP/JSON protokolü sınırlarında değerlendirir. Rastgele bir internet sitesinin otomatik anlaşılması ilk kapsamda değildir.
 
-Proje ek Node.js paketi gerektirmez; sunucu Node.js standart kütüphanesini kullanır.
+## Sistem sınırı
 
-## Windows'ta çalıştırma
-
-1. `start.bat` dosyasına çift tıklayın.
-2. Açılan sunucu penceresini açık bırakın.
-3. Tarayıcıda `http://127.0.0.1:8765` sayfası açılır.
-4. İşiniz bittiğinde sunucu penceresini kapatın.
-
-Alternatif olarak bu klasörde terminal açıp `npm start` komutunu çalıştırın, sonra tarayıcıda `http://127.0.0.1:8765` adresine gidin.
-
-## Planner modelini yeniden eğitme
-
-Türkçe örnekler `training/examples.jsonl` içindedir. Her satır bir istek ve capability etiketlerini içeren JSON nesnesidir:
-
-```json
-{"text":"İstanbul'da otel öner","labels":["hotel"]}
-```
-
-Yeni örnek ekledikten sonra `npm run train` komutunu çalıştırın. Komut TF-IDF + k-NN tabanlı çok etiketli modeli ve bağımsız HTML arayüzündeki model gömüsünü günceller. Çalışan sunucuyu yeni model için yeniden başlatın.
-
-Mevcut eğitim kümesinde 68 Türkçe örnek ve 6 capability bulunur. 14 örneklik ayrılmış ölçüm kümesinde micro-F1 0,627 elde edilmiştir. Bu küçük bir prototip ölçümüdür; geniş kapsamlı doğruluk garantisi değildir. Bu çalışma büyük bir dil modelini fine-tune etmez.
-
-## Veri kaynakları ve sınırlar
-
-- Hava: Open-Meteo; sıcaklık ve yağış tahmini. Tahminler yalnızca yayımlanmış tarih aralığında bulunur.
-- Harita, konaklama kayıtları ve gezilecek yerler: OpenStreetMap. Haritada tüm gezilecek yerler, tarihî yerler, müzeler, doğal yerler ve diğer kategoriler filtrelenebilir.
-- Rota: OpenStreetMap tabanlı araba rotası. Trafik ve toplu taşıma tarifesi sağlamaz; ücret seçeneği geçiş ücreti tutarını garanti etmez.
-- Etkinlikler: İstanbul KÜLTÜR.İSTANBUL ve İzmir Büyükşehir Belediyesi açık kaynakları. Etkinlik kapsamı bu iki şehirle sınırlıdır.
-- Otel fiyatı/müsaitliği, gerçek rezervasyon ve tren/uçak bileti satın alma bu prototipte bağlı değildir.
-
-Açık veri kayıtları eksik veya güncelliğini yitirmiş olabilir. Şehir ve tarih bilgisi ilgili kamuya açık veri servislerine gönderilir.
-
-## API uç noktaları
-
-- `GET /api/health`
-- `GET /api/catalog`
-- `POST /api/plan` — JSON gövdesi: `{"goal":"İstanbul'a gezi planla"}`
-- `GET /api/weather?city=İstanbul&date=YYYY-MM-DD`
-- `GET /api/places?city=İstanbul`
-- `GET /api/route?origin=Ankara&destination=İzmir`
-- `GET /api/events?city=İstanbul&date=YYYY-MM-DD`
-
-Sunucu varsayılan olarak yalnızca `127.0.0.1:8765` üzerinde dinler.
-
-## Proje yapısı
+Agent hedefi yorumlar ve planlar. Çekirdek sağlayıcıları bulur, alternatifleri gerekçeleriyle sunar ve seçilen servisi çağırır. Sağlayıcı kendi işini gerçekleştirir.
 
 ```text
-index.html                 Web arayüzü
-server.js                  Yerel API ve veri kaynakları
-train-planner.js           Planner eğitim betiği
-training/examples.jsonl    Etiketli Türkçe eğitim örnekleri
-training/planner-model.json Eğitilmiş model
-vendor/leaflet/            Harita kütüphanesi ve lisansı
-start.bat                  Windows hızlı başlatma
+Kullanıcı → Agent → Internet for Agents → Sağlayıcılar
+                      │
+               Katalog + Dizin
+               Keşif + Broker
+               Policy + Invocation
 ```
+
+## Mimari kararlar
+
+- Agent ve uygulama alanından bağımsız SOA çekirdeği.
+- Node.js 24 LTS, Express 5 ve TypeScript; modüler tek dağıtım, PostgreSQL.
+- Sağlayıcıların kontrat adreslerini kaydettirdiği kontrollü dizin.
+- Operatör yönetiminde sürümlü yetenek kataloğu; JSON Schema 2020-12.
+- HTTP/JSON adapter'ı; açıklanabilir filtreleme ve alternatifler.
+- İlk MVP'de bilgi/simüle teklif sorguları; gerçek yan etkili işlemler kapalı.
+- Planlama agent'ta; çekirdekte tek çağrı yürütme, otomatik retry/failover yok.
+
+## İlk deney
+
+Sentetik teslimat teklifi sağlayan A ve B keşfedilir. Sonradan eklenen C, agent ve core kodu değişmeden bulunup çağrılır. Operasyonel kayıt ve ağ izni değişiklikleri deneyde açıkça gösterilir. Bu demo bir kargo ürünü değil, sağlayıcı bağımsızlığını kanıtlayan araçtır.
+
+## Mevcut durum
+
+Mimari doküman seti ve uygulama görevleri hazırlanmıştır. Yeni çekirdek **henüz uygulanmamıştır**. Depodaki kod önceki seyahat prototipidir; mevcut package.json yeni teknoloji seçimini henüz yansıtmaz. Tasarım hedefleri ölçülmüş sonuçlar değildir.
+
+**Kod aşamasına geçiş ayrı kullanıcı talimatı bekler.** Bu çalışma uygulama kodunu değiştirmez. GitHub issue/PR oluşturulmuş veya değişiklikler yayımlanmış değildir.
+
+## Belgeler
+
+- [Tüm dokümanlar ve okuma sırası](docs/README.md)
+- [Vizyon ve kapsam](docs/architecture/vision-and-scope.md)
+- [Sistem mimarisi](docs/architecture/overview.md)
+- [Mimari karar kayıtları](docs/decisions/README.md)
+- [Uygulama görev planı](docs/planning/backlog.md)
+- [Kabul kriterleri ve hazırlık kapısı](docs/architecture/acceptance.md)
+- [Teknik kaynaklar](docs/architecture/references.md)
+
+MCP, A2A, WebMCP, açık web keşfi ve otomatik kontrat çıkarma gelecekteki araştırma yollarıdır; mevcut destek olarak sunulmaz.
