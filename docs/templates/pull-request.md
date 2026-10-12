@@ -1,21 +1,17 @@
-# <Somut değişiklik başlığı>
+# <Somut sonuç>
 
 ## Problem ve değişiklik
 
-<Ne değişti ve neden>
+<Açıklama>
 
 ## Kapsam
 
-<İlgili görev/ADR/AC>
+<N görevleri, ADR, NA>
 
 ## Doğrulama
 
-<Yapılan kontroller ve sonuçları; yapılmayanları açıkça belirt>
+<Yapılan/yapılmayan kontroller; SDK uyumu>
 
 ## Risk ve geçiş
 
-<Migration/rollback veya yok>
-
-## Doküman etkisi
-
-<Güncellenen belgeler; API/kontrat değişimi>
+<Veri, config, eski davranış, geri alma>

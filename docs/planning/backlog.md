@@ -1,28 +1,20 @@
-# Uygulama görev planı
+# Uygulama görevleri
 
-Durum: Planlandı, atanmadı; GitHub issue veya PR oluşturulmadı. Kod başlangıcı ayrı talimat bekler. Her görev docs/templates/task.md ile işlenir. Tahmini kişi/gün verilmez; repo ve ekip doğrulamasından sonra belirlenir.
+Durum: Planlandı, atanmadı. Eski T01–T12 görevleri arşivdedir. Yeni görevler aşağıdadır; GitHub issue oluşturulmadı.
 
-| ID | Görev | Bağımlılık | Kabul / çıktı |
+| ID | İş | Bağımlılık | Kabul |
 | --- | --- | --- | --- |
-| T01 | Yeni çekirdek iskeleti ve eski prototipin ayrımı | Kullanıcının kod başlatması | TS strict, Express sınırı, modül import kuralları, eski kodun korunması |
-| T02 | Catalog ve makine kontrat şemaları | T01 | Şema fixture'ları, tam sürüm/birim kuralları; AC-03/17 |
-| T03 | DB migration ve repository portları | T01 | Sahiplik, unique constraint, immutable sürüm; migration/rollback yönergesi |
-| T04 | Principal, scope ve ağ politikası | T01,T03 | AC-04/12/13, secret provisioning |
-| T05 | Registry lifecycle ve refresh | T02,T03,T04 | AC-03/06/07/11/16 |
-| T06 | Discovery ve Broker | T05 | Filtre/preference/unknown sözleşmesi; AC-05/14 |
-| T07 | HTTP adapter ve invocation | T02,T03,T04,T05 | Durumlar, timeout, idempotency; AC-08/09/10/17 |
-| T08 | API yüzeyi ve OpenAPI dokümanı | T06,T07 | Auth/hata/pagination örnekleri; belge ile route uyumu |
-| T09 | Audit, metrik ve retention | T03,T05,T07 | Payload redaction, cleanup; AC-13/18 |
-| T10 | Fixture sağlayıcılar ve örnek istemciler | T08 | A/B/C, sentetik veri etiketi, iki istemci; AC-01/02 |
-| T11 | Dağıtım ve operasyon | T08,T09 | Tek instance compose, readiness, shutdown, yedek/restore yönergesi |
-| T12 | Mimari kabul ve deney raporu | T10,T11 | AC-01–18 kanıtları, benchmark AC-15, kalan riskler |
+| N01 | Resmi SDK/A2A 1.0 uyum spike ve exact package pin | Kod başlatma talimatı | NA-01; serializer, TaskStore, SSE ve error davranışı |
+| N02 | TS monorepo, servis sınırları ve eski prototip ayrımı | N01 | Ayrı entrypoint/build; eski dosyalar korunur, yeni sistemle karıştırılmaz |
+| N03 | JSON Schema profile'ları ve örnek fixture'lar | N01,N02 | review/test input-output; bozuk artifact senaryoları |
+| N04 | Registry DB/ownership/kayıt ve kart doğrulama | N02,N03 | NA-06/11/14 |
+| N05 | Registry health/discovery ve network policy | N04 | NA-04/12/13/17 |
+| N06 | Review Agent, persistent task/dedup ve rules engine | N02,N03 | NA-01/08/10/19 |
+| N07 | Personal job API, DB, selector ve A2A client | N05,N06 | NA-08/09/11/13/20 |
+| N08 | Test Agent ve paralel job aggregator | N03,N07 | NA-03/05/07 |
+| N09 | Web UI ve reverse proxy | N04,N07,N08 | Görev/kayıt/seçim/sonuç; NA-15 |
+| N10 | Compose profilleri, ikinci review sağlayıcısı | N05,N06,N08 | NA-02/04; bağımsız servis kapatma |
+| N11 | Kabul testleri, security/retention/benchmark | N09,N10 | NA-01–22, ölçüm raporu ve açık kalanlar |
+| N12 | Çalıştırma rehberi, demo senaryosu ve sonuç raporu | N11 | Tekrarlanabilir demo; iddia/kanıt eşleşmesi |
 
-## Önerilen PR dilimleri
-
-1. Mimari belgeler (bu çalışma; yerel).
-2. T01–T03 iskelet, katalog ve veri temeli.
-3. T04–T06 güvenlik, kayıt ve keşif.
-4. T07–T09 çağrı, API ve izlenebilirlik.
-5. T10–T12 deney, işletim ve kabul kanıtı.
-
-Bir PR'da kapsam fazla büyürse görev bazında bölünür. Kullanıcı yetkisi olmadan kişiler atanmaz veya mesaj gönderilmez. Her görev relevant ADR, AC kimlikleri, failure case ve kanıt bağlantısı taşır.
+N04 ve N06 gibi bağımsız işler paralel yapılabilir; bu plan otomatik agent delegasyonu veya kişi ataması değildir. LLM entegrasyonu gerekli MVP tesliminin bağımlılığı değildir.

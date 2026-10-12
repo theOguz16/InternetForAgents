@@ -1,51 +1,65 @@
 # Internet for Agents
 
-AI agentlarının önceden entegre edilmemiş sağlayıcıları çalışma anında keşfetmesini, ortak kontratlarını anlamasını ve yetkileri kapsamında çağırmasını sağlayacak servis odaklı altyapı.
+**Mini Internet of Agents — SOA tabanlı Agent Discovery & Collaboration Platform**
 
-## Amaç
+Bağımsız geliştirilen uzman agent'ların ortak bir dizinde bulunabildiği ve A2A üzerinden görev alışverişi yapabildiği kontrollü bir agent ağı.
 
-Yeni sağlayıcı eklemek, agent'a o sağlayıcı için özel entegrasyon yazmayı gerektirmemelidir. İlk araştırma deneyi bu iddiayı desteklenen ortak yetenek tanımı ve HTTP/JSON protokolü sınırlarında değerlendirir. Rastgele bir internet sitesinin otomatik anlaşılması ilk kapsamda değildir.
+## Ne geliştiriyoruz?
 
-## Sistem sınırı
+Geliştirici kendi agent'ını çalıştırır ve Agent Card adresini Registry'ye kaydeder. Personal Agent kullanıcının görevine uygun uzmanları keşfeder, doğrudan A2A ile görev gönderir ve sonuçları birleştirir.
 
-Agent hedefi yorumlar ve planlar. Çekirdek sağlayıcıları bulur, alternatifleri gerekçeleriyle sunar ve seçilen servisi çağırır. Sağlayıcı kendi işini gerçekleştirir.
+Birincil kullanıcılar agent geliştiricileri ve yazılım ekipleridir. Web arayüzü görev gönderimini, agent kaydını ve keşif/yürütme sürecini görünür yapan demo yüzüdür.
 
-```text
-Kullanıcı → Agent → Internet for Agents → Sağlayıcılar
-                      │
-               Katalog + Dizin
-               Keşif + Broker
-               Policy + Invocation
+```mermaid
+flowchart TD
+ UI[React Web Arayüzü] -->|Görev ve sonuç REST/JSON| PA[Personal Agent]
+ UI -->|Kayıt ve listeleme REST/JSON| R[Agent Registry]
+ PA -->|Beceriye göre keşif| R
+ PA -->|Doğrudan A2A JSON-RPC| C[Code Review Agent]
+ PA -->|Doğrudan A2A JSON-RPC| T[Test Generation Agent]
 ```
 
-## Mimari kararlar
+Registry görevleri taşımaz veya yürütmez. Uzmanlar ayrı uygulamalardır; veri tabanlarını paylaşmazlar.
 
-- Agent ve uygulama alanından bağımsız SOA çekirdeği.
-- Node.js 24 LTS, Express 5 ve TypeScript; modüler tek dağıtım, PostgreSQL.
-- Sağlayıcıların kontrat adreslerini kaydettirdiği kontrollü dizin.
-- Operatör yönetiminde sürümlü yetenek kataloğu; JSON Schema 2020-12.
-- HTTP/JSON adapter'ı; açıklanabilir filtreleme ve alternatifler.
-- İlk MVP'de bilgi/simüle teklif sorguları; gerçek yan etkili işlemler kapalı.
-- Planlama agent'ta; çekirdekte tek çağrı yürütme, otomatik retry/failover yok.
+## İlk demo
 
-## İlk deney
+1. Code Review Agent A kaydedilir; kullanıcı Python kodunu inceletir.
+2. Test Generation Agent eklenir; inceleme ve test önerisi birlikte istenir.
+3. Aynı inceleme becerisini sunan Code Review Agent B eklenir; istemci kodu değişmeden keşfedilir.
+4. A durdurulur; sonraki görevde uygun B seçilir. Alternatif yoksa açık hata gösterilir.
 
-Sentetik teslimat teklifi sağlayan A ve B keşfedilir. Sonradan eklenen C, agent ve core kodu değişmeden bulunup çağrılır. Operasyonel kayıt ve ağ izni değişiklikleri deneyde açıkça gösterilir. Bu demo bir kargo ürünü değil, sağlayıcı bağımsızlığını kanıtlayan araçtır.
+Gönderilen kod ve üretilen testler çalıştırılmaz. İlk davranış deterministik kurallarla gösterilebilir; arayüz bunu açıkça belirtir. LLM desteği opsiyonel sonraki aşamadır.
 
-## Mevcut durum
+## Teknoloji kararları
 
-Mimari doküman seti ve uygulama görevleri hazırlanmıştır. Yeni çekirdek **henüz uygulanmamıştır**. Depodaki kod önceki seyahat prototipidir; mevcut package.json yeni teknoloji seçimini henüz yansıtmaz. Tasarım hedefleri ölçülmüş sonuçlar değildir.
+| Parça | Seçim |
+| --- | --- |
+| Registry, Personal Agent, uzman servisler | Node.js 24 LTS, Express 5, TypeScript strict |
+| Agent iletişimi | A2A 1.0, JSON-RPC 2.0 üzerinden HTTP(S) + SSE, resmi JS SDK |
+| Platform API'leri | REST + JSON |
+| Kalıcı veri | Servis başına ayrı SQLite dosyası |
+| Web arayüzü | React + Vite |
+| Yerel çalıştırma | Docker Compose; bağımsız servisler |
 
-**Kod aşamasına geçiş ayrı kullanıcı talimatı bekler.** Bu çalışma uygulama kodunu değiştirmez. GitHub issue/PR oluşturulmuş veya değişiklikler yayımlanmış değildir.
+A2A wire JSON alanları seçilen 1.0 sürümüne göre tanımlanmıştır. SDK'nın paket sürümü protokol sürümü değildir; gerçek uyum ve paket sabitleme ilk uygulama kapısıdır.
+
+## Durum
+
+12 Ekim 2026: Yeni mimari, protokol örnekleri, süreçler ve yol haritası dokümante edildi. **Yeni sistem henüz uygulanmadı.** Repodaki uygulama dosyaları eski seyahat prototipidir; package.json bu tasarımı henüz yansıtmaz. Buradaki komut/endpoint/örnekler çalışan servis iddiası taşımaz.
+
+Kod yazılması ayrı kullanıcı talimatı bekler. Çalışma dalı `oguzhan`. Bu revizyonda yalnızca dokümanlar değişmiştir.
 
 ## Belgeler
 
-- [Tüm dokümanlar ve okuma sırası](docs/README.md)
-- [Vizyon ve kapsam](docs/architecture/vision-and-scope.md)
-- [Sistem mimarisi](docs/architecture/overview.md)
-- [Mimari karar kayıtları](docs/decisions/README.md)
-- [Uygulama görev planı](docs/planning/backlog.md)
-- [Kabul kriterleri ve hazırlık kapısı](docs/architecture/acceptance.md)
-- [Teknik kaynaklar](docs/architecture/references.md)
+- [Okuma sırası ve tüm belgeler](docs/README.md)
+- [Sistem sınırları ve alt mimariler](docs/architecture/overview.md)
+- [A2A, JSON, Agent Card ve mesaj örnekleri](docs/architecture/a2a-protocol.md)
+- [Uçtan uca süreçler](docs/architecture/pipelines.md)
+- [Yol haritası](docs/planning/roadmap.md)
+- [Karar kayıtları](docs/decisions/README.md)
 
-MCP, A2A, WebMCP, açık web keşfi ve otomatik kontrat çıkarma gelecekteki araştırma yollarıdır; mevcut destek olarak sunulmaz.
+## İddianın sınırı
+
+Yeni agent, desteklenen beceri profiline ve A2A iletişim biçimine uyuyorsa özel istemci entegrasyonu gerektirmeden kullanılabilir. Bilinmeyen bir beceriyi kendiliğinden öğrenme, açık web tarama, marketplace, ödeme veya NANDA entegrasyonu ilk sürümde yoktur. NANDA aynı keşif ve birlikte çalışabilirlik problem alanında bir referanstır; bu proje onun küçük ölçekli bir uygulama denemesidir, eşdeğeri değildir.
+
+Görev ilerlemesi ve arayüz güncellemeleri SSE ile iletilir; periyodik polling kullanılmaz. [Karar ve toparlanma akışı](docs/decisions/0023-sse-no-polling.md).

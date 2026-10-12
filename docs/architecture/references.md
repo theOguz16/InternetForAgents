@@ -1,10 +1,16 @@
-# Teknik referanslar
+# Kaynaklar ve sürüm kontrolü
 
-2026-10-10 tarihinde resmi kaynaklar kontrol edildi. Mimari seçimler proje kararlarıdır; kaynaklar kullanılan standartların ve teknoloji çizgisinin dayanağıdır.
+Kontrol tarihi: 2026-10-12. Yalnız birincil teknik kaynaklar kullanıldı. Latest sayfası hareketli olduğundan wire örnekleri sabit v1.0.0 spesifikasyonuna bağlandı.
 
-- [Node.js resmi sürüm takvimi](https://github.com/nodejs/Release): desteklenen LTS çizgisini seçme; Node 24 ailesi uygulama başlangıç hedefidir.
-- [Express 5 geçiş rehberi](https://expressjs.com/en/guide/migrating-5/): Express 5 ve Node gereksinimleri; middleware/route ayrıntıları uygulamada bu kaynaktan doğrulanır.
-- [JSON Schema 2020-12](https://json-schema.org/draft/2020-12): kontrat girdisi ve çıktısı için seçilen şema standardı.
-- [RFC 9457](https://www.rfc-editor.org/info/rfc9457/): HTTP hata yanıtı biçiminin dayanağı.
+| Kaynak | Tasarımdaki rol |
+| --- | --- |
+| [A2A v1.0.0](https://a2a-protocol.org/v1.0.0/specification/) | Agent Card, JSON-RPC ve task modelinin normatif kaynağı |
+| [v1.0.0 a2a.proto](https://raw.githubusercontent.com/a2aproject/A2A/v1.0.0/specification/a2a.proto) | Alanlar, enum'lar ve request/response tipleri |
+| [Resmi JS SDK](https://github.com/a2aproject/a2a-js) | SDK seçimi; README v1.0 desteği bildiriyor |
+| [SDK package manifest](https://raw.githubusercontent.com/a2aproject/a2a-js/main/package.json) | Kontrolde main sürümü 1.3.0; npm kurulum kanıtı değil |
+| [A2A Discovery](https://a2a-protocol.org/latest/topics/agent-discovery/) | Merkezi dizin ve Card keşfi bağlamı |
+| [YANG RFC 7950](https://www.rfc-editor.org/rfc/rfc7950.html) | YANG'ın ağ yönetimi modelleme dili olması |
+| [JSON Schema 2020-12](https://json-schema.org/draft/2020-12) | Uygulama profile şemaları |
+| [RFC 9457](https://www.rfc-editor.org/info/rfc9457/) | Kendi REST API hata biçimimiz |
 
-Fiyat, hizmet kalitesi veya benchmark sonucu bu kaynaklardan türetilmemiştir. Proje limitleri Operations belgesinde seçilmiş başlangıç değerleridir.
+JSON wire alanları SDK'nın iç TypeScript representation'ıyla birebir aynı varsayılmaz; serialization SDK'ya bırakılır. Kaynaklardaki tüm opsiyonel özellikleri desteklemek bu projenin kapsamı değildir. Proje profile'ları, quota/TTL ve retry kuralları bizim uygulama kararlarımızdır.

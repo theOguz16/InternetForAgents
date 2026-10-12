@@ -1,16 +1,18 @@
-# Mimari kararlar
+# Güncel mimari kararlar
 
-Durum: MVP tasarım temeli. 001–002 kullanıcıyla tek tek; 003–012 tüm mimariyi tamamlama yetkisi kapsamında kararlaştırıldı. Yeni kararlar uygulamaya başlama izni değildir.
+Tarih: 2026-10-12. Durum: Yeni revizyon için kararlaştırıldı; uygulama yetkisi değildir. ADR-013–022 önceki tasarımın yerini alır. Önceki kayıtlar [arşivde](../archive/2026-10-10/decisions/README.md).
 
-- [ADR-001: Bağımsız SOA çekirdeği](0001-independent-soa-core.md)
-- [ADR-002: Dizin keşfi](0002-directory-discovery.md)
-- [ADR-003: Ortak ve sürümlü yetenek kataloğu](0003-capability-catalog.md)
-- [ADR-004: İlk adapter: HTTP ve JSON](0004-http-json.md)
-- [ADR-005: Açıklanabilir filtreleme ve alternatifler](0005-broker.md)
-- [ADR-006: Tek çağrı yürütme ve belirsiz sonuç](0006-execution.md)
-- [ADR-007: Tek dağıtım içinde modüler SOA](0007-modular-soa.md)
-- [ADR-008: TypeScript ve PostgreSQL](0008-stack-storage.md)
-- [ADR-009: Kayıt yaşam döngüsü ve güncellik](0009-registry.md)
-- [ADR-010: Kontrollü erişim ve outbound sınırı](0010-security.md)
-- [ADR-011: Alan bağımsızlığı için sentetik teklif demosu](0011-demo.md)
-- [ADR-012: İzlenebilirlik ve ölçülebilir kabul](0012-observability.md)
+| ADR | Karar | Yerine geçtiği eski ADR |
+| --- | --- | --- |
+| [ADR-013](0013-agent-network.md) | Agent ağına geçiş | 001, 006, 007 |
+| [ADR-014](0014-a2a-jsonrpc.md) | A2A 1.0 ve JSON-RPC | 004 |
+| [ADR-015](0015-skill-profiles.md) | Agent Card ve uygulama profilleri | 003 |
+| [ADR-016](0016-typescript-sqlite.md) | TypeScript servisleri ve ayrı SQLite | 008 |
+| [ADR-017](0017-discovery-health.md) | Card dizini ve ayrı sağlık gözlemi | 002, 009 |
+| [ADR-018](0018-selection.md) | Personal Agent içinde seçim | 005 |
+| [ADR-019](0019-task-polling.md) | Kalıcı görev, polling ve dedup | 006 |
+| [ADR-020](0020-security-boundaries.md) | Dağıtık yetki ve ağ sınırları | 010 |
+| [ADR-021](0021-demo-scope.md) | Kod inceleme ve test önerisi demosu | 011 |
+| [ADR-022](0022-delivery.md) | Aşamalı uyum kapıları ve gözlem | 012 |
+
+| [ADR-023](0023-sse-no-polling.md) | SSE, sınırlı reconnect ve polling yok | 014/017/019 ilgili kısımları |

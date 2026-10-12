@@ -1,32 +1,25 @@
-# <Servis adı>
+# <Servis> tasarımı
 
-Durum: <taslak/kabul>
-İlgili ADR: <bağlantı>
+## Sorumluluk ve dışarıda kalan işler
 
-## Sorumluluk ve kapsam dışı
+<Doldur>
 
-<İş sınırı>
+## Arayüzler
 
-## Sahip olunan veriler ve invariants
+<REST veya A2A; sürüm; input/output profile>
 
-<Varlıklar, transaction sınırı>
+## Katmanlar ve portlar
 
-## Girdi/çıktı arayüzleri
+<Presentation/Application/Domain/Infrastructure>
 
-<Komutlar, sorgular, şema referansları>
+## Veri ve görev sahipliği
 
-## Bağımlılıklar
+<SQLite varlıkları, transaction, owner, retention>
 
-<Kullanılan portlar; diğer servislere erişim>
+## Hata ve restart
 
-## Yaşam döngüsü ve yarışlar
+<State, timeout, dedup, recovery>
 
-<Durumlar, geçişler, concurrency>
+## Yetki ve gözlem
 
-## Hata ve yetki
-
-<Kodlar, retry, ownership>
-
-## Gözlem ve kabul
-
-<Metrikler ve AC kimlikleri>
+<Credential, network policy, NA kanıtı>

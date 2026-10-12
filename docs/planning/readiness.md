@@ -1,37 +1,21 @@
-# Mimari hazırlık raporu
-
-Tarih: 2026-10-10
+# Hazırlık durumu — 12 Ekim 2026
 
 ## Sonuç
 
-Kontrollü MVP'nin kodlamasına başlayabilmek için mimari temel hazırdır. Uygulama başlamamıştır ve kullanıcının ayrı talimatı beklenir. Bu rapor üretim hazırlığı, test başarısı veya benchmark sonucu değildir.
+Yeni agent ağı için sınırlar, alt mimariler, A2A wire hedefi, profil yapısı, süreçler, veri ve hata davranışı tanımlandı. İlk kod görevi genel ürün geliştirme değil, N01 A2A uyum spike'ıdır. Kod başlatma talimatı henüz verilmedi.
 
-## Tamamlanan tasarım
+## Tamamlanan dokümantasyon
 
-- Ürün amacı ve araştırma iddiasının sınırı.
-- Agent, çekirdek ve sağlayıcı sorumlulukları.
-- Mantıksal servisler ve veri sahipliği.
-- Yetenek kataloğu, kontrat alanları, sürüm ve HTTP protokolü.
-- Kayıt yaşam döngüsü, güncellik ve dizin kesintisi.
-- Broker filtreleri, tercihleri ve eksik veri davranışı.
-- Tek çağrı yürütme, idempotency, belirsiz sonuç ve hata zarfı.
-- Yetki, sahiplik, outbound ağ ve secret sınırları.
-- TypeScript/Express katmanları, PostgreSQL ve tek instance dağıtım.
-- Operasyonel başlangıç limitleri ve gözlem.
-- 18 kabul senaryosu, 12 sıralı uygulama görevi, 7 doküman şablonu.
+SOA görünümü; servis başına katmanlar; Registry/Personal/uzman sorumlulukları; JSON-RPC ve Card/Message/Task/Artifact örnekleri; skill profilleri; kayıt/sağlık/keşif; paralel süreç; SSE ve hata/toparlanma; REST API; SQLite sahipliği; güvenlik; Compose/operasyon; 22 kabul senaryosu; 12 görev; şablonlar; eski tasarım arşivi.
 
-## Yapılan kontroller
+## Protokol belirsizliği yönetimi
 
-Yerel Markdown bağlantıları kontrol edildi; kırık bağlantı bulunmadı. Git diff whitespace kontrolü sorun bildirmedi. Eski taslakların durumu güncellendi ve tarihsel ADR açık konuları sonraki kararlarla ilişkilendirildi. Uygulama testi çalıştırılmadı; uygulama kodu değiştirilmedi.
+Resmi JS SDK main belgeleri v1.0 desteği gösteriyor. Yerel kurulum ve npm release doğrulaması yapılmadı. Exact SDK paketi, serializer uyumu ve persistent store adapter'ı N01'in ölçülebilir kapısıdır. Bu kapı geçmeden 'A2A çalışıyor' denmez. 0.3 ve 1.0 wire formatları birlikte kullanılmaz.
 
-## Kod aşamasındaki ilk çıktılar
+## Yerel belge kontrolleri
 
-Kullanıcı başlattığında T01–T03: yeni çekirdek iskeleti, mevcut prototipten ayrım, makine kontrat şemaları ve veri migration temeli. Kesin paket patch sürümleri o gün destek/güvenlik durumuna göre sabitlenecek. API'nin makine OpenAPI karşılığı T08 çıktısıdır; implementation boyunca bu mimari API tanımına uyulur.
+Güncel ve arşiv belgeleri dahil 78 Markdown dosyasının yerel bağlantıları kontrol edildi; kırık bağlantı bulunmadı. Beş JSON protokol örneği başarıyla parse edildi. Git whitespace kontrolü temiz. Bu kontroller A2A schema/conformance testlerinin yerine geçmez. Uygulama veya entegrasyon testi çalıştırılmamıştır.
 
-## Sınırlar
+## Yayın
 
-Gerçek yan etkili işlemler, genel web taraması, dosya transferi, asenkron iş ve çok instance ölçek bilinçli olarak kapsam dışıdır. Bunlar MVP'yi bloke eden unutulmuş kararlar değildir. Gereksinim hâline geldiklerinde ilgili ADR ve kabul planı genişletilir.
-
-## Yayın durumu
-
-Dosyalar yereldedir. Commit, push, PR veya GitHub issue oluşturulmamıştır; görevler kişilere atanmamıştır.
+Revizyon oguzhan çalışma dalında yereldir. Bu turda commit/push/PR yapılmadı. Önceki docs seti archive/2026-10-10 altında korunur ve güncel yönerge sayılmaz.
