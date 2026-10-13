@@ -12,23 +12,19 @@ Birincil kullanıcılar agent geliştiricileri ve yazılım ekipleridir. Web ara
 
 ```mermaid
 flowchart TD
- UI[React Web Arayüzü] -->|Görev ve sonuç REST/JSON| PA[Personal Agent]
- UI -->|Kayıt ve listeleme REST/JSON| R[Agent Registry]
- PA -->|Beceriye göre keşif| R
- PA -->|Doğrudan A2A JSON-RPC| C[Code Review Agent]
- PA -->|Doğrudan A2A JSON-RPC| T[Test Generation Agent]
+ UI[Demo arayüzü] --> PA[Personal Agent]
+ PA -->|Keşif| R[Registry]
+ PA -->|A2A + SSE| L[Dil tespiti]
+ PA -->|A2A + SSE| K[Anahtar kelimeler]
+ PA -->|A2A + SSE| S[Kısa özet]
+ S -. İsteğe bağlı .-> M[Ortak model sunucusu]
 ```
-
-Registry görevleri taşımaz veya yürütmez. Uzmanlar ayrı uygulamalardır; veri tabanlarını paylaşmazlar.
 
 ## İlk demo
 
-1. Code Review Agent A kaydedilir; kullanıcı Python kodunu inceletir.
-2. Test Generation Agent eklenir; inceleme ve test önerisi birlikte istenir.
-3. Aynı inceleme becerisini sunan Code Review Agent B eklenir; istemci kodu değişmeden keşfedilir.
-4. A durdurulur; sonraki görevde uygun B seçilir. Alternatif yoksa açık hata gösterilir.
+Kullanıcı metin verir. Personal Agent dil, anahtar kelime ve özet sağlayıcılarını dizinden keşfeder, doğrudan çağırır ve sonuçları birleştirir. Yeni bir uyumlu sağlayıcı, Personal Agent kodu değişmeden seçilebilmelidir.
 
-Gönderilen kod ve üretilen testler çalıştırılmaz. İlk davranış deterministik kurallarla gösterilebilir; arayüz bunu açıkça belirtir. LLM desteği opsiyonel sonraki aşamadır.
+Uzmanlar dar görevler üstlenir. Dil tespiti ve anahtar kelimeler deterministik olabilir; özetleme geliştirmede fixture kullanabilir. Fixture gerçek analiz olarak sunulmaz. Model zorunlu değildir.
 
 ## Teknoloji kararları
 
@@ -45,9 +41,15 @@ A2A wire JSON alanları seçilen 1.0 sürümüne göre tanımlanmıştır. SDK'n
 
 ## Durum
 
-12 Ekim 2026: Yeni mimari, protokol örnekleri, süreçler ve yol haritası dokümante edildi. **Yeni sistem henüz uygulanmadı.** Repodaki uygulama dosyaları eski seyahat prototipidir; package.json bu tasarımı henüz yansıtmaz. Buradaki komut/endpoint/örnekler çalışan servis iddiası taşımaz.
+13 Ekim 2026: N01 A2A/SSE denemesi tamamlandı. Yeni TypeScript servis iskeleti ve Docker profilleri eklendi. **Ürün akışı henüz tamamlanmadı:** Registry kayıt/keşfi ve uzmanların A2A/SSE fixture yürütmesi eklendi. Depolar bellekte; Personal orkestrasyonu, gerçek analiz ve demo arayüzü sonraki aşamalardır. Çalışma dalı `oguzhan`.
 
-Kod yazılması ayrı kullanıcı talimatı bekler. Çalışma dalı `oguzhan`. Bu revizyonda yalnızca dokümanlar değişmiştir.
+- [Registry/A2A çalıştırma akışı](docs/development/registry-a2a.md)
+- [Metin kontratları](docs/architecture/text-profiles.md)
+- [Docker ve ekip geliştirme rehberi](docs/development/local.md)
+- [Metin agent’ları ve kaynak kullanımı kararı](docs/decisions/0024-local-text-agents.md)
+- [N01 sonuç raporu](docs/planning/n01-results.md)
+
+Eski seyahat prototipi kökte korunur ve `npm start` ile açılır. Yeni servis için `npm run dev:service` kullanılır.
 
 ## Belgeler
 

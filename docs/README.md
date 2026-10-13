@@ -1,6 +1,6 @@
 # Yeni mimari doküman rehberi
 
-Revizyon: 2026-10-12. Durum: Tasarım tamamlandı; uygulama ve protokol uyum denemesi yapılmadı.
+Revizyon: 2026-10-12. Durum: Tasarım tamamlandı; 13 Ekim tarihinde [N01 protokol uyum denemesi](planning/n01-results.md) geçti. Ürün servisleri henüz uygulanmadı.
 
 ## Okuma sırası
 
@@ -36,3 +36,10 @@ Revizyon: 2026-10-12. Durum: Tasarım tamamlandı; uygulama ve protokol uyum den
 [10 Ekim belgeleri](archive/2026-10-10/NOTICE.md) tarihsel arşivdir. Eski ADR ve görev kimlikleri yeni işlerin talimatı değildir. Merkezi çağrı motoru ve PostgreSQL temelli tek çekirdek tasarımı yürürlükten kalkmıştır. Yeni uygulama görevleri N01 ile başlar; yeni kararlar ADR-013 ile devam eder.
 
 Karar değişikliklerinde ADR, ilgili arayüz belgesi ve kabul senaryosu birlikte güncellenir. Kaynaklar protokol için referanstır; proje limitleri ve beceri profilleri kendi tasarım kararlarımızdır.
+
+## Güncel uygulama yönü — 13 Ekim
+
+[ADR-024](decisions/0024-local-text-agents.md) kod inceleme/test demosunun yerine metin agent’larını getirir. [Yerel geliştirme rehberi](development/local.md). Önceki belgelerdeki review/test örnekleri yeni demo için henüz uyarlanmamıştır; yeni profil isimleri ve şemalar N03’te kesinleştirilecektir.
+
+- [Uygulanan metin kontratları](architecture/text-profiles.md)
+- [Registry ve A2A yerel bağlantısı](development/registry-a2a.md)

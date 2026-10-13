@@ -1,3 +1,5 @@
+> 13 Ekim güncellemesi: Kullanıcı N01 kod aşamasını başlattı. [N01 sonucu](n01-results.md) başarılı; aşağıdaki 12 Ekim değerlendirmesi tarihsel tasarım durumudur. N02 henüz yapılmadı.
+
 # Hazırlık durumu — 12 Ekim 2026
 
 ## Sonuç

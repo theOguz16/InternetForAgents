@@ -16,3 +16,5 @@ Tarih: 2026-10-12. Durum: Yeni revizyon için kararlaştırıldı; uygulama yetk
 | [ADR-022](0022-delivery.md) | Aşamalı uyum kapıları ve gözlem | 012 |
 
 | [ADR-023](0023-sse-no-polling.md) | SSE, sınırlı reconnect ve polling yok | 014/017/019 ilgili kısımları |
+
+| [ADR-024](0024-local-text-agents.md) | Yerel metin agent’ları ve Docker geliştirme | 021 demo kapsamı |

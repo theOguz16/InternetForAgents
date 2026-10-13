@@ -1,0 +1,65 @@
+name: internet-for-agents
+
+x-service: &service
+  build:
+    context: .
+    dockerfile: infrastructure/Dockerfile
+  init: true
+  mem_limit: 256m
+  cpus: 0.5
+  read_only: true
+  tmpfs:
+    - /tmp:size=32m
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  registry:
+    <<: *service
+    profiles: ["registry", "integration"]
+    environment:
+      ALLOWED_AGENT_ORIGINS: http://language:4000,http://keywords:4000,http://summary:4000
+      SERVICE_NAME: registry
+      PORT: 4000
+      HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:4001:4000"
+  personal:
+    <<: *service
+    profiles: ["personal", "integration"]
+    environment:
+      SERVICE_NAME: personal
+      PORT: 4000
+      HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:4002:4000"
+  language:
+    <<: *service
+    profiles: ["language", "integration"]
+    environment:
+      PUBLIC_BASE_URL: http://language:4000
+      SERVICE_NAME: language
+      PORT: 4000
+      HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:4101:4000"
+  keywords:
+    <<: *service
+    profiles: ["keywords", "integration"]
+    environment:
+      PUBLIC_BASE_URL: http://keywords:4000
+      SERVICE_NAME: keywords
+      PORT: 4000
+      HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:4102:4000"
+  summary:
+    <<: *service
+    profiles: ["summary", "integration"]
+    environment:
+      PUBLIC_BASE_URL: http://summary:4000
+      SERVICE_NAME: summary
+      PORT: 4000
+      HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:4103:4000"

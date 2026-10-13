@@ -1,0 +1,49 @@
+{
+  "verifiedOn": "2026-10-13",
+  "node": "v24.21.0",
+  "sdk": "1.3.0",
+  "protocol": "1.0",
+  "sse": {
+    "events": [
+      "task",
+      "statusUpdate"
+    ],
+    "resumedSnapshot": true,
+    "artifactSeen": true,
+    "completed": true,
+    "executions": 1,
+    "methodsBeforeRecovery": [
+      "SendStreamingMessage",
+      "SubscribeToTask"
+    ],
+    "allMethods": [
+      "SendStreamingMessage",
+      "SubscribeToTask",
+      "SubscribeToTask",
+      "GetTask"
+    ],
+    "terminalRejected": true
+  },
+  "persistence": {
+    "restoredAfterServerRestart": true,
+    "restartedExecutorCalls": 0
+  },
+  "rpcError": {
+    "methodNotFound": true
+  },
+  "uninterrupted": {
+    "events": [
+      "task",
+      "statusUpdate",
+      "artifactUpdate",
+      "statusUpdate"
+    ],
+    "artifactReceived": true
+  },
+  "wire": {
+    "streamingContentTypeVerified": true,
+    "role": "ROLE_USER",
+    "legacyKindAbsent": true
+  },
+  "result": "PASS"
+}

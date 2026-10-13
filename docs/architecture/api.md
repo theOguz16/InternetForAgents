@@ -1,5 +1,7 @@
 # Platform REST API tasarımı
 
+Uygulanan yerel alt küme: [Registry/A2A](../development/registry-a2a.md). Aşağıdaki sahiplik, kalıcılık ve Personal API kapsamı henüz uygulanmadı.
+
 Durum: Tasarım; endpoint'ler uygulanmadı. Registry ve Personal Agent ayrı origin/servistir. UI reverse proxy aynı origin altında /registry ve /personal prefix'lerini upstream'de kaldırır. A2A endpoint'leri bu tablolardan ayrı standart SDK arayüzüdür.
 
 ## Registry — /v1
