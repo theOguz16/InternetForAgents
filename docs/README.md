@@ -43,3 +43,11 @@ Karar değişikliklerinde ADR, ilgili arayüz belgesi ve kabul senaryosu birlikt
 
 - [Uygulanan metin kontratları](architecture/text-profiles.md)
 - [Registry ve A2A yerel bağlantısı](development/registry-a2a.md)
+
+- [Personal Agent: orkestrasyon, SSE ve örnek istek](development/personal-agent.md)
+
+- [Dil ve anahtar kelime algoritmalarının mantığı](development/text-algorithms.md)
+
+- [Görev kalıcılığı ve 14 Ekim test sonuçları](development/persistence.md)
+
+- [React demo arayüzü ve çalıştırma](development/demo-ui.md)

@@ -8,3 +8,6 @@ Thumbs.db
 
 # Yeni TypeScript servislerinin derleme çıktısı
 dist/
+
+# Yerel görev verileri
+.data/

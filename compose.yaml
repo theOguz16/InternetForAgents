@@ -17,6 +17,8 @@ services:
   registry:
     <<: *service
     profiles: ["registry", "integration"]
+    volumes:
+      - registry-data:/app/data
     environment:
       ALLOWED_AGENT_ORIGINS: http://language:4000,http://keywords:4000,http://summary:4000
       SERVICE_NAME: registry
@@ -27,7 +29,11 @@ services:
   personal:
     <<: *service
     profiles: ["personal", "integration"]
+    volumes:
+      - personal-data:/app/data
     environment:
+      REGISTRY_URL: http://registry:4000
+      ALLOWED_AGENT_ORIGINS: http://language:4000,http://keywords:4000,http://summary:4000
       SERVICE_NAME: personal
       PORT: 4000
       HOST: 0.0.0.0
@@ -36,6 +42,8 @@ services:
   language:
     <<: *service
     profiles: ["language", "integration"]
+    volumes:
+      - language-data:/app/data
     environment:
       PUBLIC_BASE_URL: http://language:4000
       SERVICE_NAME: language
@@ -46,6 +54,8 @@ services:
   keywords:
     <<: *service
     profiles: ["keywords", "integration"]
+    volumes:
+      - keywords-data:/app/data
     environment:
       PUBLIC_BASE_URL: http://keywords:4000
       SERVICE_NAME: keywords
@@ -56,6 +66,8 @@ services:
   summary:
     <<: *service
     profiles: ["summary", "integration"]
+    volumes:
+      - summary-data:/app/data
     environment:
       PUBLIC_BASE_URL: http://summary:4000
       SERVICE_NAME: summary
@@ -63,3 +75,10 @@ services:
       HOST: 0.0.0.0
     ports:
       - "127.0.0.1:4103:4000"
+
+volumes:
+  registry-data:
+  personal-data:
+  language-data:
+  keywords-data:
+  summary-data:

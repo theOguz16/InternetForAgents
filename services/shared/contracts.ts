@@ -3,7 +3,7 @@ export const profiles = { language: "text-language.v1", keywords: "text-keywords
 export type Specialist = keyof typeof profiles;
 export interface TextInput { profile: string; text: string }
 export interface SpecialistResult { profile: string; mode: "fixture" | "deterministic" | "model"; output: unknown }
-export interface SpecialistHandler { execute(input: TextInput): Promise<SpecialistResult> }
+export interface SpecialistHandler { readonly mode: SpecialistResult["mode"]; execute(input: TextInput): Promise<SpecialistResult> }
 const ajv = new Ajv({ allErrors: true });
 // Aynı şemalar çalışma anında doğrulanır ve ekip için JSON olarak yayımlanır.
 export const schemas = Object.fromEntries(Object.entries(profiles).map(([role, profile]) => {

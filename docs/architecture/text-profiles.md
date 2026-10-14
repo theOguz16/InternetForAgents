@@ -10,7 +10,7 @@ ADR-024 sonrası yeni demo profilleri. Makine şemaları `services/shared/contra
 
 Girdi yalnızca iki alan içerir. Metin 1–8000 Unicode karakter olmalı ve boşluk dışında karakter içermelidir; toplam HTTP JSON gövdesi 64 KiB ile sınırlıdır. Anahtar kelimeler 1–128 karakterdir. Bilinmeyen alanlar reddedilir. URL/dosya kabul edilmez.
 
-Her sonuç `{ profile, mode, output }` biçimindedir. `mode`, `fixture`, `deterministic` veya `model` olabilir. Şu an üç handler da yalnızca fixture’dır. Dil sonucu `und`, anahtar kelimeler boş liste, özet ise örnek sonuç açıklamasıdır. Bunlar kalite göstergesi değildir.
+Her sonuç `{ profile, mode, output }` biçimindedir. `mode`, `fixture`, `deterministic` veya `model` olabilir. Dil ve anahtar kelime handler’ları artık `deterministic` modundadır; özet `fixture` kalır. Dil yeterli kanıt bulamazsa `und`, kelime filtresi aday bırakmazsa boş liste dönebilir. [Algoritmalar ve sınırlar](../development/text-algorithms.md).
 
 ## A2A isteği
 
@@ -36,4 +36,4 @@ Uzmanın `/a2a` adresine `Content-Type: application/json`, `Accept: text/event-s
 
 Tek JSON DataPart kabul edilir. SDK önce task, sonra working, artifact ve completed olaylarını SSE üzerinden gönderir. Geçersiz profil/girdi failed görev üretir; hatalı uzman çıktısı yayımlanmaz. İstek ve yanıt envelope’larını resmi SDK yönetir. Özel polling endpoint’i yoktur.
 
-Görevler ilk adaptörde bellektedir. Süreç yeniden başlarsa kaybolur; kalıcı dedup, crash recovery ve gerçek iptal henüz yoktur. İstemci tekrar gönderimin yeni iş yaratabileceğini dikkate almalıdır. Ürün kabul kriterleri bu aşamada tamamlanmış sayılmaz.
+Uygulama uzman görevlerini SQLite’ta saklar. [Yeniden açılma politikası](../development/persistence.md). A2A mesaj düzeyinde kalıcı dedup, otomatik devam ettirme ve gerçek iptal henüz yoktur. İstemci tekrar gönderimin yeni iş yaratabileceğini dikkate almalıdır. Ürün kabul kriterleri bu aşamada tamamlanmış sayılmaz.

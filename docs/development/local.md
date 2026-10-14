@@ -40,4 +40,4 @@ Derleme: `npm run build:services`. Eski seyahat prototipi `npm start` ile çalı
 ## Uzman ekleme şablonu
 `services/shared/contracts.ts` iş mantığı arayüzüdür. `services/language/handler.ts` örneğini yeni uzman dizinine kopyala. İş mantığı HTTP veya SDK nesnelerine bağımlı olmasın. A2A adaptörü girdiyi doğrular, handler’ı çağırır ve sonucu artifact olarak aktarır.
 
-Mevcut handler’lar A2A üzerinden yalnızca fixture döndürür. Uzmanların `/health` yanıtında `a2aReady: true` olur; bu gerçek analiz kalitesi anlamına gelmez. Kalıcı DB, Personal orkestrasyonu ve React arayüzü henüz uygulanmadı.
+Dil ve anahtar kelime handler’ları deterministik sonuç, özet handler’ı fixture döndürür. Uzmanların `/health` yanıtında `a2aReady: true` olur; bu gerçek analiz kalitesi anlamına gelmez. Personal orkestrasyonunun ilk sürümü eklendi; [kullanım rehberi](personal-agent.md). Personal ve uzman görevleri SQLite’ta kalıcıdır; Registry de SQLite kullanır; React demo arayüzü eklendi; [çalıştırma rehberi](demo-ui.md). [Veri dizinleri ve kurtarma](persistence.md).

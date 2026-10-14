@@ -4,8 +4,11 @@ COPY package*.json ./
 RUN npm ci --ignore-scripts --no-audit --no-fund
 COPY tsconfig.services.json ./
 COPY services ./services
-RUN npm run build:services
+COPY web ./web
+RUN npm run build
 ENV NODE_ENV=production PORT=4000
+RUN mkdir -p /app/data && chown node:node /app/data
+ENV DATA_DIR=/app/data
 USER node
 EXPOSE 4000
 CMD ["npm", "run", "start:service"]

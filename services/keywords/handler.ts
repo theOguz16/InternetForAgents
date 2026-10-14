@@ -1,7 +1,9 @@
 import { profiles, type SpecialistHandler } from "../shared/contracts.js";
-// Fixture gerçek analiz yapmaz; sonuç modu istemciye açıkça aktarılır.
+import { extractKeywords } from "./extract.js";
+
 export const handler: SpecialistHandler = {
-  async execute(_input) {
-    return { profile: profiles.keywords, mode: "fixture", output: {"keywords": []} };
+  mode: "deterministic",
+  async execute(input) {
+    return { profile: profiles.keywords, mode: "deterministic", output: { keywords: extractKeywords(input.text) } };
   },
 };

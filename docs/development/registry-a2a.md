@@ -10,7 +10,7 @@ curl -X POST http://localhost:4001/v1/agents \
 curl 'http://localhost:4001/v1/agents?profile=text-language.v1'
 ```
 
-Diğer uzmanlar için `language` yerine `keywords` veya `summary` kaydedilir. Kayıt otomatik yapılmaz. Container kartlarının endpoint’leri Compose ağında çözümlenir; hosttan doğrudan A2A denemesi için yayımlanan 4101/4102/4103 portlarını kullan. Personal Agent henüz bu kayıtları çağırmaz.
+Diğer uzmanlar için `language` yerine `keywords` veya `summary` kaydedilir. Kayıt otomatik yapılmaz. Container kartlarının endpoint’leri Compose ağında çözümlenir; hosttan doğrudan A2A denemesi için yayımlanan 4101/4102/4103 portlarını kullan. Personal Agent bu kayıtları kullanarak uzmanları çağırır; [iş oluşturma rehberi](personal-agent.md).
 
 ## Docker dışında
 
@@ -31,6 +31,6 @@ Bu kez kayıt adresi `http://127.0.0.1:4101/.well-known/agent-card.json` olur. V
 - Uzmanlarda `GET /.well-known/agent-card.json` ve `POST /a2a`: resmi SDK adaptörü.
 - `GET /profiles`: girdi/çıktı şemaları.
 
-Kayıt ve görev depoları bellektedir. Kimlik/ownership, kalıcı SQLite, pagination, kayıt silme, idempotency, SSE sonrası yeniden başlatma kurtarması ve Personal orkestrasyonu sonraki işlerdir. Bu uygulama, kapsamlı API tasarımındaki 202/pending iş akışının henüz yerine geçmez.
+Registry kayıtları `registry.sqlite` içinde kalıcıdır. Personal ve uzman görev depoları SQLite kullanır. Kimlik/ownership, pagination, kayıt silme, uzman mesaj dedup ve otomatik SSE yeniden bağlanması sonraki işlerdir. Personal orkestrasyonunun yerel alt kümesi eklendi. Bu uygulama, kapsamlı API tasarımındaki 202/pending iş akışının henüz yerine geçmez.
 
-Yerel süreçler varsayılan olarak 127.0.0.1’e bağlanır. Docker HOST=0.0.0.0 kullanır ama host portları localhost’a yayımlanır. İnternete veya güvenilmeyen paylaşılan ağa açılmamalıdır; mevcut allowlist paylaşılan ağ için tam SSRF koruması değildir. Ortak model veya LLM çağrısı yoktur.
+Yerel süreçler varsayılan olarak 127.0.0.1’e bağlanır. Docker HOST=0.0.0.0 kullanır ama host portları localhost’a yayımlanır. İnternete veya güvenilmeyen paylaşılan ağa açılmamalıdır; mevcut allowlist paylaşılan ağ için tam SSRF koruması değildir. Dil ve anahtar kelime uzmanları kurallarla metin işler; özet fixture’dır. Ortak model veya LLM çağrısı yoktur.

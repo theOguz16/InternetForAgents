@@ -41,8 +41,12 @@ A2A wire JSON alanları seçilen 1.0 sürümüne göre tanımlanmıştır. SDK'n
 
 ## Durum
 
-13 Ekim 2026: N01 A2A/SSE denemesi tamamlandı. Yeni TypeScript servis iskeleti ve Docker profilleri eklendi. **Ürün akışı henüz tamamlanmadı:** Registry kayıt/keşfi ve uzmanların A2A/SSE fixture yürütmesi eklendi. Depolar bellekte; Personal orkestrasyonu, gerçek analiz ve demo arayüzü sonraki aşamalardır. Çalışma dalı `oguzhan`.
+13 Ekim 2026: N01 A2A/SSE denemesi tamamlandı. Yeni TypeScript servis iskeleti ve Docker profilleri eklendi. **Ürün akışı henüz tamamlanmadı:** Registry kayıt/keşfi ve uzmanların A2A/SSE yürütmesi eklendi. Registry kayıtları SQLite’ta saklanır; Personal Agent keşif, paralel A2A çağrısı ve sonuç SSE’si eklendi. Dil tespiti ve anahtar kelime çıkarma deterministik algoritmalarla çalışır; özet fixture’dır. Personal ve uzman görevleri SQLite’ta saklanır. React demo arayüzü eklendi; gerçek özetleme sonraki aşamadır. Çalışma dalı `oguzhan`.
 
+- [Demo arayüzünü çalıştırma](docs/development/demo-ui.md)
+- [Görev kalıcılığı ve test sonuçları](docs/development/persistence.md)
+- [Hafif metin algoritmaları ve sınırları](docs/development/text-algorithms.md)
+- [Personal Agent akışı ve örnek görev](docs/development/personal-agent.md)
 - [Registry/A2A çalıştırma akışı](docs/development/registry-a2a.md)
 - [Metin kontratları](docs/architecture/text-profiles.md)
 - [Docker ve ekip geliştirme rehberi](docs/development/local.md)
