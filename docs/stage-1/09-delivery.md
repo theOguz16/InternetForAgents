@@ -71,7 +71,7 @@ I06 çoklu worker/lease/fanout (H05); I07 güçlü multi-tenant izolasyon (E01�
 
 ## Aşama 1 doğrulaması
 
-Markdown yerel bağlantıları ve JSON örneklerinin syntax’ı kontrol edilir; runtime testi çalıştırmak bu doküman turunun kapsamı değildir. Hedef API’ler mevcut endpoint rehberiyle karıştırılmaz. Kabul edilen dokümanlar oguzhan dalına tek dokümantasyon commit’iyle gönderilir. Final commit hash’i push sonucunda bildirilir; kendi hash’ini dosyaya gömmeye çalışılmaz.
+Markdown yerel bağlantıları ve JSON örneklerinin syntax’ı kontrol edilir; runtime testi çalıştırmak bu doküman turunun kapsamı değildir. Hedef API’ler mevcut endpoint rehberiyle karıştırılmaz. Kabul edilen dokümanlar geliştirme dalından PR ile `develop` dalına sunulur; hazır teslim `develop → main` release PR’ıyla ilerler. Final commit hash’i push sonucunda bildirilir; kendi hash’ini dosyaya gömmeye çalışılmaz.
 
 ## Bu revizyonun kontrol kaydı
 

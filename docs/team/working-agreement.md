@@ -8,7 +8,7 @@ Issue işi tarif eder; PR kod değişikliğini inceler. Her issue bir kişi tara
 
 ## Dal ve PR düzeni
 
-Entegrasyon dalı `oguzhan`. Yeni iş: güncel oguzhan’dan `feature/<task-id>-<short-name>`. PR base=`oguzhan`. `main`e doğrudan merge edilmez. Mevcut oguzhan→main PR’ı ayrı release incelemesidir. Draft PR erken geri bildirim içindir; tamamlandı anlamına gelmez.
+Entegrasyon dalı `develop`. Yeni iş: güncel develop’dan `feature/<task-id>-<short-name>`. PR base=`develop`. `main`e doğrudan merge edilmez. Mevcut develop→main PR’ı ayrı release incelemesidir. Draft PR erken geri bildirim içindir; tamamlandı anlamına gelmez.
 
 1. Issue ve ilgili S1.0 bölümlerini oku.
 2. Bağımlılıkları ve mevcut gerçek kodu kontrol et.
@@ -49,3 +49,7 @@ Bloklayıcı: veri sızıntısı, duplicate yan etki, şema kırılması, bozuk 
 ## Otomatik review hazırlığı
 
 `pr-readiness` gerekli PR bölümlerini ve gerçek Issue referansını kontrol eder. Metnin doğruluğunu, kabul kriterlerinin tamamlandığını veya mimari uygunluğu kanıtlamaz. Güncel kontrol/kurulum tablosu: [review süreci](review-process.md). İlk uygulama: [PR #69 incelemesi](reviews/pr-69.md).
+
+## Dal geçişi ve teslim raporu
+
+Entegrasyon `develop`, hazır sürüm `main`; ayrı test dalı yok. `oguzhan` eski çalışma dalı olarak korunur. Testler PR’da ve develop push’unda çalışır; otomatik deployment yok. Her PR [ortak prompt](ai-delivery-review.md) ile hazırlanmış, güncel head SHA içeren öz değerlendirme raporu taşımalı.

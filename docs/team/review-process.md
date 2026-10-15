@@ -2,8 +2,8 @@
 
 ## Günlük akış
 
-1. Geliştirici güncel `oguzhan` dalından bir iş dalı açar, Issue kapsamını uygular.
-2. PR base `oguzhan` olur. PR şablonundaki altı bilgi bölümü doldurulur; ilk bölümde `#5` gibi gerçek Issue referansı bulunur. Kısmi işte `Refs #5`, tam işte `Closes #5` kullanılabilir. Varsayılan dal `main` olduğu için Issue'nun kapanmasını ayrıca kontrol edin.
+1. Geliştirici güncel `develop` dalından bir iş dalı açar, Issue kapsamını uygular.
+2. PR base `develop` olur. PR şablonundaki bilgi bölümleri ve AI raporu doldurulur; ilk bölümde `#5` gibi gerçek Issue referansı bulunur. Kısmi işte `Refs #5`, tam işte `Closes #5` kullanılabilir. Varsayılan dal `main` olduğu için Issue'nun kapanmasını ayrıca kontrol edin.
 3. Checks bölümünde `quality`, `pr-readiness` ve mevcut `SonarCloud Code Analysis` sonucu incelenir. Başarısız kontrolün Details bağlantısından sebep okunur; geliştirici düzeltir.
 4. Oguzhan önce Issue kabul maddelerini, sonra PR kanıtını, sonra Files changed bölümünü inceler. Güvenlik, veri ve kontrat değişiklikleri ayrıca teknik inceleme ister.
 5. Bloklayıcı hata için Request changes; eksiksiz teslim için Approve. Son push'tan sonra kontroller ve onay yeniden değerlendirilir. Merge otomatik değildir.
@@ -35,7 +35,7 @@ Bulguyu `önem + dosya/satır + hangi durumda bozulur + beklenen düzeltme` biç
 
 ## Repo sahibinin yapacağı tek seferlik kurulum
 
-15 Ekim 2026 itibarıyla `theOguz16` hesabında write=true, admin=false. Bu yüzden korumalar araçla etkinleştirilmedi. Repo sahibi GitHub Settings → Rules → Rulesets (veya Branches) üzerinden `oguzhan` ve `main` için:
+15 Ekim 2026 itibarıyla `theOguz16` hesabında write=true, admin=false. Bu yüzden korumalar araçla etkinleştirilmedi. Repo sahibi GitHub Settings → Rules → Rulesets (veya Branches) üzerinden `develop` ve `main` için:
 
 - Pull request zorunlu; en az 1 onay.
 - Code owner review zorunlu.
@@ -56,3 +56,7 @@ Bulguyu `önem + dosya/satır + hangi durumda bozulur + beklenen düzeltme` biç
 
 - https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 - https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/approving-a-pull-request-with-required-reviews
+
+## Rapor güncelliği
+
+[Ortak prompt](ai-delivery-review.md) sonucu PR açıklamasına eklenir. `pr-readiness`, rapor SHA’sının güncel PR head ile ve hedef dalın PR base ile eşleşmesini ister. Yeni kod pushlanırsa rapor yenilenmelidir; yalnız açıklamayı güncellemek yeterlidir. `develop → main` release raporunda tüm release kapsamı incelenir, hedef `main` yazılır.

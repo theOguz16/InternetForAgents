@@ -7,7 +7,7 @@ Git, Node.js 24, npm ve Docker Desktop/Engine + Compose. Python yalnız runner g
 ```sh
 git clone https://github.com/furkankorkmaz35/InternetForAgents.git
 cd InternetForAgents
-git switch oguzhan
+git switch develop
 npm ci
 npm run build
 npm run test:services

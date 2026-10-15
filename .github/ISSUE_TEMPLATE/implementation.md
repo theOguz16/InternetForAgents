@@ -21,4 +21,8 @@ title: "[TASK-ID] "
 
 ## Review soruları
 
-Base: oguzhan. Küçük PR açın; secret veya yerel DB göndermeyin.
+Base: develop. Küçük PR açın; secret veya yerel DB göndermeyin.
+
+## AI destekli teslim raporu
+
+- [ ] [Ortak değerlendirme promptuyla](https://github.com/furkankorkmaz35/InternetForAgents/blob/develop/docs/team/ai-delivery-review.md) rapor hazırla ve PR açıklamasına ekle. Güncel commit SHA, kabul kriteri kanıtları ve çalıştırılmayan kontrolleri belirt.

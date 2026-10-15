@@ -4,7 +4,7 @@ Bu bir öneridir; kişilere atama yapılmadı. Tüm 67 issue’yu aynı anda ba�
 
 ## Önce review
 
-Altyapı PR’ını oguzhan’a review edin. Manifest/Registry kapsamını test raporuyla karşılaştırın. Merge edilmeden ana geliştirme tabanının bu özellikleri içerdiğini varsaymayın.
+Altyapı PR’ını develop’a review edin. Manifest/Registry kapsamını test raporuyla karşılaştırın. Merge edilmeden ana geliştirme tabanının bu özellikleri içerdiğini varsaymayın.
 
 ## İlk hazırlanabilir işler
 

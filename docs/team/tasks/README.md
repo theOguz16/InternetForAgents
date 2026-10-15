@@ -1,6 +1,6 @@
 # Uygulama görevleri
 
-67 GitHub Issue: 62 Teslim A, 5 gelecek seviye. Gerçek kişi ataması yapılmadı. Base oguzhan; çözümler PR ile, son review Oguzhan’da.
+67 GitHub Issue: 62 Teslim A, 5 gelecek seviye. Gerçek kişi ataması yapılmadı. Base develop; çözümler PR ile, son review Oguzhan’da.
 
 | Task | Yerel ayrıntı | GitHub | Bağımlılıklar |
 | --- | --- | --- | --- |

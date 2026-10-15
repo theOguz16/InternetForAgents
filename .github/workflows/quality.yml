@@ -1,9 +1,9 @@
 name: Build and service tests
 on:
   pull_request:
-    branches: [oguzhan, main]
+    branches: [develop, main]
   push:
-    branches: [oguzhan]
+    branches: [develop]
 permissions:
   contents: read
 jobs:
