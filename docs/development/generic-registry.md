@@ -30,3 +30,7 @@ Namespace sahipliği/auth, pending/suspend/revision, expiry ve DNS sabitleme hen
 ## Kanıt
 
 15 Ekim 2026: TypeScript build ve 10 otomatik test geçti. HTTP testi bilinmeyen beceri kaydı/keşfini, eski testler metin demosunun korunmasını doğrular. Çalışan Docker image’ları bu değişiklikle otomatik güncellenmedi; PR merge sonrası yeniden build gerekir.
+
+## Kart eşlemesi
+
+Registry’nin kullandığı alanlar için typed Card doğrulaması ve hata/uyumluluk kuralları: [B03 uygulaması](agent-card-validation.md).
