@@ -33,4 +33,8 @@ Demo: http://localhost:4002. Uzmanları arayüzden kaydetmek için [çalıştır
 - [Tüm belgeler](docs/README.md)
 - [Docker doğrulama raporu](docs/development/docker-demo-results.md)
 
-Çalışma dalı: `oguzhan`. 'Kayıtlı', 'doğrudan çağrılabilir' ve 'bir workflow ile uyumlu' farklı özelliklerdir. Yeni beceriyi kaydetmek, anlamını otomatik öğrenip her akışta kullanabilmek anlamına gelmez.
+Çalışma dalı: `develop`. 'Kayıtlı', 'doğrudan çağrılabilir' ve 'bir workflow ile uyumlu' farklı özelliklerdir. Yeni beceriyi kaydetmek, anlamını otomatik öğrenip her akışta kullanabilmek anlamına gelmez.
+
+## Ekip geliştirme
+
+[Çalışma anlaşması ve review](docs/team/working-agreement.md) · [Kurulum](docs/team/local-setup.md) · [67 görev](docs/team/tasks/README.md) · [Manifest/Registry ilk artım](docs/development/generic-registry.md). Yeni genel kayıt yalnız yerel geliştirme kapsamındadır; ownership ve genel dispatch sonraki işlerdir.

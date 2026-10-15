@@ -24,3 +24,7 @@ A2A taşımasının normatif kaynağı sabit [v1.0 belirtimidir](https://a2a-pro
 ## Bu aşamanın kapanış şartı
 
 Dokuz task’ın her biri aşağıdaki belgelerde karşılanır; yerel bağlantı/örnek kontrolü ve commit kaydı teslim kanıtıdır. Model seçimi, sonuç ölçümü, runner güvenlik doğrulaması ve yeni kontratların kodda uygulanması sonraki aşamaların açık işleridir. Bu işler tamamlanmadan Teslim A kabul edilmez.
+
+## Uygulama artımı
+
+Genel manifest kayıt/doğrulama alt kümesinin gerçek kapsamı [uygulama raporunda](../development/generic-registry.md), junior görevleri [ekip backlog’unda](../team/tasks/README.md) tutulur. S1.0 hedefleri ile tamamlanan özellikler aynı şey değildir.

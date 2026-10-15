@@ -143,3 +143,25 @@ test('Registry SQLite: yeniden açılma, kimlik koruma ve kaldırılan ağ izni'
   assert.equal((await fetch(`${restored}/v1/agents/${original.id}`)).status, 404);
   assert.equal(store.list().length, 1); // İzin değişimi veriyi silmez, yalnız görünürlüğü kısıtlar.
 });
+
+test('Registry HTTP: generic manifest kaydı, yeni profil keşfi ve legacy geriye uyumu', async t => {
+  const { RegistryStore } = require('../dist/services/registry/store.js');
+  const store = new RegistryStore(':memory:'); t.after(() => store.close());
+  const manifest = structuredClone(require('../examples/manifests/text-length.json'));
+  const agent = await serve(t, (app, base) => {
+    app.get('/.well-known/agent-card.json', (_req, res) => res.json({ name: 'Independent text length', skills: [{id:'text-length'}], capabilities: {streaming:true}, supportedInterfaces:[{url:`${base}/a2a`,protocolBinding:'JSONRPC',protocolVersion:'1.0'}] }));
+    app.get('/ifa/capabilities.json', (_req,res) => res.json(manifest));
+  });
+  const registry = await serve(t, app => app.use('/v1', registryRouter(new Set([agent]), store)));
+  const body = {cardUrl:`${agent}/.well-known/agent-card.json`,manifestUrl:`${agent}/ifa/capabilities.json`};
+  const registered = await post(`${registry}/v1/agents`,body); assert.equal(registered.status,201);
+  const saved = await registered.json(); assert.equal(saved.manifest.capabilities[0].id,'team-example/text-length');
+  const found = await (await fetch(`${registry}/v1/agents?profile=team-example%2Ftext-length`)).json();
+  assert.equal(found.agents[0].id,saved.id);
+  const badOrigin = await post(`${registry}/v1/agents`,{...body,manifestUrl:'http://example.com/ifa/capabilities.json'}); assert.equal(badOrigin.status,422);
+  manifest.capabilities[0].description = 'changed';
+  assert.equal((await post(`${registry}/v1/agents`,body)).status,409);
+  manifest.capabilities[0].inputSchema.properties.text.pattern='.*';
+  const badSchema = await post(`${registry}/v1/agents`,body); assert.equal(badSchema.status,422); assert.equal((await badSchema.json()).error,'unsupported_field');
+  assert.equal(store.get(saved.id).manifest.capabilities[0].description,saved.manifest.capabilities[0].description);
+});
