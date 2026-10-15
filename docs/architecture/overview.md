@@ -1,57 +1,56 @@
-# Sistem bağlamı ve servis sınırları
+> **Tarihsel tasarım referansı — 15 Ekim 2026:** Güncel hedef ve limitler [S1.0](../stage-1/README.md) içindedir. Bu belgedeki eski demo/endpoint/limit kararları S1.0 ile çeliştiğinde uygulanmaz. Mevcut kod için [geliştirme rehberi](../development/local.md).
 
-Durum: MVP için kararlaştırıldı. [Kararlar](../decisions/README.md).
+# Sistem ve alt mimariler
 
-## Bağlam
+## Dört mimari düzey
+
+| Düzey | Karar | Neden |
+| --- | --- | --- |
+| Sistem | SOA; dört backend servisi ve web UI | Bağımsız servis sahipliği ve çalıştırma |
+| Servis içi | Hafif hexagonal/katmanlı yapı | Framework, DB ve LLM bağımlılıklarını iş akışından ayırma |
+| Entegrasyon | Registry için REST; agent'lar için A2A JSON-RPC | Keşif ile görev trafiğinin ayrılması |
+| Çalıştırma | Compose, servis başına bir instance ve ayrı SQLite | Ders kapsamına uygun işletim |
+
+## Mantıksal görünüm
 
 ```mermaid
-flowchart TD
- U[Kullanıcı] --> A[Örnek veya harici agent]
- A --> API[Express HTTP sınırı]
- P[Sağlayıcı yöneticisi] --> API
- API --> C[Catalog]
- API --> R[Registry]
- API --> D[Discovery ve Broker]
- API --> I[Invocation]
- D --> R
- D --> C
- I --> R
- I --> C
- I --> PLY[Policy]
- I --> AD[HTTP adapter]
- AD --> S[Harici sağlayıcılar]
- R --> V[Contract validation ve güvenli edinim]
+flowchart LR
+ UI[Web UI] -->|REST JSON| R[Registry]
+ UI -->|REST JSON| P[Personal Agent]
+ P -->|Keşif| R
+ P -->|A2A| C[Review Agent]
+ P -->|A2A| T[Test Agent]
+ R --> RD[(Registry SQLite)]
+ P --> PD[(Personal SQLite)]
+ C --> CD[(Review SQLite)]
+ T --> TD[(Test SQLite)]
 ```
 
-## Mantıksal servisler
+SOA servis başına repository gerektirmez. Monorepo içinde ayrı deployment hedefleri vardır. Registry bir gateway değildir; A2A görevleri üzerinden geçmez.
 
-| Servis | Sahip olduğu bilgi | Sorumluluk |
-| --- | --- | --- |
-| Catalog | Değişmez yetenek sürümleri | Ortak iş anlamı ve şemalar |
-| Registry | Sağlayıcılar, kontrat sürümleri, durum ve doğrulama kayıtları | Kayıt, güncelleme, askı ve kaldırma |
-| Discovery/Broker | Kalıcı alan verisi yok | Katalog ve Registry üzerinden uygun adayları bulma, filtreleme ve sıralama |
-| Invocation | Çağrı durumu ve istemci tekrar anahtarları | Yetki, süre bütçesi, adapter çağrısı ve sonuç doğrulama |
-| Policy | Konfigürasyon ve principal kapsamları | Kaynak erişimi ve outbound hedef izinleri |
-| Evidence | Audit ve ölçüm kayıtları | İzlenebilirlik; sıralama için salt okunur ölçüm görünümü |
+## Servis içi bağımlılık
 
-Contract validation, HTTP adapter ve ağ politikası altyapı bileşenleridir; her biri ayrı deploy edilen servis değildir. Tek Node süreci ve tek PostgreSQL ile başlanır. Mantıksal servisler yalnızca yayımladıkları uygulama arayüzleri üzerinden konuşur; birbirlerinin tablolarına yazmaz.
+Presentation → Application → Domain. Infrastructure, application/domain tarafından tanımlı portları uygular. Composition root bunları bağlar. Domain Express, A2A SDK, SQLite veya LLM SDK import etmez.
 
-## Agent sınırı
+- Presentation: REST controller, A2A handler, doğrulama ve DTO mapping.
+- Application: register/search/create job/dispatch/check status gibi kullanım durumları.
+- Domain: kayıt durumu, görev planı, seçim kuralları, sonuç ve profil invariant'ları.
+- Infrastructure: SQLite repository, Registry HTTP client, A2A SDK adapter, clock, analyzer/LLM adapter.
 
-Hedef yorumlama, gerekli yeteneklerin seçimi, kullanıcı etkileşimi, çok adımlı iş planı ve son alternatiflerin kullanıcıya sunulması agent'ın sorumluluğudur. Çekirdek tek çağrıyı yürütür; kendiliğinden başka sağlayıcı seçip çağırmaz. Agent farklı sağlayıcıyı çağırmak isterse yeni istek yapar.
+Küçük servislerde katmanlar birer klasör olabilir; her sınıf için gereksiz interface üretilmez. Portlar DB, ağ, saat ve analiz motoru gibi değişebilen sınırlar içindir.
 
-## Bağımlılık ilkesi
+## Personal Agent alt yapısı
 
-HTTP controller → uygulama kullanım durumu → alan modeli ve portlar. Altyapı adapter'ları portları uygular. Alan modeli Express veya SQL istemcisini import etmez. Modüller arası bağımlılıklar açık arayüzlerden geçer; döngü kurulmaz. Telemetri portu her modülde kullanılabilir ancak iş kararının sahibi olamaz.
+Request Interpreter → Plan Builder → Discovery Client → Selector → A2A Dispatcher → Task Tracker → Result Aggregator.
 
-## Senaryolar
+Bunlar aynı uygulamanın modülleridir. İlk planlar sabittir: review, tests, review+tests. Sonuncusu iki bağımsız child task paralel yürütür. Genel workflow/DAG motoru veya merkezi message broker yoktur.
 
-Kayıt: Yetkili sağlayıcı → Registry → güvenli kontrat edinimi → Catalog uyum kontrolü → aktif sürüm.
+## Uzman alt yapısı
 
-Keşif: Agent → capability/version ve kısıtlar → Registry aktif görünümü → Broker → alternatifler.
+A2A transport adapter → Profile Validator → Task Application Service → AnalysisEngine port → Artifact Builder → Task Repository.
 
-Çağrı: Agent seçimi → Registry sürüm ve durum kontrolü → Policy → Invocation → Adapter → çıktı doğrulama → sonuç.
+A2A iletişim tipleri boundary'de iç modele dönüştürülür. Domain'de yalnızca Python kaynak metni ve typed sonuçlar görülür. Kural motorundan LLM'e geçmek engine adapter değişikliğidir, A2A protokolünü değiştirmez.
 
-## Kod sınırı
+## Bağımsızlık kuralları
 
-Bu set yalnızca dokümantasyondur. Uygulama kodu kullanıcının ayrı başlatma talimatıyla yazılır.
+Başka servisin DB'sine, source modülüne veya domain nesnesine doğrudan erişilmez. Ortak paket yalnızca profile DTO/schema, teknik gözlem yardımcıları ve A2A adapter yardımcıları içerebilir. Registry uygulama mantığı uzmanlara import edilmez. Shared package dağıtık servisleri lockstep deploy zorunluluğuna sokmamalı; profile version açık taşınır.

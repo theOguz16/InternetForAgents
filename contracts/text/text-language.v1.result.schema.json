@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "mode",
+    "output"
+  ],
+  "properties": {
+    "profile": {
+      "const": "text-language.v1"
+    },
+    "mode": {
+      "enum": [
+        "fixture",
+        "deterministic",
+        "model"
+      ]
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language"
+      ],
+      "properties": {
+        "language": {
+          "enum": [
+            "tr",
+            "en",
+            "und"
+          ]
+        }
+      }
+    }
+  }
+}

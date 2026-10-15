@@ -1,29 +1,19 @@
-# ADR-XXX: <Karar başlığı>
+# ADR-XXX: <başlık>
 
-Tarih: <tarih>
-Durum: Öneri / Kabul / Yerine yenisi geçti
-İlgili karar: <ADR>
+Tarih / durum / yerine geçtiği karar: <doldur>
 
 ## Bağlam
 
-<Problem ve sınırlar>
+<Problem ve kısıtlar>
 
-## Seçenekler
+## Seçenekler ve karar
 
-<En az iki seçenek ve somut maliyetleri>
+<En az iki seçenek, neden seçildi, maliyet>
 
-## Karar ve gerekçe
+## Etkilenen sınırlar
 
-<Seçim, kapsamı ve nedenleri>
+<Servis, wire sürümü, profile, veri sahipliği>
 
-## Sonuçlar
+## Yeniden değerlendirme ve kabul
 
-<Olumlu etkiler, maliyetler, riskler>
-
-## Yeniden değerlendirme koşulu
-
-<Ölçülebilir tetikleyici>
-
-## Etkilenen belgeler ve kabul senaryoları
-
-<Bağlantılar>
+<Tetikleyici, NA kriterleri ve belge bağlantıları>

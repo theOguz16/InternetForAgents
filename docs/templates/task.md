@@ -1,31 +1,22 @@
-# <Görev ID>: <Başlık>
+# NXX: <başlık>
 
 Durum: Planlandı
 Sorumlu: Atanmadı
-Bağımlılıklar: <ID>
-ADR / AC: <bağlantılar>
+Bağımlılıklar: <N>
+İlgili ADR / NA: <kimlikler>
 
-## Problem ve beklenen davranış
+## Davranış ve kapsam
 
-<Tetikleyici, önce/sonra>
-
-## Kapsam ve kapsam dışı
-
-<Somut sınır>
+<Somut tetikleyici ve sonuç>
 
 ## Kabul kriterleri
 
-- Verilen: <başlangıç>; olduğunda: <işlem>; beklenen: <gözlenebilir sonuç>.
-- Hata senaryosu: <sonuç>.
+<Verilen/olduğunda/beklenen; en az bir failure case>
 
 ## Doğrulama kanıtı
 
-<Plan / sonuç / artefakt; yapılmadıysa açıkça yaz>
+<Test sonucu veya yapılmadı; protokol fixture bağlantısı>
 
-## Veri, güvenlik ve geçiş etkisi
+## Veri ve geçiş
 
-<Migration, rollback, izinler>
-
-## Tamamlanma
-
-<İlgili belge güncel, AC kanıtı var, engel yok>
+<Migration, rollback, doküman etkisi>

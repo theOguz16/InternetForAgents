@@ -1,0 +1,337 @@
+{
+  "B04": {
+    "title": "[B04] Manifest validator sınır testlerini ve şemalarını tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/2",
+    "number": 2
+  },
+  "B03": {
+    "title": "[B03] Agent Card ve manifest eşlemesini tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/3",
+    "number": 3
+  },
+  "B01": {
+    "title": "[B01] Registry genel beceri kaydını tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/4",
+    "number": 4
+  },
+  "B05": {
+    "title": "[B05] Bağımsız agent geliştirme şablonu hazırla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/5",
+    "number": 5
+  },
+  "D01": {
+    "title": "[D01] Backend katman ve port sınırlarını düzenle",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/6",
+    "number": 6
+  },
+  "D04": {
+    "title": "[D04] Kalıcı dispatch ve uçtan uca dedup tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/7",
+    "number": 7
+  },
+  "B06": {
+    "title": "[B06] Ortak A2A adaptörünü genel envelope’a taşı",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/8",
+    "number": 8
+  },
+  "B07": {
+    "title": "[B07] Agent uyumluluk kontrol komutu geliştir",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/9",
+    "number": 9
+  },
+  "B08": {
+    "title": "[B08] Model portu ve qualification rehberi hazırla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/10",
+    "number": 10
+  },
+  "B09": {
+    "title": "[B09] İki bağımsız geliştiriciyle onboarding deneyi yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/11",
+    "number": 11
+  },
+  "E01": {
+    "title": "[E01] Kullanıcı oturumu ve rol modelini uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/12",
+    "number": 12
+  },
+  "C01": {
+    "title": "[C01] Registry sahiplik ve kayıt yaşam döngüsü uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/13",
+    "number": 13
+  },
+  "C02": {
+    "title": "[C02] Sürüm değişmezliği ve revision concurrency tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/14",
+    "number": 14
+  },
+  "C03": {
+    "title": "[C03] Registry arama ve sayfalama uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/15",
+    "number": 15
+  },
+  "C04": {
+    "title": "[C04] Kayıt güncelliği politikasını uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/16",
+    "number": 16
+  },
+  "C05": {
+    "title": "[C05] Açıklanabilir sağlayıcı seçim modülünü ayır",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/17",
+    "number": 17
+  },
+  "C06": {
+    "title": "[C06] Güvenli alternatif sağlayıcı davranışı ekle",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/18",
+    "number": 18
+  },
+  "D02": {
+    "title": "[D02] Deklaratif workflow tanımı oluştur",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/19",
+    "number": 19
+  },
+  "D03": {
+    "title": "[D03] Workflow validator ve DAG executor uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/20",
+    "number": 20
+  },
+  "D05": {
+    "title": "[D05] SSE reconnect ve görev uzlaştırma uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/21",
+    "number": 21
+  },
+  "D06": {
+    "title": "[D06] Timeout iptal ve iş bütçelerini tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/22",
+    "number": 22
+  },
+  "E05": {
+    "title": "[E05] Güvenilmeyen agent içeriği sınırlarını uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/23",
+    "number": 23
+  },
+  "D07": {
+    "title": "[D07] Minimum context oluşturucu uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/24",
+    "number": 24
+  },
+  "D08": {
+    "title": "[D08] Yetkili artifact deposu ve kaynak izi kur",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/25",
+    "number": 25
+  },
+  "D09": {
+    "title": "[D09] Retention silme ve restart politikasını tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/26",
+    "number": 26
+  },
+  "D10": {
+    "title": "[D10] Görev geçmişi ve birleşik raporu tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/27",
+    "number": 27
+  },
+  "E02": {
+    "title": "[E02] Servis kimliği ve secret yaşam döngüsü kur",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/28",
+    "number": 28
+  },
+  "E03": {
+    "title": "[E03] SSRF ve egress korumasını tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/29",
+    "number": 29
+  },
+  "E04": {
+    "title": "[E04] Kota queue ve backpressure tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/30",
+    "number": 30
+  },
+  "E06": {
+    "title": "[E06] Runner tasarımını uygulanabilir güvenlik paketine dönüştür",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/31",
+    "number": 31
+  },
+  "E07": {
+    "title": "[E07] İzole Python runner uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/32",
+    "number": 32
+  },
+  "E08": {
+    "title": "[E08] Runner saldırı ve kaynak sınırı testleri yaz",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/33",
+    "number": 33
+  },
+  "E09": {
+    "title": "[E09] Web ve bağımlılık güvenlik kapıları ekle",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/34",
+    "number": 34
+  },
+  "E10": {
+    "title": "[E10] Audit ve veri maskeleme uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/35",
+    "number": 35
+  },
+  "F01-IMPL": {
+    "title": "[F01-IMPL] Kod demo profillerinin makine şemalarını üret",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/36",
+    "number": 36
+  },
+  "F02": {
+    "title": "[F02] Bağımsız kod üretme agent’ı geliştir",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/37",
+    "number": 37
+  },
+  "F03": {
+    "title": "[F03] Bağımsız review agent’ı geliştir",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/38",
+    "number": 38
+  },
+  "F04": {
+    "title": "[F04] Bağımsız test üretme agent’ı geliştir",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/39",
+    "number": 39
+  },
+  "F05": {
+    "title": "[F05] Kod üretim review test workflow’unu bağla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/40",
+    "number": 40
+  },
+  "F06": {
+    "title": "[F06] Aynı beceride ikinci sağlayıcı bağla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/41",
+    "number": 41
+  },
+  "B10": {
+    "title": "[B10] Genel capability doğrudan çağrı API’si uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/42",
+    "number": 42
+  },
+  "F07": {
+    "title": "[F07] Farklı alanda agent ekle",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/43",
+    "number": 43
+  },
+  "G02": {
+    "title": "[G02] Frontend feature modüllerine ayrıştır",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/44",
+    "number": 44
+  },
+  "G03": {
+    "title": "[G03] Keşif agent detayı ve sahiplik ekranlarını yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/45",
+    "number": 45
+  },
+  "G04": {
+    "title": "[G04] Şemadan doğrudan çağrı formu oluştur",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/46",
+    "number": 46
+  },
+  "G05": {
+    "title": "[G05] Workflow ve görev detay ekranını tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/47",
+    "number": 47
+  },
+  "G06": {
+    "title": "[G06] Görev geçmişi ve artifact görünümünü yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/48",
+    "number": 48
+  },
+  "G07": {
+    "title": "[G07] Reconnect retry ve idempotency UX tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/49",
+    "number": 49
+  },
+  "G08": {
+    "title": "[G08] Erişilebilirlik ve kullanıcı testi yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/50",
+    "number": 50
+  },
+  "H02": {
+    "title": "[H02] Trace metric ve structured logging ekle",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/51",
+    "number": 51
+  },
+  "H03": {
+    "title": "[H03] Birim ve kontrat test matrisini tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/52",
+    "number": 52
+  },
+  "H04": {
+    "title": "[H04] E2E ve arıza testlerini otomatikleştir",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/53",
+    "number": 53
+  },
+  "H05": {
+    "title": "[H05] Yük ve soak deneyini çalıştır",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/54",
+    "number": 54
+  },
+  "H06": {
+    "title": "[H06] Bağımsız kod oracle benchmark kümesi hazırla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/55",
+    "number": 55
+  },
+  "H07": {
+    "title": "[H07] Tek ve çok agent karşılaştırması yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/56",
+    "number": 56
+  },
+  "H08": {
+    "title": "[H08] Geliştirici entegrasyon maliyetini ölç",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/57",
+    "number": 57
+  },
+  "H09": {
+    "title": "[H09] KPI ve başarısızlık analiz raporu yaz",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/58",
+    "number": 58
+  },
+  "I01": {
+    "title": "[I01] Temiz makine kurulumunu doğrula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/59",
+    "number": 59
+  },
+  "I02": {
+    "title": "[I02] CI ve PR review kalite kapılarını kur",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/60",
+    "number": 60
+  },
+  "I03": {
+    "title": "[I03] Backup restore ve migration rehberi uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/61",
+    "number": 61
+  },
+  "I04": {
+    "title": "[I04] Operasyon runbook’u tamamla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/62",
+    "number": 62
+  },
+  "I05": {
+    "title": "[I05] Teslim A kabul ve release oturumu yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/63",
+    "number": 63
+  },
+  "I06": {
+    "title": "[I06] Çoklu worker ölçek tasarımını uygula",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/64",
+    "number": 64
+  },
+  "I07": {
+    "title": "[I07] Çok kiracılı güçlü izolasyon kur",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/65",
+    "number": 65
+  },
+  "I08": {
+    "title": "[I08] Dinamik plan önerisi araştırması yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/66",
+    "number": 66
+  },
+  "I09": {
+    "title": "[I09] Uzun dönem memory retrieval araştırması yap",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/67",
+    "number": 67
+  },
+  "I10": {
+    "title": "[I10] Açık internet dağıtım kapısını hazırla",
+    "url": "https://github.com/furkankorkmaz35/InternetForAgents/issues/68",
+    "number": 68
+  }
+}
