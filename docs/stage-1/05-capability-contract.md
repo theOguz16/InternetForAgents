@@ -1,6 +1,6 @@
 # Geliştirici yetenek tanımı — ifa-manifest.v1
 
-Durum: S1.0 kabul edilmiş tasarım; parser/endpoint/şablon henüz uygulanmadı. Platform agent’ın iş mantığını yazmaz. Geliştirici şema ve semantiği sağlar; platform tanımın yapısını, izinlerini ve ilan edilen sürümü doğrular. Doğrulama agent’ın dürüst veya doğru olduğunu kanıtlamaz.
+Durum: S1.0 kabul edilmiş tasarım. Manifest parser, Registry eşleme ve yerel agent şablonu uygulanmıştır; bu belgedeki bütün yaşam döngüsü/yetki özellikleri henüz tamamlanmış değildir. Platform agent’ın iş mantığını yazmaz. Geliştirici şema ve semantiği sağlar; platform tanımın yapısını, izinlerini ve ilan edilen sürümü doğrular. Doğrulama agent’ın dürüst veya doğru olduğunu kanıtlamaz.
 
 ## Kimlikler
 
@@ -82,3 +82,7 @@ Kayıt yaşamı pending_validation → active veya rejected; owner/operator susp
 Yeni ID kayıt olabilir; desteklenen schema ile doğrudan çağrılabilir. Aynı profil adını kullanmak yetmez: sürüm/digest ve semantik uyum gerekir. Workflow açık eşleştirmeyle veri bağlar; kod profili bilmeyen bir metin becerisi o role otomatik sokulmaz. Registry gelecekte bilmediği tüm yetenekleri anlamak zorunda değildir.
 
 B02 tamamlanma kanıtı: bu tanım, örnekler, sınırlar ve sürüm kararı. B03–B07’de parser, şema testleri ve bağımsız şablon uygulanacaktır. Mevcut `text-language.v1` vb. legacy profiller hemen bu envelope’u kabul etmez; geçiş adaptörü ayrı iştir.
+
+## B04 uygulama kanıtları
+
+[Validator sınırları, makine envelope şemaları ve kabul testleri](../development/manifest-validation.md).

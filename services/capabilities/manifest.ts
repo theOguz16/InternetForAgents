@@ -92,7 +92,8 @@ export function validateManifest(value: unknown, skillIds: string[]): Manifest {
     if (!version.test(cap.version)) fail("unsupported_version", `${path}/version`);
     if (!skillIds.includes(cap.skillId) || bindings.has(cap.skillId)) fail("invalid_skill_binding", `${path}/skillId`);
     ids.add(cap.id); bindings.add(cap.skillId);
-    if (!["fixture", "deterministic", "model"].includes(String(cap.executionMode)) || cap.sideEffects !== "none") fail("unsupported_execution", path);
+    // JSON alanının kendisi string olmalı; String(["model"]) gibi dönüşümler hatalı girdiyi gizler.
+    if (typeof cap.executionMode !== "string" || !["fixture", "deterministic", "model"].includes(cap.executionMode) || cap.sideEffects !== "none") fail("unsupported_execution", path);
     inspectSchema(cap.inputSchema, `${path}/inputSchema`); inspectSchema(cap.outputSchema, `${path}/outputSchema`);
     if (!Array.isArray(cap.examples) || cap.examples.length < 1 || cap.examples.length > 10) fail("invalid_examples", path);
     // Untrusted schema'lar global Ajv cache'inde sonsuza kadar tutulmaz.
