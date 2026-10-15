@@ -52,7 +52,7 @@ gerçek unittest case kontrolü **E07** sorumluluğudur; burada geçti iddia edi
 | --- | --- |
 | 1. Üç profil örneği schema geçer | Üç `examples/code-demo/*.json` dosyası Ajv, semantik validator ve gerçek B04 manifest validator’ından geçer; zorunlu her input/output alanının silinmesi reddedilir |
 | 2. Eksik alan, bozuk signature, tutarsız verdict ret | `invalid/` fixture’ları; keyword/dunder/ASCII hataları, duplicate parametre, yanlış tür, limit ±1, ters verdict, geçersiz finding line, fazladan alan ve UTF-8 çok byte testi |
-| 3. Aynı paket/sürüm import | Geçici bağımsız projeye gerçek npm pack/install; CJS, ESM, TypeScript; farklı sürümler input/output doğrulamasında ret |
+| 3. Aynı paket/sürüm import | Geçici bağımsız projeye gerçek npm pack/lockfile/ci; CJS, ESM, TypeScript; farklı sürümler input/output doğrulamasında ret |
 
 Bu kanıtlar S1.0 K05, TH03 (boyut sınırı) ve TH07’nin şema/doğruluk iddiası
 ayrımıyla ilişkilidir; bütün tehdit modelinin uygulandığını göstermez.
@@ -92,7 +92,8 @@ npm --prefix examples/agent-template test
 ```
 
 Yeni kontrat testleri service test komutuna dahildir. Bağımsız consumer testi
-npm cache’ini (önceki npm ci’den dolan) offline kullanır; geçici dizini temizler.
+npm ci’nin doldurduğu tarball cache’ini sabit consumer lockfile ile offline kullanır;
+registry metadata’sına ihtiyaç duymaz ve geçici dizini temizler.
 Testler ekip DB/portlarını değiştirmez. Gerçek çalıştırma sonuçları ve güncel
 head SHA, PR’ın AI destekli teslim raporunda tutulur; bu belge sonraki her commit
 ve ortam için başarı iddiası değildir.

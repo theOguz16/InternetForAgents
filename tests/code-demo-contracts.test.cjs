@@ -165,8 +165,32 @@ test('Bağımsız geliştirici: npm pack/install ile aynı 1.0.0 paketi, CJS/ESM
   const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   try {
     const packed = JSON.parse(execFileSync(npm, ['pack', './packages/code-demo-contracts', '--ignore-scripts', '--json', '--pack-destination', directory], { cwd: root, encoding: 'utf8' }))[0];
-    writeFileSync(join(directory, 'package.json'), JSON.stringify({ name: 'independent-consumer', version: '1.0.0', private: true, dependencies: { '@ifa/code-demo-contracts': `file:./${packed.filename}` } }));
-    execFileSync(npm, ['install', '--offline', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: directory, stdio: 'pipe' });
+    const consumer = { name: 'independent-consumer', version: '1.0.0', private: true, dependencies: { '@ifa/code-demo-contracts': `file:./${packed.filename}` } };
+    writeFileSync(join(directory, 'package.json'), JSON.stringify(consumer));
+    // npm ci tarball cache'ini doldurur, registry metadata'sını garanti etmez.
+    // Bağımsız tüketici de teslim edilen artifact ve sabit lockfile ile kurulmalıdır.
+    const rootLock = JSON.parse(readFileSync(join(root, 'package-lock.json')));
+    const packageEntry = rootLock.packages['packages/code-demo-contracts'];
+    const ajvEntry = rootLock.packages['packages/code-demo-contracts/node_modules/ajv'];
+    assert.equal(ajvEntry.version, packageEntry.dependencies.ajv);
+    const locked = {
+      '': consumer,
+      'node_modules/@ifa/code-demo-contracts': {
+        version: packageEntry.version, resolved: `file:./${packed.filename}`, integrity: packed.integrity,
+        dependencies: packageEntry.dependencies, engines: packageEntry.engines,
+      },
+      'node_modules/ajv': ajvEntry,
+    };
+    function addDependency(name) {
+      const key = `node_modules/${name}`;
+      if (Object.hasOwn(locked, key)) return;
+      assert.ok(rootLock.packages[key], `Missing pinned consumer dependency: ${name}`);
+      locked[key] = rootLock.packages[key];
+      Object.keys(locked[key].dependencies ?? {}).forEach(addDependency);
+    }
+    Object.keys(ajvEntry.dependencies).forEach(addDependency);
+    writeFileSync(join(directory, 'package-lock.json'), JSON.stringify({ name: consumer.name, version: consumer.version, lockfileVersion: 3, requires: true, packages: locked }));
+    execFileSync(npm, ['ci', '--offline', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: directory, stdio: 'pipe' });
     const source = `const c = require('@ifa/code-demo-contracts'); const example = ${JSON.stringify(generation)}; if (c.VERSION !== '1.0.0') throw Error('version'); c.validateOutput(example.capability, example.output, example.input); require('@ifa/code-demo-contracts/schemas/function-spec.schema.json');`;
     execFileSync(process.execPath, ['-e', source], { cwd: directory });
     execFileSync(process.execPath, ['--input-type=module', '-e', `import { VERSION, validateInput } from '@ifa/code-demo-contracts'; if (VERSION !== '1.0.0' || typeof validateInput !== 'function') throw Error('exports');`], { cwd: directory });
