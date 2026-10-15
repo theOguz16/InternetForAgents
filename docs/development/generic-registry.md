@@ -8,7 +8,7 @@ B01/B03/B04/C02 kapsamının yerel alt kümesi. Kayıt isteği artık `{cardUrl,
 npm run validate:manifest -- examples/manifests/text-length.json text-length
 ```
 
-CLI kartın gerçek skill ID’lerini argüman olarak bekler; agent sunucusu başlatmaz. Registry ağdan aldığı kartla eşlemeyi kendisi yapar. cardUrl-only eski metin kayıtları geriye uyumluluk için korunur.
+CLI kartın gerçek skill ID’lerini argüman olarak bekler; agent sunucusu başlatmaz. Yalnız proje dizini içindeki, en fazla 128 KiB büyüklüğündeki JSON dosyalarını okur; proje dışına yönlenen sembolik bağlantıları reddeder. Registry ağdan aldığı kartla eşlemeyi kendisi yapar. cardUrl-only eski metin kayıtları geriye uyumluluk için korunur.
 
 ## Uygulananlar
 
