@@ -1,3 +1,5 @@
+> **Karar zinciri notu:** Güncel durum ve kısmi geçersiz kılmalar [ADR-025](0025-stage1-baseline.md) içinde listelenmiştir.
+
 # ADR-017: Card dizini ve ayrı sağlık gözlemi
 
 Tarih: 2026-10-12

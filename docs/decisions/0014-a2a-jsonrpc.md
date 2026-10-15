@@ -1,3 +1,5 @@
+> **Karar zinciri notu:** Güncel durum ve kısmi geçersiz kılmalar [ADR-025](0025-stage1-baseline.md) içinde listelenmiştir.
+
 # ADR-014: A2A 1.0 ve JSON-RPC
 
 Tarih: 2026-10-12

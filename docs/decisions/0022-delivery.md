@@ -1,3 +1,5 @@
+> **Karar zinciri notu:** Güncel durum ve kısmi geçersiz kılmalar [ADR-025](0025-stage1-baseline.md) içinde listelenmiştir.
+
 # ADR-022: Aşamalı uyum kapıları ve gözlem
 
 Tarih: 2026-10-12

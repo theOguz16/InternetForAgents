@@ -1,20 +1,19 @@
-# Güncel mimari kararlar
+# Karar kayıtları
 
-Tarih: 2026-10-12. Durum: Yeni revizyon için kararlaştırıldı; uygulama yetkisi değildir. ADR-013–022 önceki tasarımın yerini alır. Önceki kayıtlar [arşivde](../archive/2026-10-10/decisions/README.md).
+Güncel hedef: [S1.0](../stage-1/README.md), 15 Ekim 2026. [ADR-025](0025-stage1-baseline.md) bu baseline’ın karar ve alternatif haritasıdır. Kabul edilmiş tasarım, uygulanmış özellik anlamına gelmez.
 
-| ADR | Karar | Yerine geçtiği eski ADR |
-| --- | --- | --- |
-| [ADR-013](0013-agent-network.md) | Agent ağına geçiş | 001, 006, 007 |
-| [ADR-014](0014-a2a-jsonrpc.md) | A2A 1.0 ve JSON-RPC | 004 |
-| [ADR-015](0015-skill-profiles.md) | Agent Card ve uygulama profilleri | 003 |
-| [ADR-016](0016-typescript-sqlite.md) | TypeScript servisleri ve ayrı SQLite | 008 |
-| [ADR-017](0017-discovery-health.md) | Card dizini ve ayrı sağlık gözlemi | 002, 009 |
-| [ADR-018](0018-selection.md) | Personal Agent içinde seçim | 005 |
-| [ADR-019](0019-task-polling.md) | Kalıcı görev, polling ve dedup | 006 |
-| [ADR-020](0020-security-boundaries.md) | Dağıtık yetki ve ağ sınırları | 010 |
-| [ADR-021](0021-demo-scope.md) | Kod inceleme ve test önerisi demosu | 011 |
-| [ADR-022](0022-delivery.md) | Aşamalı uyum kapıları ve gözlem | 012 |
-
-| [ADR-023](0023-sse-no-polling.md) | SSE, sınırlı reconnect ve polling yok | 014/017/019 ilgili kısımları |
-
-| [ADR-024](0024-local-text-agents.md) | Yerel metin agent’ları ve Docker geliştirme | 021 demo kapsamı |
+| Kayıt | Güncel ilişki |
+| --- | --- |
+| [013 Agent ağı](0013-agent-network.md) | Korunur, generic kayıtla genişler |
+| [014 A2A](0014-a2a-jsonrpc.md) | A2A 1.0 korunur; SSE için 023 |
+| [015 Profiller](0015-skill-profiles.md) | Sabit profil kapsamı 025/B02 ile değiştirilir |
+| [016 TS/SQLite](0016-typescript-sqlite.md) | Tek-instance Teslim A için korunur |
+| [017 Discovery](0017-discovery-health.md) | 023/025 güncellik politikasına göre |
+| [018 Selection](0018-selection.md) | Policy-aware seçim yönünde genişler |
+| [019 Polling](0019-task-polling.md) | Polling kısmı 023 tarafından geçersiz |
+| [020 Security](0020-security-boundaries.md) | S1.0 threat/runner politikasıyla genişler |
+| [021 Demo](0021-demo-scope.md) | 024 ve sonra 025 kapsam değişikliği |
+| [022 Delivery](0022-delivery.md) | S1.0 kabul kapılarıyla somutlaşır |
+| [023 SSE](0023-sse-no-polling.md) | Korunur; polling yok |
+| [024 Metin agent’ları](0024-local-text-agents.md) | Metinler regresyon olarak kalır; ana demo 025 |
+| [025 Baseline](0025-stage1-baseline.md) | Etkin: ürün/mimari/kontrat/context/security/ölçüm |

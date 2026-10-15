@@ -1,3 +1,5 @@
+> **Tarihsel tasarım referansı — 15 Ekim 2026:** Güncel hedef ve limitler [S1.0](../stage-1/README.md) içindedir. Bu belgedeki eski demo/endpoint/limit kararları S1.0 ile çeliştiğinde uygulanmaz. Mevcut kod için [geliştirme rehberi](../development/local.md).
+
 # Platform REST API tasarımı
 
 Uygulanan yerel alt küme: [Registry/A2A](../development/registry-a2a.md). [Personal yerel API alt kümesi](../development/personal-agent.md) de uygulandı. Aşağıdaki sahiplik, kalıcılık ve eski operation tabanlı API kapsamı henüz uygulanmadı.

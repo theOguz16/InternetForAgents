@@ -1,3 +1,5 @@
+> **Karar zinciri notu:** Güncel durum ve kısmi geçersiz kılmalar [ADR-025](0025-stage1-baseline.md) içinde listelenmiştir.
+
 # ADR-015: Agent Card ve uygulama profilleri
 
 Tarih: 2026-10-12

@@ -1,3 +1,5 @@
+> **Tarihsel tasarım referansı — 15 Ekim 2026:** Güncel hedef ve limitler [S1.0](../stage-1/README.md) içindedir. Bu belgedeki eski demo/endpoint/limit kararları S1.0 ile çeliştiğinde uygulanmaz. Mevcut kod için [geliştirme rehberi](../development/local.md).
+
 # Veri modeli ve sahiplik
 
 Karar: Her backend kendi SQLite dosyasını ve volume'unu kullanır; dosya başka servisle paylaşılmaz. Bir uygulama bir instance. SQLite WAL, foreign key kontrolü ve kısa transaction'lar hedeflenir; ağ isteği transaction içinde tutulmaz.

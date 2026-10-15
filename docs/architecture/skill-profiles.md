@@ -1,3 +1,5 @@
+> **Tarihsel tasarım referansı — 15 Ekim 2026:** Güncel hedef ve limitler [S1.0](../stage-1/README.md) içindedir. Bu belgedeki eski demo/endpoint/limit kararları S1.0 ile çeliştiğinde uygulanmaz. Mevcut kod için [geliştirme rehberi](../development/local.md).
+
 # Uygulamaya özel beceri profilleri
 
 A2A mesaj taşıma ve görev modelini sağlar. Kod inceleme sonucundaki alanların anlamını bizim profile tanımımız belirler. Kartta aynı tag'in bulunması veri uyumu kanıtı değildir.

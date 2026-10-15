@@ -1,3 +1,5 @@
+> **Tarihsel tasarım referansı — 15 Ekim 2026:** Güncel hedef ve limitler [S1.0](../stage-1/README.md) içindedir. Bu belgedeki eski demo/endpoint/limit kararları S1.0 ile çeliştiğinde uygulanmaz. Mevcut kod için [geliştirme rehberi](../development/local.md).
+
 # Kaynaklar ve sürüm kontrolü
 
 Kontrol tarihi: 2026-10-12. Yalnız birincil teknik kaynaklar kullanıldı. Latest sayfası hareketli olduğundan wire örnekleri sabit v1.0.0 spesifikasyonuna bağlandı.

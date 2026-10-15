@@ -1,3 +1,5 @@
+> Güncel kayıt alanları ve güvenlik sınırları [manifest tanımında](../stage-1/05-capability-contract.md). Health URL otomatik zorunlu değildir; güncel hedef periyodik probe içermez.
+
 # Agent kayıt incelemesi
 
 Developer: <sahip>

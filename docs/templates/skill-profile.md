@@ -1,3 +1,5 @@
+> Yeni profiller [ifa-manifest.v1](../stage-1/05-capability-contract.md) kurallarına uymalıdır. Bu şablon tek başına wire sözleşmesi değildir.
+
 # <profile-id>.v1
 
 Durum: <taslak>
@@ -14,7 +16,7 @@ Semantik: <işin anlamı>
 
 ## A2A davranışı
 
-<Task dönüşü, polling, kabul edilen medya, idempotency>
+<Task dönüşü, SSE/reconnect, kabul edilen medya, idempotency>
 
 ## Uyumluluk
 
