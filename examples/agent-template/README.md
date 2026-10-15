@@ -1,8 +1,8 @@
 # Bağımsız IFA agent başlangıç paketi
 
-Issue #5 / B05 ilk geliştirme artımı. Node.js **24.x** gerekir. Bu klasör tek başına başka bir klasöre veya repoya kopyalanabilir: platformun `services/` dosyalarına import, workspace bağlantısı veya platformun node_modules dizinine ihtiyaç duymaz.
+Issue #5 / B05 yerel şablon teslimi. Node.js **24.x** gerekir. Bu klasör tek başına başka bir klasöre veya repoya kopyalanabilir: platformun `services/` dosyalarına import, workspace bağlantısı veya platformun node_modules dizinine ihtiyaç duymaz.
 
-**Durum:** İlk şablon uygulanmıştır; B03 (#3) ve B04 (#2) bağımlılıkları açık. 15 Ekim 2026: temiz kopyada kurulum/build ve 6 A2A kabul testi, Docker çağrısı ve gerçek Registry kaydı doğrulandı; ayrıntılar aşağıda. Platformun eski metin görev arayüzü bu beceriyi henüz çağırmaz; genel invocation B06/B10 kapsamında ilerler. Bu paket üretim SDK'sı veya internet servisi olarak sunulmamalıdır.
+**Durum:** Yerel şablonun uygulaması ve kabul kanıtları tamamlanmış, insan review’ına hazırdır; B03 (#3) ve B04 (#2) bağımlılıkları açık. 15 Ekim 2026: temiz kopyada kurulum/build ve 6 A2A kabul testi, Docker çağrısı ve gerçek Registry kaydı doğrulandı; ayrıntılar aşağıda. Platformun eski metin görev arayüzü bu beceriyi henüz çağırmaz; genel invocation B06/B10 kapsamında ilerler. Bu paket üretim SDK'sı veya internet servisi olarak sunulmamalıdır.
 
 ## Dosyalar ve değiştireceğin yerler
 
