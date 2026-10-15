@@ -1,0 +1,28 @@
+{
+  "capability": {
+    "id": "ifa-demo/code-generation",
+    "version": "1.0.0"
+  },
+  "input": {
+    "spec": {
+      "language": "python",
+      "functionName": "sum_even",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "list[int]"
+        },
+        {
+          "name": "numbers",
+          "type": "list[int]"
+        }
+      ],
+      "returnType": "int",
+      "requirements": [
+        "Listedeki çift sayıları topla.",
+        "Boş liste için 0 döndür."
+      ]
+    }
+  },
+  "expectedError": "duplicate_parameter"
+}

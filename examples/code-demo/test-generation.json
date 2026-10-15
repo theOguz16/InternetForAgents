@@ -1,0 +1,31 @@
+{
+  "capability": {
+    "id": "ifa-demo/test-generation",
+    "version": "1.0.0"
+  },
+  "input": {
+    "spec": {
+      "language": "python",
+      "functionName": "sum_even",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "list[int]"
+        }
+      ],
+      "returnType": "int",
+      "requirements": [
+        "Listedeki çift sayıları topla.",
+        "Boş liste için 0 döndür."
+      ]
+    },
+    "code": "def sum_even(numbers):\n    return sum(n for n in numbers if n % 2 == 0)\n"
+  },
+  "output": {
+    "framework": "unittest",
+    "tests": "import unittest\nfrom submission import sum_even\n\nclass SumEvenTests(unittest.TestCase):\n    def test_empty(self):\n        self.assertEqual(sum_even([]), 0)\n",
+    "scenarios": [
+      "Boş liste için 0."
+    ]
+  }
+}

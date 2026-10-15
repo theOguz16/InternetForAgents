@@ -1,0 +1,28 @@
+{
+  "name": "@ifa/code-demo-contracts",
+  "version": "1.0.0",
+  "description": "S1.0 code demo schemas and semantic validation; no agents or runner",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "main": "index.cjs",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.cjs"
+    },
+    "./schemas/*": "./schemas/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.cjs",
+    "index.d.ts",
+    "schemas",
+    "README.md"
+  ],
+  "dependencies": {
+    "ajv": "8.20.0"
+  }
+}

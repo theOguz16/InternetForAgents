@@ -1,0 +1,29 @@
+{
+  "capability": {
+    "id": "ifa-demo/code-review",
+    "version": "1.0.0"
+  },
+  "input": {
+    "spec": {
+      "language": "python",
+      "functionName": "sum_even",
+      "parameters": [
+        {
+          "name": "numbers",
+          "type": "list[int]"
+        }
+      ],
+      "returnType": "int",
+      "requirements": [
+        "Listedeki çift sayıları topla.",
+        "Boş liste için 0 döndür."
+      ]
+    },
+    "code": "def sum_even(numbers):\n    return sum(n for n in numbers if n % 2 == 0)\n"
+  },
+  "output": {
+    "verdict": "no_findings",
+    "findings": [],
+    "summary": "İncelemede bulgu yok; doğruluk kanıtı değildir."
+  }
+}
