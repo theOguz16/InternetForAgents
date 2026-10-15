@@ -2,6 +2,7 @@ import { Router } from "express";
 import { RegistryStore, RegistryCapacityError, CapabilityVersionConflict, type Entry } from "./store.js";
 import { validateManifest, ManifestError, type Manifest } from "../capabilities/manifest.js";
 import { fetchJson } from "./fetch-json.js";
+import { validateRegistryCard, CardValidationError } from "../capabilities/agent-card.js";
 import { profiles } from "../shared/contracts.js";
 
 // Yalnızca operatörün seçtiği sabit origin'lere erişilir; redirect takip edilmez.
@@ -24,32 +25,28 @@ export function registryRouter(allowedOrigins: Set<string>, store: RegistryStore
       if (!allowedOrigins.has(url.origin) || url.username || url.password || url.pathname !== "/.well-known/agent-card.json" || url.search || url.hash) {
         res.status(422).json({ error: "card_url_not_allowed" }); return;
       }
-      const card = await fetchJson(url, 65536) as any;
-      if (!card || typeof card !== "object") throw new Error("invalid_card");
+      const card = validateRegistryCard(await fetchJson(url, 65536), url);
       let manifest: Manifest | undefined;
       let manifestUrl: string | undefined;
       if (body.manifestUrl !== undefined) {
         if (typeof body.manifestUrl !== "string") throw new Error("invalid_manifest_url");
         const target = new URL(body.manifestUrl);
         if (target.origin !== url.origin || target.username || target.password || target.pathname !== "/ifa/capabilities.json" || target.search || target.hash) throw new Error("invalid_manifest_url");
-        const skillIds = Array.isArray(card.skills) ? card.skills.map((skill: any) => skill?.id).filter((id: unknown): id is string => typeof id === "string") : [];
-        manifest = validateManifest(await fetchJson(target, 131072), skillIds);
+        manifest = validateManifest(await fetchJson(target, 131072), card.skillIds);
         manifestUrl = target.href;
       }
-      const endpoint = Array.isArray(card.supportedInterfaces) && card.supportedInterfaces.find((item: any) => item?.protocolBinding === "JSONRPC" && item.protocolVersion === "1.0");
-      const supported = manifest ? manifest.capabilities.map(cap => cap.id) : Array.isArray(card.skills) ? [...new Set<string>(card.skills.map((skill: any) => skill?.id).filter((id: unknown) => Object.values(profiles).includes(id as any)))] : [];
-      if (typeof card.name !== "string" || !card.name.trim() || card.name.length > 200 || !endpoint || !supported.length || card.capabilities?.streaming !== true) throw new Error("incompatible_card");
-      const rpc = new URL(endpoint.url);
-      if (rpc.origin !== url.origin || rpc.username || rpc.password || rpc.pathname !== "/a2a" || rpc.search || rpc.hash) throw new Error("invalid_endpoint");
+      const legacyProfiles: readonly string[] = Object.values(profiles);
+      const supported = manifest ? manifest.capabilities.map(cap => cap.id) : card.skillIds.filter(id => legacyProfiles.includes(id));
+      if (!supported.length) throw new CardValidationError("no_supported_skill", "/card/skills");
       try {
-        const { entry, created } = store.save({ cardUrl: url.href, name: card.name, profiles: supported, endpoint: rpc.href, registeredAt: new Date().toISOString(), ...(manifest ? { manifest, manifestUrl } : {}) });
+        const { entry, created } = store.save({ cardUrl: url.href, name: card.name, profiles: supported, endpoint: card.endpoint, registeredAt: new Date().toISOString(), ...(manifest ? { manifest, manifestUrl } : {}) });
         res.status(created ? 201 : 200).json(entry);
       } catch (error) {
         // Disk hatası kartın geçersiz olduğu anlamına gelmez; istemciye ayrı hata döneriz.
         res.status(error instanceof RegistryCapacityError || error instanceof CapabilityVersionConflict ? 409 : 503).json({ error: error instanceof RegistryCapacityError ? "registry_capacity" : error instanceof CapabilityVersionConflict ? "capability_version_conflict" : "registry_storage_unavailable" });
       }
     } catch (error) {
-      if (error instanceof ManifestError) { res.status(422).json({ error: error.code, path: error.path }); return; }
+      if (error instanceof ManifestError || error instanceof CardValidationError) { res.status(422).json({ error: error.code, path: error.path }); return; }
       res.status(422).json({ error: "card_validation_failed" });
     }
   });
