@@ -1,6 +1,8 @@
 ## İlgili issue ve kapsam
 
-Task ID / Issue: #...
+Task ID / Issue: Refs #ISSUE_NUMARASI
+
+Tam teslimde Closes, kısmi teslimde Refs kullan. Bu satırı gerçek numarayla değiştir.
 Base: oguzhan
 
 ## Ne değişti, neden?

@@ -1,0 +1,45 @@
+name: PR review readiness
+on:
+  pull_request:
+    branches: [oguzhan, main]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+jobs:
+  pr-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # PR kodu çalıştırılmaz; açıklama yalnız veri olarak GitHub API'den okunur.
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: context.issue.number });
+            const body = (pr.body || '').replace(/<!--[\s\S]*?-->/g, '');
+            const errors = [];
+            const required = ['İlgili issue ve kapsam', 'Ne değişti, neden?', 'Kabul kriteri → kanıt', 'Doğrulama', 'Mimari / veri etkisi', 'Riskler / kapsam dışında kalanlar'];
+            const sections = new Map();
+            for (const match of body.matchAll(/^## (.+)\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/gm)) {
+              sections.set(match[1].trim(), match[2].trim());
+            }
+            for (const title of required) {
+              const content = sections.get(title) || '';
+              if (content.replace(/[-*\[\]x\s]/g, '').length < 8) errors.push(`Doldurulması gereken bölüm: ${title}`);
+            }
+            const scope = sections.get('İlgili issue ve kapsam') || '';
+            const numbers = [...new Set([...scope.matchAll(/(?:^|\s)#(\d+)\b/g)].map(m => Number(m[1])))];
+            if (!numbers.length || numbers.length > 10) errors.push('Kapsam bölümünde 1–10 yerel Issue referansı (#123) olmalı.');
+            for (const issue_number of numbers.slice(0, 10)) {
+              try {
+                const { data: issue } = await github.rest.issues.get({ owner, repo, issue_number });
+                if (issue.pull_request) errors.push(`#${issue_number} bir PR; işin Issue numarasını belirt.`);
+              } catch { errors.push(`#${issue_number} Issue kaydı okunamadı.`); }
+            }
+            await core.summary.addHeading('Review hazırlığı')
+              .addRaw('Bu kontrol açıklamanın biçimini ve Issue referansını denetler. Kabul kriterlerinin gerçekten karşılandığını insan review eder.\n')
+              .addList(errors.length ? errors : ['Gerekli bölümler ve Issue referansları mevcut.'])
+              .write();
+            if (errors.length) core.setFailed(errors.join('\n'));

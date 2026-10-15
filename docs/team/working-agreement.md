@@ -2,7 +2,7 @@
 
 ## Roller
 
-Oguzhan: ürün kapsamını ve önceliği belirler; task kabul kriterlerini netleştirir; PR’ı mimari, ürün davranışı ve kanıt açısından review eder; merge kararı verir. Geliştirici: issue kapsamını uygular, test/kanıt sağlar, kendi kodunu ilk kez inceler ve PR açar. İkinci reviewer: güvenlik/kontrat değişikliklerinde ek inceleme yapar. Gerçek kullanıcı adları henüz atanmamıştır.
+Oguzhan: ürün kapsamını ve önceliği belirler; task kabul kriterlerini netleştirir; PR’ı mimari, ürün davranışı ve kanıt açısından review eder; merge kararı verir. Geliştirici: issue kapsamını uygular, test/kanıt sağlar, kendi kodunu ilk kez inceler ve PR açar. İkinci reviewer: güvenlik/kontrat değişikliklerinde ek inceleme yapar. Oguzhan’ın doğrulanmış GitHub hesabı `theOguz16`; geliştirici atamaları henüz yapılmamıştır.
 
 Issue işi tarif eder; PR kod değişikliğini inceler. Her issue bir kişi tarafından sahiplenilir. Büyük iş küçük PR’lara ayrılabilir; kısmi PR issue’yu otomatik kapatmaz. Bağımlı issue bitmeden sözleşme/arayüz taslağı üzerine ilerleniyorsa bu açıkça belirtilir.
 
@@ -17,7 +17,7 @@ Entegrasyon dalı `oguzhan`. Yeni iş: güncel oguzhan’dan `feature/<task-id>-
 5. Diff’i kendin oku, test çıktısı/screenshot/negatif senaryoyu PR’a ekle.
 6. Review iste. Değişiklik taleplerini çöz; kendi PR’ını onaysız merge etme.
 
-GitHub required review/branch protection teknik olarak henüz kurulmadı. Bu belge çalışma anlaşmasıdır, koruma etkin iddiası değildir. Repo yetkileri incelenerek ayrı issue’da güvenle kurulmalıdır. CODEOWNERS’a kullanıcı adı doğrulanmadan kişi yazılmaz.
+CODEOWNERS doğrulanmış `@theOguz16` hesabına yönlenir; hedef dala merge edildikten sonra review isteği üretir. GitHub required review/branch protection henüz etkin değil: mevcut hesap admin yetkisine sahip değil. Repo sahibinin uygulayacağı ayarlar ve kendi PR’ını onaylama sınırı [review süreci](review-process.md) içinde açıklanmıştır.
 
 ## Her işin Definition of Done’u
 
@@ -45,3 +45,7 @@ Bloklayıcı: veri sızıntısı, duplicate yan etki, şema kırılması, bozuk 
 ## İlk CI kapısı
 
 `.github/workflows/quality.yml` PR’larda Node 24 ile npm ci, build, servis testleri ve manifest örneğini çalıştırır. Güvenlik taraması, image testi, e2e UI ve required-review politikası I02/E09 kapsamına bırakılmıştır. Workflow dosyasının eklenmesi GitHub’da çalışmasının başarıyla tamamlandığı anlamına gelmez; PR checks sonucu ayrıca kontrol edilmelidir.
+
+## Otomatik review hazırlığı
+
+`pr-readiness` gerekli PR bölümlerini ve gerçek Issue referansını kontrol eder. Metnin doğruluğunu, kabul kriterlerinin tamamlandığını veya mimari uygunluğu kanıtlamaz. Güncel kontrol/kurulum tablosu: [review süreci](review-process.md). İlk uygulama: [PR #69 incelemesi](reviews/pr-69.md).
