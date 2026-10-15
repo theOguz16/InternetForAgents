@@ -2,7 +2,7 @@
 
 Issue #5 / B05 ilk geliştirme artımı. Node.js **24.x** gerekir. Bu klasör tek başına başka bir klasöre veya repoya kopyalanabilir: platformun `services/` dosyalarına import, workspace bağlantısı veya platformun node_modules dizinine ihtiyaç duymaz.
 
-**Durum:** İlk şablon uygulanmıştır; B03 (#3) ve B04 (#2) bağımlılıkları açık. Derleme kanıtı tek başına temiz kurulum/runtime kabulü değildir. Platformun eski metin görev arayüzü bu beceriyi henüz çağırmaz; genel invocation B06/B10 kapsamında ilerler. Bu paket üretim SDK'sı veya internet servisi olarak sunulmamalıdır.
+**Durum:** İlk şablon uygulanmıştır; B03 (#3) ve B04 (#2) bağımlılıkları açık. 15 Ekim 2026: temiz kopyada kurulum/build ve 6 A2A kabul testi, Docker çağrısı ve gerçek Registry kaydı doğrulandı; ayrıntılar aşağıda. Platformun eski metin görev arayüzü bu beceriyi henüz çağırmaz; genel invocation B06/B10 kapsamında ilerler. Bu paket üretim SDK'sı veya internet servisi olarak sunulmamalıdır.
 
 ## Dosyalar ve değiştireceğin yerler
 
@@ -105,6 +105,15 @@ Yeni kayıt 201, aynı adres güncellemesi 200; aynı capability/version farklı
 
 ## Tamamlanma öncesi kanıtlar
 
-B05 kapanmadan ayrı klasörde README akışı, Card/manifest Registry kabulü, başarılı çağrı ve hatalı input/output senaryoları doğrulanmalı. Bunlar henüz bu geliştirme artımında çalıştırılmış testler olarak raporlanmıyor. Mevcut platform testleri de bu bağımsız paketi otomatik kapsamaz.
+15 Ekim 2026 kabul kanıtı:
+
+- Kaynak klasör node_modules/dist/.env hariç sistemin geçici dizinine kopyalandı; `.env.example` kopyalanarak `npm ci --ignore-scripts`, `npm run build` çalıştırıldı. Platform bağımlılıklarına ihtiyaç duymadan başarılı.
+- `npm test`: **6/6** gerçek HTTP/A2A testi. Unicode/boş/maksimum input, invalid envelope/schema, tekrar invocation, 413 body limiti, bozuk output, handler hatası, timeout sırasında busy ve yalnız config/handler değişimiyle yeni beceri.
+- Bağımsız `docker build` başarılı. Read-only, 128 MiB, 0.5 CPU container'ı 127.0.0.1:4321'e yayınlandı; health sonrasında temiz kopyadan `AGENT_URL=http://127.0.0.1:4321 npm run call` → `{length:3}`, completed.
+- Container ilk açılır açılmaz yapılan ilk çağrı hazır olmadan başarısız oldu; health başarılı olduktan sonra çağrı geçti. Yeni çağrı göndermeden süreç hazır olmasını bekleyin; timeout sonrası işin çalışmadığını varsaymayın.
+- Platform Registry router'ı ayrı loopback portu ve geçici bellek deposuyla çalıştırıldı; container Card+manifest kaydı **201**, capability filtresi **1 sağlayıcı** döndürdü. Mevcut Registry verisi değiştirilmedi.
+- Platformun `npm run test:services` kontrolleri **10/10** geçti.
+
+Starter testleri kendi CI işinde `npm test` ile yürür. Kök test paketi bu testleri otomatik içermez. B03/B04 tamamlanmış sayılmaz; üretim auth/dedup/persistence kabulü bu sonuçlardan çıkarılamaz.
 
 Bir sonraki PR'da S1.0 bağımlılıkları tamamlandığında uyumluluk kontrolü ve kalıcı/kimlik kapsamlı dedup ortak adaptörle hizalanmalı; bu starter'ın sınırlı davranışı genel platform kontratının yerine geçmez.

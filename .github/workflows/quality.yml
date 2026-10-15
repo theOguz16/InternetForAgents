@@ -33,6 +33,6 @@ jobs:
           node-version: '24'
           cache: npm
           cache-dependency-path: examples/agent-template/package-lock.json
-      # Kök paketin bağımlılıklarını kurmadan starter'ın kendi build'ini doğrular.
+      # Kök paketin bağımlılıklarını kurmadan starter'ın build ve A2A kabulünü doğrular.
       - run: npm ci --ignore-scripts
-      - run: npm run build
+      - run: npm test
