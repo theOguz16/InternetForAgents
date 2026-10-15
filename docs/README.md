@@ -27,3 +27,7 @@ Güncel tasarım tabanı: **S1.0 / 15 Ekim 2026**. Uygulama, çalışan yerel me
 ## Şablonlar
 
 [ADR](templates/adr.md), [task](templates/task.md), [agent onboarding](templates/agent-onboarding.md), [skill profile](templates/skill-profile.md), [experiment](templates/experiment.md). Yeni dokümanda durum, owner, değişen ADR ve kabul kanıtı bulunmalı.
+
+## Ekip uygulama backlog’u
+
+[Çalışma düzeni](team/working-agreement.md), [kurulum](team/local-setup.md), [ayrıntılı görevler](team/tasks/README.md), [manifest kayıt uygulaması](development/generic-registry.md).

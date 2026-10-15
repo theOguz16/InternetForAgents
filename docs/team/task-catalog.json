@@ -1,0 +1,675 @@
+[
+  {
+    "id": "B01",
+    "title": "[B01] Registry genel beceri kaydını tamamla",
+    "deps": [
+      "B03",
+      "B04"
+    ],
+    "path": "docs/team/tasks/B01.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B03",
+    "title": "[B03] Agent Card ve manifest eşlemesini tamamla",
+    "deps": [
+      "B04"
+    ],
+    "path": "docs/team/tasks/B03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B04",
+    "title": "[B04] Manifest validator sınır testlerini ve şemalarını tamamla",
+    "deps": [],
+    "path": "docs/team/tasks/B04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B05",
+    "title": "[B05] Bağımsız agent geliştirme şablonu hazırla",
+    "deps": [
+      "B03",
+      "B04"
+    ],
+    "path": "docs/team/tasks/B05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B06",
+    "title": "[B06] Ortak A2A adaptörünü genel envelope’a taşı",
+    "deps": [
+      "B05",
+      "D04"
+    ],
+    "path": "docs/team/tasks/B06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B07",
+    "title": "[B07] Agent uyumluluk kontrol komutu geliştir",
+    "deps": [
+      "B06"
+    ],
+    "path": "docs/team/tasks/B07.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B08",
+    "title": "[B08] Model portu ve qualification rehberi hazırla",
+    "deps": [
+      "B05"
+    ],
+    "path": "docs/team/tasks/B08.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "B09",
+    "title": "[B09] İki bağımsız geliştiriciyle onboarding deneyi yap",
+    "deps": [
+      "B07"
+    ],
+    "path": "docs/team/tasks/B09.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "C01",
+    "title": "[C01] Registry sahiplik ve kayıt yaşam döngüsü uygula",
+    "deps": [
+      "E01",
+      "B03"
+    ],
+    "path": "docs/team/tasks/C01.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "C02",
+    "title": "[C02] Sürüm değişmezliği ve revision concurrency tamamla",
+    "deps": [
+      "C01"
+    ],
+    "path": "docs/team/tasks/C02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "C03",
+    "title": "[C03] Registry arama ve sayfalama uygula",
+    "deps": [
+      "B01",
+      "C01"
+    ],
+    "path": "docs/team/tasks/C03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "C04",
+    "title": "[C04] Kayıt güncelliği politikasını uygula",
+    "deps": [
+      "C02"
+    ],
+    "path": "docs/team/tasks/C04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "C05",
+    "title": "[C05] Açıklanabilir sağlayıcı seçim modülünü ayır",
+    "deps": [
+      "C03"
+    ],
+    "path": "docs/team/tasks/C05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "C06",
+    "title": "[C06] Güvenli alternatif sağlayıcı davranışı ekle",
+    "deps": [
+      "C05",
+      "D04"
+    ],
+    "path": "docs/team/tasks/C06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D01",
+    "title": "[D01] Backend katman ve port sınırlarını düzenle",
+    "deps": [],
+    "path": "docs/team/tasks/D01.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D02",
+    "title": "[D02] Deklaratif workflow tanımı oluştur",
+    "deps": [
+      "B04",
+      "D01"
+    ],
+    "path": "docs/team/tasks/D02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D03",
+    "title": "[D03] Workflow validator ve DAG executor uygula",
+    "deps": [
+      "D02",
+      "C05"
+    ],
+    "path": "docs/team/tasks/D03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D04",
+    "title": "[D04] Kalıcı dispatch ve uçtan uca dedup tamamla",
+    "deps": [
+      "D01"
+    ],
+    "path": "docs/team/tasks/D04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D05",
+    "title": "[D05] SSE reconnect ve görev uzlaştırma uygula",
+    "deps": [
+      "D04"
+    ],
+    "path": "docs/team/tasks/D05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D06",
+    "title": "[D06] Timeout iptal ve iş bütçelerini tamamla",
+    "deps": [
+      "D03",
+      "D04"
+    ],
+    "path": "docs/team/tasks/D06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D07",
+    "title": "[D07] Minimum context oluşturucu uygula",
+    "deps": [
+      "D02",
+      "E05"
+    ],
+    "path": "docs/team/tasks/D07.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D08",
+    "title": "[D08] Yetkili artifact deposu ve kaynak izi kur",
+    "deps": [
+      "D07",
+      "E01"
+    ],
+    "path": "docs/team/tasks/D08.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D09",
+    "title": "[D09] Retention silme ve restart politikasını tamamla",
+    "deps": [
+      "D04",
+      "D08"
+    ],
+    "path": "docs/team/tasks/D09.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "D10",
+    "title": "[D10] Görev geçmişi ve birleşik raporu tamamla",
+    "deps": [
+      "D03",
+      "D08"
+    ],
+    "path": "docs/team/tasks/D10.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E01",
+    "title": "[E01] Kullanıcı oturumu ve rol modelini uygula",
+    "deps": [],
+    "path": "docs/team/tasks/E01.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E02",
+    "title": "[E02] Servis kimliği ve secret yaşam döngüsü kur",
+    "deps": [
+      "E01"
+    ],
+    "path": "docs/team/tasks/E02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E03",
+    "title": "[E03] SSRF ve egress korumasını tamamla",
+    "deps": [],
+    "path": "docs/team/tasks/E03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E04",
+    "title": "[E04] Kota queue ve backpressure tamamla",
+    "deps": [
+      "D04"
+    ],
+    "path": "docs/team/tasks/E04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E05",
+    "title": "[E05] Güvenilmeyen agent içeriği sınırlarını uygula",
+    "deps": [
+      "D01"
+    ],
+    "path": "docs/team/tasks/E05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E06",
+    "title": "[E06] Runner tasarımını uygulanabilir güvenlik paketine dönüştür",
+    "deps": [],
+    "path": "docs/team/tasks/E06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E07",
+    "title": "[E07] İzole Python runner uygula",
+    "deps": [
+      "E06"
+    ],
+    "path": "docs/team/tasks/E07.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E08",
+    "title": "[E08] Runner saldırı ve kaynak sınırı testleri yaz",
+    "deps": [
+      "E07"
+    ],
+    "path": "docs/team/tasks/E08.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E09",
+    "title": "[E09] Web ve bağımlılık güvenlik kapıları ekle",
+    "deps": [
+      "E01"
+    ],
+    "path": "docs/team/tasks/E09.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "E10",
+    "title": "[E10] Audit ve veri maskeleme uygula",
+    "deps": [
+      "E01",
+      "D08"
+    ],
+    "path": "docs/team/tasks/E10.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F02",
+    "title": "[F02] Bağımsız kod üretme agent’ı geliştir",
+    "deps": [
+      "B05",
+      "B06",
+      "B08",
+      "F01-IMPL"
+    ],
+    "path": "docs/team/tasks/F02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F03",
+    "title": "[F03] Bağımsız review agent’ı geliştir",
+    "deps": [
+      "B05",
+      "B06",
+      "B08",
+      "F01-IMPL"
+    ],
+    "path": "docs/team/tasks/F03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F04",
+    "title": "[F04] Bağımsız test üretme agent’ı geliştir",
+    "deps": [
+      "B05",
+      "B06",
+      "B08",
+      "F01-IMPL"
+    ],
+    "path": "docs/team/tasks/F04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F05",
+    "title": "[F05] Kod üretim review test workflow’unu bağla",
+    "deps": [
+      "D03",
+      "E07",
+      "F02",
+      "F03",
+      "F04"
+    ],
+    "path": "docs/team/tasks/F05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F06",
+    "title": "[F06] Aynı beceride ikinci sağlayıcı bağla",
+    "deps": [
+      "F02",
+      "C05"
+    ],
+    "path": "docs/team/tasks/F06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F07",
+    "title": "[F07] Farklı alanda agent ekle",
+    "deps": [
+      "B07",
+      "B10"
+    ],
+    "path": "docs/team/tasks/F07.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G02",
+    "title": "[G02] Frontend feature modüllerine ayrıştır",
+    "deps": [],
+    "path": "docs/team/tasks/G02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G03",
+    "title": "[G03] Keşif agent detayı ve sahiplik ekranlarını yap",
+    "deps": [
+      "C01",
+      "C03",
+      "E01",
+      "G02"
+    ],
+    "path": "docs/team/tasks/G03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G04",
+    "title": "[G04] Şemadan doğrudan çağrı formu oluştur",
+    "deps": [
+      "B04",
+      "G02",
+      "B06",
+      "B10"
+    ],
+    "path": "docs/team/tasks/G04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G05",
+    "title": "[G05] Workflow ve görev detay ekranını tamamla",
+    "deps": [
+      "D03",
+      "D10",
+      "G02"
+    ],
+    "path": "docs/team/tasks/G05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G06",
+    "title": "[G06] Görev geçmişi ve artifact görünümünü yap",
+    "deps": [
+      "D08",
+      "D10",
+      "E01",
+      "G02"
+    ],
+    "path": "docs/team/tasks/G06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G07",
+    "title": "[G07] Reconnect retry ve idempotency UX tamamla",
+    "deps": [
+      "D04",
+      "D05",
+      "D06",
+      "G02"
+    ],
+    "path": "docs/team/tasks/G07.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "G08",
+    "title": "[G08] Erişilebilirlik ve kullanıcı testi yap",
+    "deps": [
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "G07"
+    ],
+    "path": "docs/team/tasks/G08.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H02",
+    "title": "[H02] Trace metric ve structured logging ekle",
+    "deps": [
+      "D01",
+      "E10"
+    ],
+    "path": "docs/team/tasks/H02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H03",
+    "title": "[H03] Birim ve kontrat test matrisini tamamla",
+    "deps": [
+      "B04",
+      "D03"
+    ],
+    "path": "docs/team/tasks/H03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H04",
+    "title": "[H04] E2E ve arıza testlerini otomatikleştir",
+    "deps": [
+      "D05",
+      "F05",
+      "G05"
+    ],
+    "path": "docs/team/tasks/H04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H05",
+    "title": "[H05] Yük ve soak deneyini çalıştır",
+    "deps": [
+      "E04",
+      "H02"
+    ],
+    "path": "docs/team/tasks/H05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H06",
+    "title": "[H06] Bağımsız kod oracle benchmark kümesi hazırla",
+    "deps": [],
+    "path": "docs/team/tasks/H06.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H07",
+    "title": "[H07] Tek ve çok agent karşılaştırması yap",
+    "deps": [
+      "F05",
+      "H06",
+      "B08"
+    ],
+    "path": "docs/team/tasks/H07.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H08",
+    "title": "[H08] Geliştirici entegrasyon maliyetini ölç",
+    "deps": [
+      "B09"
+    ],
+    "path": "docs/team/tasks/H08.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "H09",
+    "title": "[H09] KPI ve başarısızlık analiz raporu yaz",
+    "deps": [
+      "H04",
+      "H05",
+      "H07",
+      "H08"
+    ],
+    "path": "docs/team/tasks/H09.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "I01",
+    "title": "[I01] Temiz makine kurulumunu doğrula",
+    "deps": [
+      "B05",
+      "F05"
+    ],
+    "path": "docs/team/tasks/I01.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "I02",
+    "title": "[I02] CI ve PR review kalite kapılarını kur",
+    "deps": [
+      "H03",
+      "H04",
+      "E09"
+    ],
+    "path": "docs/team/tasks/I02.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "I03",
+    "title": "[I03] Backup restore ve migration rehberi uygula",
+    "deps": [
+      "C01",
+      "D09"
+    ],
+    "path": "docs/team/tasks/I03.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "I04",
+    "title": "[I04] Operasyon runbook’u tamamla",
+    "deps": [
+      "H02",
+      "I03"
+    ],
+    "path": "docs/team/tasks/I04.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "I05",
+    "title": "[I05] Teslim A kabul ve release oturumu yap",
+    "deps": [
+      "H09",
+      "I01",
+      "I02",
+      "I03",
+      "I04"
+    ],
+    "path": "docs/team/tasks/I05.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "I06",
+    "title": "[I06] Çoklu worker ölçek tasarımını uygula",
+    "deps": [
+      "H05",
+      "I05"
+    ],
+    "path": "docs/team/tasks/I06.md",
+    "phase": "future"
+  },
+  {
+    "id": "I07",
+    "title": "[I07] Çok kiracılı güçlü izolasyon kur",
+    "deps": [
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E08",
+      "I05"
+    ],
+    "path": "docs/team/tasks/I07.md",
+    "phase": "future"
+  },
+  {
+    "id": "I08",
+    "title": "[I08] Dinamik plan önerisi araştırması yap",
+    "deps": [
+      "D03",
+      "B04",
+      "I05"
+    ],
+    "path": "docs/team/tasks/I08.md",
+    "phase": "future"
+  },
+  {
+    "id": "I09",
+    "title": "[I09] Uzun dönem memory retrieval araştırması yap",
+    "deps": [
+      "D07",
+      "D08",
+      "D09",
+      "I05"
+    ],
+    "path": "docs/team/tasks/I09.md",
+    "phase": "future"
+  },
+  {
+    "id": "I10",
+    "title": "[I10] Açık internet dağıtım kapısını hazırla",
+    "deps": [
+      "I06",
+      "I07",
+      "I08",
+      "I09"
+    ],
+    "path": "docs/team/tasks/I10.md",
+    "phase": "future"
+  },
+  {
+    "id": "B10",
+    "title": "[B10] Genel capability doğrudan çağrı API’si uygula",
+    "deps": [
+      "B03",
+      "B04",
+      "B06",
+      "D04",
+      "E01"
+    ],
+    "path": "docs/team/tasks/B10.md",
+    "phase": "delivery-a"
+  },
+  {
+    "id": "F01-IMPL",
+    "title": "[F01-IMPL] Kod demo profillerinin makine şemalarını üret",
+    "deps": [
+      "B04"
+    ],
+    "path": "docs/team/tasks/F01-IMPL.md",
+    "phase": "delivery-a"
+  }
+]
