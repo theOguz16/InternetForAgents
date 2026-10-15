@@ -38,3 +38,5 @@ Demo: http://localhost:4002. Uzmanları arayüzden kaydetmek için [çalıştır
 ## Ekip geliştirme
 
 [Çalışma anlaşması ve review](docs/team/working-agreement.md) · [Kurulum](docs/team/local-setup.md) · [67 görev](docs/team/tasks/README.md) · [Manifest/Registry ilk artım](docs/development/generic-registry.md). Yeni genel kayıt yalnız yerel geliştirme kapsamındadır; ownership ve genel dispatch sonraki işlerdir.
+
+[Kod/review/test ortak kontrat paketi](packages/code-demo-contracts/README.md) ve [kabul kanıtları](docs/development/code-demo-contracts.md): şemalar ve FunctionSpec semantiği hazır; agent/runner entegrasyonu ayrı işlerdir.

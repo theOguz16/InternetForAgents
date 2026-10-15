@@ -31,3 +31,5 @@ Güncel tasarım tabanı: **S1.0 / 15 Ekim 2026**. Uygulama, çalışan yerel me
 ## Ekip uygulama backlog’u
 
 [Çalışma düzeni](team/working-agreement.md), [kurulum](team/local-setup.md), [ayrıntılı görevler](team/tasks/README.md), [manifest kayıt uygulaması](development/generic-registry.md).
+
+[Kod demo ortak kontrat paketi ve kabul kanıtları](development/code-demo-contracts.md).
