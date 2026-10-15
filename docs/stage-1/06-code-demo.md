@@ -1,6 +1,6 @@
 # Kod üretme / review / test demo profilleri
 
-Durum: F01 tasarımı; agent implementasyonları ekip üyelerinin teslimidir. Profile ID’leri platform registry kabul listesi değildir; örnek ortak semantik anlaşmalarıdır. Her profil `ifa-call.v1` / `ifa-result.v1` envelope’unu kullanır.
+Durum: F01 tasarımı; F01-IMPL şema/semantik paketi uygulanmıştır. Agent implementasyonları ekip üyelerinin teslimidir. Profile ID’leri platform registry kabul listesi değildir; örnek ortak semantik anlaşmalarıdır. Her profil `ifa-call.v1` / `ifa-result.v1` envelope’unu kullanır.
 
 ## Ortak FunctionSpec
 
@@ -69,3 +69,13 @@ Her model adımı en fazla 90 saniye; demo workflow toplam bütçesi 300 saniye;
 ## Kabul örnekleri
 
 sum_even; string ters çevirme; maksimum değer (boş davranışı açık); benzersiz liste elemanları (sıra korunur); palindrome (case politikasını spec belirtir). Belirsiz gereksinim reddedilir veya kullanıcıdan açıklık istenir. Üretilen testlerin kendisi oracle değildir: bağımsız gizli test seti [deney planında](08-evaluation.md) tanımlanır.
+
+## F01-IMPL uygulama kanıtı
+
+[Ortak paket, şema/semantik kuralları, sürümleme ve kabul kanıtları](../development/code-demo-contracts.md).
+`@ifa/code-demo-contracts@1.0.0` üç profilin input/output şemalarını ve FunctionSpec
+doğrulayıcısını sağlar. Parametre adları da 1–64 karakterdir; no_findings sıfır
+bulgu gerektirir ([ADR-026](../decisions/0026-code-demo-contracts.md)).
+Gerçek Python imzası/AST ve unittest case sayısı E07 runner kontrolüdür.
+Paket, agent veya runner’ın tamamlandığı ya da kullanıcı erişim izolasyonunun
+uygulandığı anlamına gelmez.

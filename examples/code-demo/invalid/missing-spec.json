@@ -1,0 +1,8 @@
+{
+  "capability": {
+    "id": "ifa-demo/code-generation",
+    "version": "1.0.0"
+  },
+  "input": {},
+  "expectedError": "invalid_schema"
+}
