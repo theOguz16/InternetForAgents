@@ -1,0 +1,26 @@
+{
+  "name": "ifa-agent-template",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone local IFA agent starter",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "dev": "tsx --env-file-if-exists=.env src/server.ts",
+    "call": "node --env-file-if-exists=.env dist/client.js"
+  },
+  "dependencies": {
+    "@a2a-js/sdk": "1.3.0",
+    "ajv": "8.20.0",
+    "express": "5.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "24.19.2",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}

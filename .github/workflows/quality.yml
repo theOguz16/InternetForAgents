@@ -20,3 +20,19 @@ jobs:
       - run: npm run build
       - run: npm run test:services
       - run: npm run validate:manifest -- examples/manifests/text-length.json text-length
+  agent-template-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: examples/agent-template
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: examples/agent-template/package-lock.json
+      # Kök paketin bağımlılıklarını kurmadan starter'ın kendi build'ini doğrular.
+      - run: npm ci --ignore-scripts
+      - run: npm run build
