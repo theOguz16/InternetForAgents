@@ -1,7 +1,10 @@
 FROM node:24-bookworm-slim
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --ignore-scripts --no-audit --no-fund
+# file: bağımlılığının hedefi kurulumda bulunmalı; aksi halde npm kopuk bağlantıyı gizleyebilir.
+COPY packages/code-demo-contracts ./packages/code-demo-contracts
+RUN npm ci --ignore-scripts --no-audit --no-fund \
+    && node -e "require('@ifa/code-demo-contracts')"
 COPY tsconfig.services.json ./
 COPY services ./services
 COPY web ./web

@@ -102,3 +102,26 @@ Bağımlılık notu: yeni paket Ajv 8.20.0’ı tam sürümle kullanır. Kök uy
 mevcut Ajv 8.17.1 pin’i bu işte değiştirilmez; `npm audit` burada `$data`
 seçeneğine ilişkin GHSA-2g4f-4pwh-qvx6 moderate bulgusunu bildirebilir.
 Yeni paket `$data` açmaz ve sabit, güvenilir şemalarla çalışır.
+
+
+## Docker paketleme kontrolü (PR #74 review düzeltmesi)
+
+Kök `file:packages/code-demo-contracts` bağımlılığı image içinde aynı yolu ister.
+`infrastructure/Dockerfile` paket kaynaklarını **npm ci öncesinde** kopyalar ve
+kurulum katmanında gerçek `require('@ifa/code-demo-contracts')` çalıştırır. Böylece
+kopuk yerel paket bağlantısı demo henüz paketi kullanmasa bile build’i durdurur.
+`.dockerignore` nested `node_modules` dizinlerini de dışlar; geliştiricinin yerel
+bağımlılıkları kaynaklarla birlikte image’a taşınmaz.
+
+```sh
+docker build --progress=plain -f infrastructure/Dockerfile -t ifa-f01-contracts-review:pr74 .
+docker run --rm --network none --read-only --entrypoint node ifa-f01-contracts-review:pr74 -e "const assert = require('node:assert/strict'); const c = require('@ifa/code-demo-contracts'); assert.equal(c.VERSION, '1.0.0'); assert.equal(require('@ifa/code-demo-contracts/schemas/function-spec.schema.json').type, 'object'); console.log(require.resolve('@ifa/code-demo-contracts'));"
+```
+
+Review doğrulamasında gerçek image build’i ve backend/frontend build geçti.
+Ayrıca ağ kapalı/read-only container’da UID 1000 ile CJS + ESM + JSON schema
+importları, üç profilin input/output örnekleri, farklı sürüm, keyword identifier
+ve tutarsız verdict retleri doğrulandı. Node image sürümü v24.22.0;
+`require.resolve` sonucu `/app/packages/code-demo-contracts/index.cjs` oldu.
+Image kimliği ve güncel head SHA PR açıklamasındadır. Compose servisleri ve
+kalıcı volume’lar bu kontrolde kullanılmaz; uçtan uca Compose/runner testi değildir.
