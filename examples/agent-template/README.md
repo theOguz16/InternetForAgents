@@ -2,7 +2,7 @@
 
 Issue #5 / B05 yerel şablon teslimi. Node.js **24.x** gerekir. Bu klasör tek başına başka bir klasöre veya repoya kopyalanabilir: platformun `services/` dosyalarına import, workspace bağlantısı veya platformun node_modules dizinine ihtiyaç duymaz.
 
-**Durum:** Yerel şablonun uygulaması ve kabul kanıtları tamamlanmış, insan review’ına hazırdır; B03 (#3) ve B04 (#2) bağımlılıkları açık. 15 Ekim 2026: temiz kopyada kurulum/build ve 6 A2A kabul testi, Docker çağrısı ve gerçek Registry kaydı doğrulandı; ayrıntılar aşağıda. Platformun eski metin görev arayüzü bu beceriyi henüz çağırmaz; genel invocation B06/B10 kapsamında ilerler. Bu paket üretim SDK'sı veya internet servisi olarak sunulmamalıdır.
+**Durum:** Yerel şablonun uygulaması ve kabul kanıtları tamamlanmış, insan review’ına hazırdır; B03 PR #72 ile develop’a alındı; B04 (#2) açık. 15 Ekim 2026: temiz kopyada kurulum/build ve 6 A2A kabul testi, Docker çağrısı ve gerçek Registry kaydı doğrulandı; ayrıntılar aşağıda. Platformun eski metin görev arayüzü bu beceriyi henüz çağırmaz; genel invocation B06/B10 kapsamında ilerler. Bu paket üretim SDK'sı veya internet servisi olarak sunulmamalıdır.
 
 ## Dosyalar ve değiştireceğin yerler
 
@@ -112,8 +112,8 @@ Yeni kayıt 201, aynı adres güncellemesi 200; aynı capability/version farklı
 - Bağımsız `docker build` başarılı. Read-only, 128 MiB, 0.5 CPU container'ı 127.0.0.1:4321'e yayınlandı; health sonrasında temiz kopyadan `AGENT_URL=http://127.0.0.1:4321 npm run call` → `{length:3}`, completed.
 - Container ilk açılır açılmaz yapılan ilk çağrı hazır olmadan başarısız oldu; health başarılı olduktan sonra çağrı geçti. Yeni çağrı göndermeden süreç hazır olmasını bekleyin; timeout sonrası işin çalışmadığını varsaymayın.
 - Platform Registry router'ı ayrı loopback portu ve geçici bellek deposuyla çalıştırıldı; container Card+manifest kaydı **201**, capability filtresi **1 sağlayıcı** döndürdü. Mevcut Registry verisi değiştirilmedi.
-- Platformun `npm run test:services` kontrolleri **10/10** geçti.
+- B03 birleşimi sonrası `npm run build`, platform `npm run test:services` **13/13** ve starter `npm test` **6/6** yeniden geçti. Güncel Registry ile yerel Node agent kaydı **201**, keşif **1 sağlayıcı**, A2A çağrısı `{length:3}` / completed verdi. Bu son birleşik deney Docker kullanmadı; yukarıdaki Docker kanıtı önceki aynı starter uygulamasına aittir.
 
-Starter testleri kendi CI işinde `npm test` ile yürür. Kök test paketi bu testleri otomatik içermez. B03/B04 tamamlanmış sayılmaz; üretim auth/dedup/persistence kabulü bu sonuçlardan çıkarılamaz.
+Starter testleri kendi CI işinde `npm test` ile yürür. Kök test paketi bu testleri otomatik içermez. B04 tamamlanmış sayılmaz; üretim auth/dedup/persistence kabulü bu sonuçlardan çıkarılamaz.
 
 Bir sonraki PR'da S1.0 bağımlılıkları tamamlandığında uyumluluk kontrolü ve kalıcı/kimlik kapsamlı dedup ortak adaptörle hizalanmalı; bu starter'ın sınırlı davranışı genel platform kontratının yerine geçmez.

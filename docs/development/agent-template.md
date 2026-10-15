@@ -7,9 +7,9 @@ Config'ten Card/manifest üreten, handler'ı ayrı tutan Node 24 + Express + A2A
 ## Kapsam ve kanıt
 
 - Yerel paket kurulumu ve TypeScript build başarılı; npm kurulum audit'i bu paket için 0 bulgu bildirdi (bu tüm platformun güvenlik değerlendirmesi değildir).
-- Temiz geçici kopyada 6/6 A2A kabul testi, Docker build/gerçek örnek çağrı ve izole Registry 201 kayıt/keşif başarılı; platform regresyonu 10/10. Ayrıntılı senaryolar paket README içinde.
+- Temiz geçici kopyada 6/6 A2A kabul testi, Docker build/gerçek örnek çağrı ve izole Registry 201 kayıt/keşif başarılı; B03 birleşimi sonrası platform regresyonu 13/13. Ayrıntılı senaryolar paket README içinde.
 - CI bağımsız pakette build ve 6 kabul testini çalıştırır. Kök servis testleri bu paketi kapsıyor sayılmaz.
-- B05 yerel şablon geliştirmesi ve kendi kabul kanıtları tamamlandı; insan review’ına hazır. B03 (#3), B04 (#2) açık olduğundan Issue kapanışı ve merge öncesi bu bağımlılıkların güncel sözleşmeleriyle entegrasyon değerlendirilmelidir.
+- B05 yerel şablon geliştirmesi ve kendi kabul kanıtları tamamlandı; insan review’ına hazır. B03 PR #72 ile develop’a alındı; güncel Registry ile yerel Node starter kayıt (201), keşif (1 sağlayıcı) ve A2A çağrısı (length:3/completed) yeniden doğrulandı. B04 (#2) açık kalır; tamamlandı sayılmaz.
 
 ## Kararlar
 
