@@ -1,0 +1,279 @@
+{
+  "protocol": "B08-development-readiness-v1",
+  "startedAt": "2026-10-17T14:40:02.598Z",
+  "finishedAt": "2026-10-17T14:40:15.888Z",
+  "holdoutUsed": false,
+  "fixture": false,
+  "qualityBenchmark": false,
+  "datasetSha256": "f087c53b12dfca8b4391a92d7f49b297caf2aebea767d9f8366c1674a7f9f5d2",
+  "environment": {
+    "platform": "darwin",
+    "release": "27.0.0",
+    "cpu": "Apple M4",
+    "cpuCount": 10,
+    "hostRamBytes": 17179869184,
+    "node": "v24.21.0"
+  },
+  "config": {
+    "model": "llama3.2:3b",
+    "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+    "context": 2048,
+    "maxTokens": 512,
+    "seed": 42,
+    "temperature": 0,
+    "concurrency": 1,
+    "timeoutMs": 90000
+  },
+  "results": [
+    {
+      "id": "dev-01",
+      "correct": true,
+      "text": "{\"answer\":5}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 44,
+        "outputTokens": 6
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.07225000000000037,
+        "executionMs": 10201.172541,
+        "totalMs": 10201.24725
+      },
+      "gatewayRssBytes": 59375616
+    },
+    {
+      "id": "dev-02",
+      "correct": true,
+      "text": "{\"answer\": \"cba\"}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 42,
+        "outputTokens": 7
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.056207999999969616,
+        "executionMs": 350.4587499999998,
+        "totalMs": 350.5152500000004
+      },
+      "gatewayRssBytes": 95191040
+    },
+    {
+      "id": "dev-03",
+      "correct": true,
+      "text": "{\"answer\": 3}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 47,
+        "outputTokens": 7
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.009292000000641565,
+        "executionMs": 346.3629170000004,
+        "totalMs": 346.37337500000103
+      },
+      "gatewayRssBytes": 95879168
+    },
+    {
+      "id": "dev-04",
+      "correct": true,
+      "text": "{\"answer\": 5}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 46,
+        "outputTokens": 7
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.04379199999857519,
+        "executionMs": 341.69941700000163,
+        "totalMs": 341.74424999999974
+      },
+      "gatewayRssBytes": 96108544
+    },
+    {
+      "id": "dev-05",
+      "correct": false,
+      "text": "{\"answer\":false}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 45,
+        "outputTokens": 6
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.043208000000959146,
+        "executionMs": 330.50762499999837,
+        "totalMs": 330.5520410000008
+      },
+      "gatewayRssBytes": 96600064
+    },
+    {
+      "id": "dev-06",
+      "correct": true,
+      "text": "{\"answer\": \"hello\"}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 42,
+        "outputTokens": 7
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.07916599999953178,
+        "executionMs": 348.2039590000004,
+        "totalMs": 348.2842079999991
+      },
+      "gatewayRssBytes": 96813056
+    },
+    {
+      "id": "dev-07",
+      "correct": true,
+      "text": "{\"answer\": 0}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 50,
+        "outputTokens": 7
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.07300000000032014,
+        "executionMs": 337.71750000000065,
+        "totalMs": 337.79104200000074
+      },
+      "gatewayRssBytes": 97075200
+    },
+    {
+      "id": "dev-08",
+      "correct": false,
+      "text": "{\"answer\":[\"1\",\"2\"]}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 49,
+        "outputTokens": 8
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.0318329999990965,
+        "executionMs": 370.29395900000054,
+        "totalMs": 370.3264170000002
+      },
+      "gatewayRssBytes": 97206272
+    },
+    {
+      "id": "dev-09",
+      "correct": false,
+      "text": "{\"answer\":false}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 45,
+        "outputTokens": 6
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.020792000001165434,
+        "executionMs": 317.3430419999986,
+        "totalMs": 317.36495900000045
+      },
+      "gatewayRssBytes": 97304576
+    },
+    {
+      "id": "dev-10",
+      "correct": false,
+      "text": "{\"answer\": 12}",
+      "mode": "model",
+      "model": {
+        "name": "llama3.2:3b",
+        "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+        "backendVersion": "0.30.8"
+      },
+      "usage": {
+        "inputTokens": 50,
+        "outputTokens": 7
+      },
+      "resources": {
+        "modelBytes": 2207713852,
+        "vramBytes": 2207713852
+      },
+      "timing": {
+        "queueMs": 0.03983399999924586,
+        "executionMs": 342.88037500000064,
+        "totalMs": 342.92245899999944
+      },
+      "gatewayRssBytes": 97337344
+    }
+  ]
+}

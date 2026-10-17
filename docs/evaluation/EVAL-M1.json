@@ -1,0 +1,81 @@
+{
+  "protocol": "EVAL-M1",
+  "revision": 1,
+  "status": "frozen-before-holdout",
+  "date": "2026-10-17",
+  "holdoutAccessed": false,
+  "purpose": "İlk kod agent kalite karşılaştırmasında sabit backend/options; kalite başarısı iddiası değildir.",
+  "selectionReason": "Kurulu adayların aynı açık geliştirme setinde strict JSON doğru yanıtı: llama3.2 6/10, qwen3 0/10. Bu küçük arayüz qualification deneyi Python benchmark değildir.",
+  "model": {
+    "model": "llama3.2:3b",
+    "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+    "context": 2048,
+    "maxTokens": 512,
+    "seed": 42,
+    "temperature": 0,
+    "concurrency": 1,
+    "timeoutMs": 90000,
+    "backend": "ollama",
+    "backendVersion": "0.30.8",
+    "quantization": "Q4_K_M",
+    "think": false,
+    "stream": false,
+    "keepAlive": "5m"
+  },
+  "qualification": {
+    "dataset": "tests/fixtures/model/development.json",
+    "datasetSha256": "f087c53b12dfca8b4391a92d7f49b297caf2aebea767d9f8366c1674a7f9f5d2",
+    "reports": [
+      {
+        "path": "docs/evaluation/b08-qwen3-4b.json",
+        "sha256": "74cfe3834cb986c76bd57c23ad4b1e00dd12529b81ee8e090dcf11c7e6d71d15",
+        "model": "qwen3:4b",
+        "correct": 0,
+        "total": 10,
+        "coldMs": 9652.938166000002,
+        "maxObservedModelBytes": 2732589055
+      },
+      {
+        "path": "docs/evaluation/b08-llama32-3b.json",
+        "sha256": "a45a886c95c24da6f2fd1e285d7273ffad07a6da0e18b25133095d273c698952",
+        "model": "llama3.2:3b",
+        "correct": 6,
+        "total": 10,
+        "coldMs": 10201.24725,
+        "maxObservedModelBytes": 2207713852
+      }
+    ]
+  },
+  "qualityAcceptance": {
+    "policy": "İlk sürüm için önceden ilan edilen ürün hedefleri; qualification skorundan istatistiksel olarak türetilmemiştir. Holdout sonuçlarına göre geriye dönük değiştirilmez.",
+    "generationOraclePassRateMin": 0.6,
+    "reviewPrecisionMin": 0.7,
+    "reviewRecallMin": 0.6,
+    "generatedTestsValidityMin": 0.8,
+    "mutationDetectionMin": 0.5
+  },
+  "evaluationRules": {
+    "holdoutProtocol": "docs/stage-1/08-evaluation.md Q1; H06 bağımsız oracle ile ayrı hazırlanır ve her run öncesi hashlenir",
+    "fixtureExcluded": true,
+    "failuresRemainInDenominator": true,
+    "tuningOnHoldout": false,
+    "changesRequireNewRevisionAndNewExperiment": true,
+    "qualificationDoesNotProveCodeQuality": true
+  },
+  "limitations": [
+    "Açık geliştirme seti yalnız temel JSON görevleri içerir.",
+    "Modelin kod/review/test kalitesi henüz ölçülmedi.",
+    "Kaynak gözlemleri /api/ps snapshot; peak RAM/VRAM değildir.",
+    "Arka plan uygulamaları izole edilmedi; donanım ham raporda kaydedildi.",
+    "Gateway dışından Ollama kullanan istemciler global kuyruk garantisine dahil değildir."
+  ],
+  "implementation": {
+    "baseCommit": "bb1c344f69d1a10c2a8dbc47802a408491b5abdd",
+    "sourceHashes": {
+      "services/model/port.ts": "3a97170fa6b2abc75d8f7804859bca45ee23ece48f19b58b646fb988bde16895",
+      "services/model/queue.ts": "4dd21d924c6d152b0a9dc52ad33237b14c84710d8b3b1d67e0f135c1dc399fad",
+      "services/model/ollama.ts": "4c722412ca31d974ccf517e5c95ee4d9cf517a065ff7771132354d3e309d11ea",
+      "scripts/qualify-model.cjs": "6fa5452b4a8ea9b2b3f52ddd0d9e9c0bae461a8156f5c675a6edbdb29be1d561"
+    }
+  }
+}

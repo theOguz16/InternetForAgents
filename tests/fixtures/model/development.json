@@ -1,0 +1,12 @@
+[
+  {"id":"dev-01","prompt":"Return only JSON, no markdown: {\"answer\": the sum of 2 and 3}","expected":{"answer":5}},
+  {"id":"dev-02","prompt":"Return only JSON, no markdown: {\"answer\": the reverse of the string abc}","expected":{"answer":"cba"}},
+  {"id":"dev-03","prompt":"Return only JSON, no markdown: {\"answer\": the number of items in [1,2,3]}","expected":{"answer":3}},
+  {"id":"dev-04","prompt":"Return only JSON, no markdown: {\"answer\": the largest number in [-2,0,5]}","expected":{"answer":5}},
+  {"id":"dev-05","prompt":"Return only JSON, no markdown: {\"answer\": true if 4 is even, otherwise false}","expected":{"answer":true}},
+  {"id":"dev-06","prompt":"Return only JSON, no markdown: {\"answer\": the lowercase version of HELLO}","expected":{"answer":"hello"}},
+  {"id":"dev-07","prompt":"Return only JSON, no markdown: {\"answer\": sum of the numbers in an empty list, using 0 as identity}","expected":{"answer":0}},
+  {"id":"dev-08","prompt":"Return only JSON, no markdown: {\"answer\": the unique items of [1,1,2] preserving order}","expected":{"answer":[1,2]}},
+  {"id":"dev-09","prompt":"Return only JSON, no markdown: {\"answer\": true if radar is a palindrome, otherwise false}","expected":{"answer":true}},
+  {"id":"dev-10","prompt":"Return only JSON, no markdown: {\"answer\": the sum of even numbers in [1,2,3,4]}","expected":{"answer":6}}
+]
