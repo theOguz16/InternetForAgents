@@ -8,7 +8,7 @@ H01 tasarım tabanı. Hedefler ölçülmüş başarı değildir. Çalışma baş
 
 Her run manifesti: commit, OS/kernel, CPU/RAM, Docker sürüm/image digest, Node sürümü, servis limitleri, DB/fixture büyüklüğü, model adı/digest/quantization/context length, concurrency, temperature/seed desteği, ağ modu, arka plan uygulamaları, başlangıç/bitiş zamanı. Donanım değişirse yeni R etiketi; eski sonuçla aynı sınıf gibi birleştirilmez.
 
-Model seçimi EVAL-1 içinde marka/parametre boyutu olarak kilitlenmez: B08’de R1’e sığan adaylarla qualification yapılır, ardından EVAL-M1 manifestinde tek model sürümü bütün karşılaştırmalar için dondurulur. Model seçilmeden kalite benchmark’ı yürütülmez. Bu kapı gelecekteki iş; ölçüm yapılmış değildir.
+Model seçimi EVAL-1 içinde marka/parametre boyutu olarak kilitlenmez: B08’de R1’e sığan adaylarla qualification yapılır, ardından EVAL-M1 manifestinde tek model sürümü bütün karşılaştırmalar için dondurulur. Model seçilmeden kalite benchmark’ı yürütülmez. B08 ilk backend qualification ve EVAL-M1 kaydı aşağıda bağlıdır; Q1 kod kalitesi ölçümü henüz yapılmamıştır.
 
 ## İş yükleri ve yöntem
 
@@ -52,3 +52,7 @@ Uzman kapalı/yavaş, bozuk artifact, kesik SSE, task ID alınmadan kopma, Regis
 ## Tekrarlanabilir rapor
 
 Run manifest + test fixture hash’leri + ham ölçüm CSV/JSON + grafik + hedef/sonuç tablosu + başarısız örnek analizi + limitations. Secrets ve gerçek kişisel veri yoktur. İnsan değerlendirmesinde mümkünse yaklaşım adı gizlenir. İki geliştiricilik onboarding sonucu genellenebilir istatistik diye sunulmaz. Kabul kanıtı rapor dosyasının sürümlü commit’idir.
+
+## B08 ilk qualification kaydı
+
+[Model portu ve deney sınırları](../development/model-port.md), [EVAL-M1 revision 1](../evaluation/EVAL-M1.json). Model ayarları ve ilk kalite hedefleri holdout öncesinde sabitlendi; gerçek kod agent kalite benchmark’ı henüz yapılmadı.
