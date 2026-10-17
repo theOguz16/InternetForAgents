@@ -77,7 +77,7 @@ review precision/recall veya mutation detection kanıtı değildir.
 
 `/api/ps` yalnız sonuç sonunda bir kez okunur. modelBytes/vramBytes o andaki
 backend raporudur; peak RAM/VRAM değildir. gatewayRssBytes ölçüm sürecine aittir,
-model RSS değildir. Cold ilk çağrı ayrı incelenir; eksik gözlem null kalır.
+model RSS değildir. İlk çağrı ayrı raporlanır; load_duration toplanmadığından cold olduğu doğrulanmaz. Eksik gözlem null kalır.
 Arka plan programlarının etkisi izole edilmemiştir; küçük örneklem genellenmez.
 
 ## Kanıt ve uyumluluk
