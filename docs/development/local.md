@@ -35,7 +35,7 @@ Model indirilmez, model sunucusu başlatılmaz. Sürekli sağlık sorgusu veya p
 npm install
 SERVICE_NAME=language PORT=4101 npm run dev:service
 ```
-Derleme: `npm run build:services`. Eski seyahat prototipi `npm start` ile çalışır; yeni platform değildir. N01 denemesi `spikes/n01-a2a` altında bağımsızdır.
+Derleme: `npm run build:services`. Personal varsayılan olarak kimlik ister (`AUTH_MODE=required`); token oluşturma ve anonim yerel demo modu için [kimlik rehberi](identity.md). Eski seyahat prototipi `npm start` ile çalışır; yeni platform değildir. N01 denemesi `spikes/n01-a2a` altında bağımsızdır.
 
 ## Uzman ekleme şablonu
 `services/shared/contracts.ts` iş mantığı arayüzüdür. `services/language/handler.ts` örneğini yeni uzman dizinine kopyala. İş mantığı HTTP veya SDK nesnelerine bağımlı olmasın. A2A adaptörü girdiyi doğrular, handler’ı çağırır ve sonucu artifact olarak aktarır.

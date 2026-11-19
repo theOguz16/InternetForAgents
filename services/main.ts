@@ -2,7 +2,15 @@ import express from "express";
 import { registryGateway } from "./personal/registry-gateway.js";
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { PersonalStore } from "./personal/store.js";
+import { PersonalStore } from "./personal/infrastructure/sqlite-job-store.js";
+import { RegistryDirectory } from "./personal/infrastructure/registry-directory.js";
+import { A2ASpecialistGateway } from "./personal/infrastructure/a2a-specialist-gateway.js";
+import { systemClock } from "./personal/infrastructure/system-clock.js";
+import { JobService } from "./personal/application/job-service.js";
+import { IdentityService } from "./identity/application/identity-service.js";
+import { SqliteIdentityStore } from "./identity/infrastructure/sqlite-identity-store.js";
+import { authenticate } from "./identity/http/authenticate.js";
+import { sessionRouter } from "./identity/http/session-router.js";
 import { SqliteTaskStore } from "./shared/task-store.js";
 import { personalRouter } from "./personal/router.js";
 import { mountSpecialist } from "./shared/a2a.js";
@@ -36,10 +44,21 @@ if (service === "personal") {
   const registry = new URL(process.env.REGISTRY_URL ?? "http://127.0.0.1:4001");
   if (!["http:", "https:"].includes(registry.protocol) || registry.username || registry.password || registry.pathname !== "/" || registry.search || registry.hash) throw new Error("Geçersiz REGISTRY_URL");
   const origins = new Set((process.env.ALLOWED_AGENT_ORIGINS ?? "http://127.0.0.1:4101,http://127.0.0.1:4102,http://127.0.0.1:4103").split(",").map(value => new URL(value.trim()).origin));
+  const authMode = process.env.AUTH_MODE ?? "required";
+  if (authMode !== "required" && authMode !== "local-demo") throw new Error("Geçersiz AUTH_MODE");
+  // Secure cookie varsayılandır; yalnız TLS olmayan yerel deneme için açıkça kapatılır.
+  const secureCookie = process.env.COOKIE_SECURE !== "false";
   const store = new PersonalStore(join(dataDir, "personal.sqlite"));
-  storage = store;
-  app.use("/v1", personalRouter(registry.origin, origins, store));
-  app.use("/registry", registryGateway(registry.origin));
+  const identityStore = new SqliteIdentityStore(join(dataDir, "identity.sqlite"));
+  storage = { close: () => { store.close(); identityStore.close(); } };
+  // Composition root: portların somut uygulamaları yalnız burada seçilir.
+  const identity = new IdentityService(identityStore, systemClock);
+  const jobs = new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registry.origin), gateway: new A2ASpecialistGateway(), allowedOrigins: origins });
+  const auth = authenticate(identity, authMode);
+  if (authMode === "local-demo") console.warn(JSON.stringify({ service, event: "auth_local_demo", warning: "Kimlik bilgisi olmayan istekler demo principal'ına atanır; yalnız loopback'e bağlı yerel demo içindir." }));
+  app.use("/v1", sessionRouter(identity, { secure: secureCookie }));
+  app.use("/v1", auth, personalRouter(jobs));
+  app.use("/registry", auth, registryGateway(registry.origin));
   app.use(express.static(join(process.cwd(), "dist", "web")));
 }
 if (specialist) {

@@ -5,7 +5,7 @@
 Node.js 24 kullanın. `npm install` ardından `npm run build` hem servisleri hem React arayüzünü derler. Mevcut servisleri açın; Personal servisi için:
 
 ```sh
-SERVICE_NAME=personal PORT=4002 npm run start:service
+AUTH_MODE=local-demo SERVICE_NAME=personal PORT=4002 npm run start:service
 ```
 
 Tarayıcıda `http://localhost:4002` açılır. Registry ve uzmanlar ayrı süreçler olarak açık olmalıdır; Personal bunları otomatik başlatmaz.
