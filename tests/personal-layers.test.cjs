@@ -5,6 +5,7 @@ const { join } = require('node:path');
 const { JobService } = require('../dist/services/personal/application/job-service.js');
 const { DiscoveryError } = require('../dist/services/personal/application/ports.js');
 const { selectProvider } = require('../dist/services/personal/domain/provider-selection.js');
+const { LOCAL_DEMO_PRINCIPAL } = require('../dist/services/identity/domain/principal.js');
 
 const root = join(__dirname, '..', 'services', 'personal');
 const sources = dir => readdirSync(join(root, dir)).filter(name => name.endsWith('.ts')).map(name => ({ name: `${dir}/${name}`, text: readFileSync(join(root, dir, name), 'utf8') }));
@@ -61,8 +62,11 @@ function service(overrides = {}) {
   const f = fakes(overrides);
   let now = overrides.now ?? new Date('2026-11-19T10:00:00Z'); let id = 0;
   const repository = overrides.repository ?? memoryRepository();
-  const jobs = new JobService({ repository, clock: { now: () => now }, newId: () => `job-${++id}`, directory: f.directory, gateway: f.gateway, allowedOrigins: new Set(['http://agent.test']) });
-  return { jobs, repository, calls: f.calls, advance: ms => { now = new Date(now.getTime() + ms); } };
+  const real = new JobService({ repository, clock: { now: () => now }, newId: () => `job-${++id}`, directory: f.directory, gateway: f.gateway, allowedOrigins: new Set(['http://agent.test']) });
+  // D01 testleri tek çağıranla çalışır; sahiplik E01 testlerinde ayrıca denetlenir.
+  const as = overrides.principal ?? LOCAL_DEMO_PRINCIPAL;
+  const jobs = { submit: (key, value) => real.submit(as, key, value), get: id => real.get(as, id), subscribe: (id, fn) => real.subscribe(id, fn) };
+  return { jobs, real, repository, calls: f.calls, advance: ms => { now = new Date(now.getTime() + ms); } };
 }
 const finished = (jobs, id) => new Promise(resolve => {
   const off = jobs.subscribe(id, job => { if (job.status !== 'running') { off(); resolve(job); } });
@@ -128,7 +132,7 @@ test('D01 JobService: yeniden başlatmada yarım iş unknown, bitmiş iş aynen 
   const half = { id: 'half', status: 'running', revision: 1, createdAt: done.createdAt, children: [{ skill: 'language', state: 'completed' }, { skill: 'summary', state: 'working' }] };
   const repository = memoryRepository({ jobs: [['done', done], ['half', half]], keys: [] });
   const { jobs, calls } = service({ repository });
-  assert.deepEqual(jobs.get('done'), done);
+  assert.deepEqual(jobs.get('done'), { ...done, ownerId: 'local-demo' });
   const recovered = jobs.get('half');
   assert.equal(recovered.status, 'partial'); assert.equal(recovered.revision, 2);
   assert.deepEqual(recovered.children[1], { skill: 'summary', state: 'unknown', error: 'personal_restarted' });

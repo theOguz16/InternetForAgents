@@ -13,9 +13,14 @@ const { A2ASpecialistGateway } = require('../dist/services/personal/infrastructu
 const { systemClock } = require('../dist/services/personal/infrastructure/system-clock.js');
 const { PersonalStore } = require('../dist/services/personal/infrastructure/sqlite-job-store.js');
 
-// services/main.ts ile aynı üretim adaptörleri; testte yalnız depo geçici olur.
+const { IdentityService } = require('../dist/services/identity/application/identity-service.js');
+const { SqliteIdentityStore } = require('../dist/services/identity/infrastructure/sqlite-identity-store.js');
+const { authenticate } = require('../dist/services/identity/http/authenticate.js');
+
+// services/main.ts ile aynı üretim adaptörleri; testte depo geçici, kimlik local-demo modundadır.
 function personalApi(registryUrl, allowedOrigins, store = new PersonalStore(':memory:')) {
-  return personalRouter(new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registryUrl), gateway: new A2ASpecialistGateway(), allowedOrigins }));
+  const identity = new IdentityService(new SqliteIdentityStore(':memory:'), systemClock);
+  return [authenticate(identity, 'local-demo'), personalRouter(new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registryUrl), gateway: new A2ASpecialistGateway(), allowedOrigins }))];
 }
 
 test('Dil: iki dil, karışık metin, tekrar ve yetersiz kanıt', () => {
@@ -92,7 +97,8 @@ test('SQLite: Personal iş/anahtar geri yükleme ve yarım işi tekrar gönderme
   const personal = await serve(t, app => app.use('/v1', personalApi('http://127.0.0.1:1', new Set(), store)));
   t.after(() => { store.close(); rmSync(dir, { recursive: true, force: true }); });
   const restored = await (await fetch(`${personal}/v1/jobs/done`)).json();
-  assert.deepEqual(restored, completed);
+  // E01 öncesi biçimdeki kayıt migrate edilir: içerik aynen korunur, sahibi local-demo olur.
+  assert.deepEqual(restored, { ...completed, ownerId: 'local-demo' });
   const pending = await (await fetch(`${personal}/v1/jobs/pending`)).json();
   assert.equal(pending.status, 'unknown');
   assert.equal(pending.children[0].error, 'personal_restarted');
