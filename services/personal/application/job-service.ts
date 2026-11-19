@@ -1,10 +1,11 @@
 import { createHash, randomUUID } from "node:crypto";
 import { profiles, validInput, type Specialist } from "../../shared/contracts.js";
-import { createJob, finalStatus, hasCapacity, isExpired, recoverAfterRestart, type IdempotencyRecord, type Job } from "../domain/job.js";
+import { can, type Principal } from "../../identity/domain/principal.js";
+import { createJob, finalStatus, hasCapacity, isExpired, migrateSavedState, recoverAfterRestart, scopedKey, type IdempotencyRecord, type Job } from "../domain/job.js";
 import type { Clock, JobRepository } from "./ports.js";
 import { runChild, type ChildDeps } from "./run-child.js";
 
-export type SubmitError = "invalid_idempotency_key" | "invalid_job" | "invalid_text" | "idempotency_conflict" | "job_capacity";
+export type SubmitError = "forbidden" | "invalid_idempotency_key" | "invalid_job" | "invalid_text" | "idempotency_conflict" | "job_capacity";
 export type SubmitOutcome =
   | { kind: "error"; code: SubmitError }
   | { kind: "existing"; job: Job }
@@ -27,14 +28,18 @@ export class JobService {
   private readonly listeners = new Map<string, Set<(job: Job) => void>>();
 
   constructor(private readonly deps: JobServiceDeps) {
-    const saved = deps.repository.load();
+    const saved = migrateSavedState(deps.repository.load());
     this.jobs = new Map(saved.jobs);
     this.keys = new Map(saved.keys);
     for (const job of this.jobs.values()) recoverAfterRestart(job);
     this.persist();
   }
 
-  get(id: string): Job | undefined { return this.jobs.get(id); }
+  /** Görünmeyen iş ile olmayan iş ayırt edilmez; ikisi de undefined döner (404). */
+  get(principal: Principal, id: string): Job | undefined {
+    const job = this.jobs.get(id);
+    return job && can(principal, "job.read", { ownerId: job.ownerId }) ? job : undefined;
+  }
 
   /** Dinleyici her kalıcı revizyondan sonra çağrılır; dönen fonksiyon aboneliği kaldırır. */
   subscribe(id: string, listener: (job: Job) => void): () => void {
@@ -43,8 +48,10 @@ export class JobService {
     return () => { set.delete(listener); if (!set.size) this.listeners.delete(id); };
   }
 
-  submit(key: string | undefined, body: unknown): SubmitOutcome {
-    if (!key || !/^[\x21-\x7e]{1,128}$/.test(key)) return { kind: "error", code: "invalid_idempotency_key" };
+  submit(principal: Principal, rawKey: string | undefined, body: unknown): SubmitOutcome {
+    if (!can(principal, "job.create")) return { kind: "error", code: "forbidden" };
+    if (!rawKey || !/^[\x21-\x7e]{1,128}$/.test(rawKey)) return { kind: "error", code: "invalid_idempotency_key" };
+    const key = scopedKey(principal.id, rawKey);
     const request = parseRequest(body);
     if (!request) return { kind: "error", code: "invalid_job" };
     const { skills } = request;
@@ -66,7 +73,7 @@ export class JobService {
       return { kind: "existing", job: this.jobs.get(existing.jobId)! };
     }
     if (!hasCapacity(this.jobs.values())) return { kind: "error", code: "job_capacity" };
-    const job = createJob((this.deps.newId ?? randomUUID)(), now, skills);
+    const job = createJob((this.deps.newId ?? randomUUID)(), principal.id, now, skills);
     this.jobs.set(job.id, job); this.keys.set(key, { hash, jobId: job.id });
     this.persist(); // Kabul yanıtından önce iş ve anahtar birlikte kalıcılaştırılır.
     // Yürütme bir sonraki mikro görevde başlar: çağıran kabul snapshot'ını
@@ -90,7 +97,7 @@ export class JobService {
     for (const listener of [...this.listeners.get(job.id) ?? []]) listener(job);
   }
 
-  private persist() { this.deps.repository.save({ jobs: [...this.jobs], keys: [...this.keys] }); }
+  private persist() { this.deps.repository.save({ version: 2, jobs: [...this.jobs], keys: [...this.keys] }); }
 }
 
 function parseRequest(body: unknown): { text: unknown; skills: Specialist[] } | undefined {
