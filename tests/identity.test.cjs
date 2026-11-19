@@ -231,3 +231,13 @@ test('E01 HTTP: kayıt yalnız developer; local-demo yalnız kimlik bilgisi yoks
   const demoUser = demo.identity.createPrincipal('Gerçek', 'user').token;
   assert.equal((await call(`${demo.base}/v1/jobs/${id}`, { headers: bearer(demoUser) })).status, 404, 'gerçek kullanıcı demo işini göremez');
 });
+
+test('E01 rotateToken: okuma ile yazma arasında iptal edilen principal için token dönmez', () => {
+  const { store, identity } = identityWithClock();
+  const { principal } = identity.createPrincipal('Yarış', 'developer');
+  // Gerçek depo üzerinde: okuma aktif görür, yazma anında principal iptal edilmiştir.
+  const original = store.replaceTokenHash.bind(store);
+  store.replaceTokenHash = (id, tokenHash) => { store.revokePrincipal(id, new Date().toISOString()); return original(id, tokenHash); };
+  assert.equal(identity.rotateToken(principal.id), undefined);
+  assert.equal(identity.authenticateToken('ifa_' + 'A'.repeat(43)), undefined);
+});

@@ -23,7 +23,7 @@ Docker’da aynı volume ile: `docker compose run --rm personal node dist/servic
 | API/CLI | `Authorization: Bearer <token>` | Gerekmez; tarayıcı bu başlığı kendiliğinden göndermez |
 | Web | `POST /v1/session {"token": …}` → `ifa_session` cookie (`HttpOnly; SameSite=Strict; Secure; Path=/`, 8 saat) | GET dışındaki her istekte `X-CSRF-Token` |
 
-`GET /v1/session` mevcut principal’ı ve CSRF token’ını döner (sayfa yenileme). `DELETE /v1/session` çıkış yapar ve CSRF ister. Giriş yalnız `application/json` kabul eder; siteler arası düz form giriş yapamaz (login CSRF). Principal başına en fazla 10 oturum tutulur; yeni giriş en eskisini kapatır. Session kimliği DB’de hash olarak saklanır.
+`GET /v1/session` mevcut principal’ı ve CSRF token’ını döner (sayfa yenileme). `DELETE /v1/session` çıkış yapar ve CSRF ister. Giriş yalnız `application/json` kabul eder; siteler arası düz form giriş yapamaz (login CSRF). Principal başına en fazla 10 oturum tutulur; yeni giriş en eskisini kapatır. Session kimliği DB’de hash olarak saklanır. CSRF token’ı ise bilerek düz metin saklanır: sayfa yenilendiğinde `GET /v1/session` aynı token’ı döndürebilmelidir. CSRF token’ı tek başına yetki vermez; hash’li session cookie’si olmadan kullanılamaz, bu yüzden DB sızıntısında oturum ele geçirilemez. #12 plan yorumundaki "CSRF token’ı da hash" ifadesi bu kararla güncellenmiştir.
 
 Gönderilmiş ama geçersiz kimlik bilgisi her modda 401’dir; anonim kullanıcıya düşürülmez.
 
