@@ -1,17 +1,9 @@
 import { DatabaseSync } from "node:sqlite";
-import type { Child } from "./orchestrator.js";
-export interface Job {
-  id: string;
-  status: "running" | "completed" | "partial" | "failed" | "unknown";
-  revision: number;
-  createdAt: string;
-  children: Child[];
-}
-export interface SavedState {
-  jobs: [string, Job][];
-  keys: [string, { hash: string; jobId: string }][];
-}
-export class PersonalStore {
+import type { JobRepository } from "../application/ports.js";
+import type { SavedState } from "../domain/job.js";
+
+/** JobRepository'nin SQLite uygulaması. */
+export class PersonalStore implements JobRepository {
   private db: DatabaseSync;
   constructor(path: string) {
     this.db = new DatabaseSync(path);
