@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://internet-for-agents.local/schemas/ifa-workflow.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workflowVersion",
+    "id",
+    "version",
+    "title",
+    "steps"
+  ],
+  "properties": {
+    "workflowVersion": {
+      "const": "ifa-workflow.v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9.-]*$"
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "capability",
+          "requires",
+          "input",
+          "outputs",
+          "budget",
+          "required"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,31}$"
+          },
+          "capability": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "version"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9.-]*$"
+              },
+              "version": {
+                "type": "string",
+                "maxLength": 64,
+                "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+              }
+            }
+          },
+          "requires": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sideEffects"
+            ],
+            "properties": {
+              "sideEffects": {
+                "enum": [
+                  "none"
+                ]
+              }
+            }
+          },
+          "input": {
+            "type": "object",
+            "minProperties": 1,
+            "maxProperties": 16,
+            "propertyNames": {
+              "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "pointer"
+              ],
+              "properties": {
+                "source": {
+                  "enum": [
+                    "input",
+                    "step"
+                  ]
+                },
+                "step": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9-]{0,31}$"
+                },
+                "pointer": {
+                  "type": "string",
+                  "maxLength": 256
+                }
+              }
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "maxItems": 16,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "maxLength": 256
+            }
+          },
+          "budget": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "timeoutMs",
+              "maxOutputBytes"
+            ],
+            "properties": {
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 1000,
+                "maximum": 60000
+              },
+              "maxOutputBytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 131072
+              }
+            }
+          },
+          "required": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

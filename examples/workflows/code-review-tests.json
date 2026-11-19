@@ -1,0 +1,41 @@
+{
+  "workflowVersion": "ifa-workflow.v1",
+  "id": "ifa-demo/code-review-tests",
+  "version": "1.0.0",
+  "title": "Python fonksiyonu üret, review et ve test üret",
+  "steps": [
+    {
+      "id": "generate",
+      "capability": { "id": "ifa-demo/code-generation", "version": "1.0.0" },
+      "requires": { "sideEffects": "none" },
+      "input": { "spec": { "source": "input", "pointer": "/spec" } },
+      "outputs": ["/code"],
+      "budget": { "timeoutMs": 60000, "maxOutputBytes": 65536 },
+      "required": true
+    },
+    {
+      "id": "review",
+      "capability": { "id": "ifa-demo/code-review", "version": "1.0.0" },
+      "requires": { "sideEffects": "none" },
+      "input": {
+        "spec": { "source": "input", "pointer": "/spec" },
+        "code": { "source": "step", "step": "generate", "pointer": "/code" }
+      },
+      "outputs": ["/verdict", "/findings", "/summary"],
+      "budget": { "timeoutMs": 60000, "maxOutputBytes": 65536 },
+      "required": false
+    },
+    {
+      "id": "tests",
+      "capability": { "id": "ifa-demo/test-generation", "version": "1.0.0" },
+      "requires": { "sideEffects": "none" },
+      "input": {
+        "spec": { "source": "input", "pointer": "/spec" },
+        "code": { "source": "step", "step": "generate", "pointer": "/code" }
+      },
+      "outputs": ["/tests", "/scenarios"],
+      "budget": { "timeoutMs": 60000, "maxOutputBytes": 65536 },
+      "required": true
+    }
+  ]
+}
