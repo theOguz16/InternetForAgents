@@ -27,7 +27,16 @@ test('Manifest digest: anahtar sırası/skill binding bağımsız; farklı seman
 });
 test('Registry: değişmez profile sürümü ve başarısız transaction snapshot koruması', () => {
   const store = new RegistryStore(':memory:');
-  const entry = { cardUrl: 'http://agent/.well-known/agent-card.json', endpoint: 'http://agent/a2a', name: 'Demo', profiles: ['team-example/text-length'], registeredAt: '2026-10-15', manifest: copy() };
+  const entry = {
+    kind: 'manifest',
+    cardUrl: 'http://agent/.well-known/agent-card.json',
+    endpoint: 'http://agent/a2a',
+    name: 'Demo',
+    profiles: ['team-example/text-length'],
+    registeredAt: '2026-10-15',
+    manifestUrl: 'http://agent/ifa/capabilities.json',
+    manifest: copy(),
+  };
   try {
     const first = store.save(entry);
     const changed = structuredClone(entry); changed.manifest.capabilities[0].description = 'Different';
