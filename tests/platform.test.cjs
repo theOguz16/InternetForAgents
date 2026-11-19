@@ -7,6 +7,21 @@ const { extractKeywords } = require('../dist/services/keywords/extract.js');
 const { mountSpecialist } = require('../dist/services/shared/a2a.js');
 const { registryRouter } = require('../dist/services/registry/router.js');
 const { personalRouter } = require('../dist/services/personal/router.js');
+const { JobService } = require('../dist/services/personal/application/job-service.js');
+const { RegistryDirectory } = require('../dist/services/personal/infrastructure/registry-directory.js');
+const { A2ASpecialistGateway } = require('../dist/services/personal/infrastructure/a2a-specialist-gateway.js');
+const { systemClock } = require('../dist/services/personal/infrastructure/system-clock.js');
+const { PersonalStore } = require('../dist/services/personal/infrastructure/sqlite-job-store.js');
+
+const { IdentityService } = require('../dist/services/identity/application/identity-service.js');
+const { SqliteIdentityStore } = require('../dist/services/identity/infrastructure/sqlite-identity-store.js');
+const { authenticate } = require('../dist/services/identity/http/authenticate.js');
+
+// services/main.ts ile aynı üretim adaptörleri; testte depo geçici, kimlik local-demo modundadır.
+function personalApi(registryUrl, allowedOrigins, store = new PersonalStore(':memory:')) {
+  const identity = new IdentityService(new SqliteIdentityStore(':memory:'), systemClock);
+  return [authenticate(identity, 'local-demo'), personalRouter(new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registryUrl), gateway: new A2ASpecialistGateway(), allowedOrigins }))];
+}
 
 test('Dil: iki dil, karışık metin, tekrar ve yetersiz kanıt', () => {
   for (const [text, expected] of [['Merhaba dünya', 'tr'], ['Hello world', 'en'], ['Merhaba hello', 'und'], ['hello hello hello', 'und'], ['123 !!!', 'und'], ['https://hello.world', 'und']]) {
@@ -41,7 +56,7 @@ test('HTTP: kayıt → keşif → paralel A2A → kullanıcı SSE, idempotency v
   const registry = await serve(t, app => app.use('/v1', registryRouter(origins)));
   for (const origin of origins) assert.equal((await post(`${registry}/v1/agents`, { cardUrl: `${origin}/.well-known/agent-card.json` })).status, 201);
   assert.equal((await post(`${registry}/v1/agents`, { cardUrl: 'http://example.com/.well-known/agent-card.json' })).status, 422);
-  const personal = await serve(t, app => app.use('/v1', personalRouter(registry, origins)));
+  const personal = await serve(t, app => app.use('/v1', personalApi(registry, origins)));
   const body = { text: 'Merhaba dünya robot robot ve sensör', skills: ['language', 'keywords', 'summary'] };
   const created = await post(`${personal}/v1/jobs`, body, { 'Idempotency-Key': 'first' });
   assert.equal(created.status, 202);
@@ -58,7 +73,7 @@ test('HTTP: kayıt → keşif → paralel A2A → kullanıcı SSE, idempotency v
   assert.equal(repeated.status, 200); assert.equal((await repeated.json()).id, job.id);
   assert.equal((await post(`${personal}/v1/jobs`, { ...body, text: 'different' }, { 'Idempotency-Key': 'first' })).status, 409);
   // Yalnız dil sağlayıcısı görünür: diğer işin hatası başarılı sonucu kaybettirmemeli.
-  const partial = await serve(t, app => app.use('/v1', personalRouter(registry, new Set([[...origins][0]]))));
+  const partial = await serve(t, app => app.use('/v1', personalApi(registry, new Set([[...origins][0]]))));
   const partialJob = await (await post(`${partial}/v1/jobs`, body, { 'Idempotency-Key': 'partial' })).json();
   const stream = await fetch(`${partial}/v1/jobs/${partialJob.id}/events`, { signal: AbortSignal.timeout(10000) });
   const snapshots = (await stream.text()).split('\n').filter(line => line.startsWith('data: ')).map(line => JSON.parse(line.slice(6)));
@@ -70,7 +85,6 @@ test('SQLite: Personal iş/anahtar geri yükleme ve yarım işi tekrar gönderme
   const { tmpdir } = require('node:os');
   const { join } = require('node:path');
   const { createHash } = require('node:crypto');
-  const { PersonalStore } = require('../dist/services/personal/store.js');
   const dir = mkdtempSync(join(tmpdir(), 'ifa-personal-'));
   const path = join(dir, 'jobs.sqlite');
   const body = { text: 'Merhaba dünya', skills: ['language'] };
@@ -80,10 +94,11 @@ test('SQLite: Personal iş/anahtar geri yükleme ve yarım işi tekrar gönderme
   store.save({ jobs: [['done', completed], ['pending', { ...completed, id: 'pending', status: 'running', children: [{ skill: 'language', state: 'working' }] }]], keys: [['repeat', { hash, jobId: 'done' }]] });
   store.close();
   store = new PersonalStore(path);
-  const personal = await serve(t, app => app.use('/v1', personalRouter('http://127.0.0.1:1', new Set(), store)));
+  const personal = await serve(t, app => app.use('/v1', personalApi('http://127.0.0.1:1', new Set(), store)));
   t.after(() => { store.close(); rmSync(dir, { recursive: true, force: true }); });
   const restored = await (await fetch(`${personal}/v1/jobs/done`)).json();
-  assert.deepEqual(restored, completed);
+  // E01 öncesi biçimdeki kayıt migrate edilir: içerik aynen korunur, sahibi local-demo olur.
+  assert.deepEqual(restored, { ...completed, ownerId: 'local-demo' });
   const pending = await (await fetch(`${personal}/v1/jobs/pending`)).json();
   assert.equal(pending.status, 'unknown');
   assert.equal(pending.children[0].error, 'personal_restarted');
