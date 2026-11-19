@@ -42,9 +42,11 @@ export class IdentityService {
     const current = this.repository.findPrincipal(id);
     if (!current || current.revokedAt) return undefined;
     const token = secret("ifa");
-    this.repository.replaceTokenHash(id, hash(token));
+    // Okuma ile yazma arasında principal iptal edilmiş olabilir; yazılmamış
+    // bir token'ı geçerliymiş gibi döndürmeyiz. Oturumlar her durumda kapanır.
+    const replaced = this.repository.replaceTokenHash(id, hash(token));
     this.repository.deleteSessionsOf(id);
-    return token;
+    return replaced ? token : undefined;
   }
 
   revoke(id: string): boolean {
