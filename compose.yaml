@@ -21,6 +21,9 @@ services:
       - registry-data:/app/data
     environment:
       ALLOWED_AGENT_ORIGINS: http://language:4000,http://keywords:4000,http://summary:4000
+      # İmzalı principal olmadan gelen değişiklikler local-demo sahibine yazılır.
+      # Paylaşılan ortamda kaldırın ve iki servise aynı REGISTRY_PRINCIPAL_SECRET verin.
+      AUTH_MODE: local-demo
       SERVICE_NAME: registry
       PORT: 4000
       HOST: 0.0.0.0
@@ -34,6 +37,9 @@ services:
     environment:
       REGISTRY_URL: http://registry:4000
       ALLOWED_AGENT_ORIGINS: http://language:4000,http://keywords:4000,http://summary:4000
+      # Host portu yalnız 127.0.0.1'e açık; giriş ekranı (G03) gelene kadar demo anonim çalışır.
+      # Paylaşılan ortamda kaldırın: varsayılan AUTH_MODE=required token/oturum ister.
+      AUTH_MODE: local-demo
       SERVICE_NAME: personal
       PORT: 4000
       HOST: 0.0.0.0

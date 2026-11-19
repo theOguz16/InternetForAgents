@@ -16,7 +16,7 @@ Registry adres rehberidir; kullanıcı metni Registry’ye gönderilmez. Persona
 Önce [Registry rehberindeki](registry-a2a.md) gibi servisleri açıp üç kartı kaydet. Docker dışında Personal için ayrı terminal:
 
 ```sh
-SERVICE_NAME=personal PORT=4002 npm run dev:service
+AUTH_MODE=local-demo SERVICE_NAME=personal PORT=4002 npm run dev:service
 ```
 
 Görev oluştur:
@@ -55,14 +55,21 @@ Uzman akışı hata verirse, görev kimliği biliniyor ve zaman bütçesi dolmam
 
 ## Sınırlar
 
-Dil ve anahtar kelime uzmanları deterministik metin analizi yapar; özet fixture üretir. LLM çağrısı yoktur. [Algoritma açıklamaları](text-algorithms.md). Registry kayıtları, Personal işleri ve idempotency SQLite’ta saklanır. [Yeniden açılma davranışı](persistence.md). Kimlik/sahiplik tamamlanana kadar yerel demo kapsamındadır. Idempotency anahtarları bu yerel tek kullanıcı kapsamındadır.
+Dil ve anahtar kelime uzmanları deterministik metin analizi yapar; özet fixture üretir. LLM çağrısı yoktur. [Algoritma açıklamaları](text-algorithms.md). Registry kayıtları, Personal işleri ve idempotency SQLite’ta saklanır. [Yeniden açılma davranışı](persistence.md). İşler sahiplidir; başkasının işi 404 döner ve idempotency anahtarları çağırana göre ayrılır. Kimlik, oturum ve roller: [identity.md](identity.md).
 
 Tek parça JSON artifact desteklenir; parçalı artifact birleştirme yoktur. İnteraktif ek girdi/auth isteyen uzman profilleri desteklenmez. Ağ hataları kullanıcı metnini veya uzak hata ayrıntısını açığa çıkarmayan kodlarla gösterilir. React demo arayüzü eklendi; [çalıştırma rehberi](demo-ui.md).
 
 ## Kodda nereden okumalı?
 
-- `services/personal/router.ts`: HTTP, girdi kontrolü, idempotency, job durumu ve kullanıcı SSE’si.
-- `services/personal/orchestrator.ts`: keşif, seçim, A2A çağrısı ve çıktı kontrolü.
+Personal servisi [S1.0 servis içi mimarisini](../stage-1/03-architecture.md#servis-içi-mimari) izler (D01): Presentation → Application → Domain; Infrastructure portları uygular.
+
+- `services/personal/router.ts` (presentation): yalnız HTTP durum kodu ve kullanıcı SSE’si.
+- `services/personal/application/job-service.ts`: gönderim, girdi kontrolü, idempotency, süre sonu, kapasite, kalıcı revizyon ve abonelik.
+- `services/personal/application/run-child.ts`: tek uzman adımı; keşif → seçim → bağlantı → gönderim ve hata anlamı (gönderim öncesi `failed`, sonrası `unknown`).
+- `services/personal/application/ports.ts`: `JobRepository` (DB), `Clock`, `ProviderDirectory` ve `SpecialistGateway` (network).
+- `services/personal/domain/`: iş durumu kuralları ve sağlayıcı seçimi. Express, SQLite, A2A SDK veya Ajv import etmez; `tests/personal-layers.test.cjs` bunu denetler.
+- `services/personal/infrastructure/`: SQLite deposu, Registry keşfi, A2A JSONRPC+SSE istemcisi ve sistem saati.
+- `services/main.ts`: composition root; somut adaptörler yalnız burada bağlanır.
 - `services/shared/contracts.ts`: herkesin kabul ettiği veri biçimleri.
 
-Bağımlılık yönü: HTTP katmanı orkestrasyonu çağırır; orkestrasyon uzmanların iç algoritmasını bilmez. Bu küçük ayrım, ileride bellekteki job deposunu SQLite ile değiştirmeyi kolaylaştırır.
+Bağımlılık yönü içe doğrudur: domain hiçbir katmanı bilmez, application yalnız domain ve portları bilir, uzmanların iç algoritması bilinmez. HTTP API ve SQLite kayıt biçimi D01 ile değişmedi; mevcut kayıtlar migration gerektirmez.
