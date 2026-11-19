@@ -61,8 +61,15 @@ Tek parça JSON artifact desteklenir; parçalı artifact birleştirme yoktur. İ
 
 ## Kodda nereden okumalı?
 
-- `services/personal/router.ts`: HTTP, girdi kontrolü, idempotency, job durumu ve kullanıcı SSE’si.
-- `services/personal/orchestrator.ts`: keşif, seçim, A2A çağrısı ve çıktı kontrolü.
+Personal servisi [S1.0 servis içi mimarisini](../stage-1/03-architecture.md#servis-içi-mimari) izler (D01): Presentation → Application → Domain; Infrastructure portları uygular.
+
+- `services/personal/router.ts` (presentation): yalnız HTTP durum kodu ve kullanıcı SSE’si.
+- `services/personal/application/job-service.ts`: gönderim, girdi kontrolü, idempotency, süre sonu, kapasite, kalıcı revizyon ve abonelik.
+- `services/personal/application/run-child.ts`: tek uzman adımı; keşif → seçim → bağlantı → gönderim ve hata anlamı (gönderim öncesi `failed`, sonrası `unknown`).
+- `services/personal/application/ports.ts`: `JobRepository` (DB), `Clock`, `ProviderDirectory` ve `SpecialistGateway` (network).
+- `services/personal/domain/`: iş durumu kuralları ve sağlayıcı seçimi. Express, SQLite, A2A SDK veya Ajv import etmez; `tests/personal-layers.test.cjs` bunu denetler.
+- `services/personal/infrastructure/`: SQLite deposu, Registry keşfi, A2A JSONRPC+SSE istemcisi ve sistem saati.
+- `services/main.ts`: composition root; somut adaptörler yalnız burada bağlanır.
 - `services/shared/contracts.ts`: herkesin kabul ettiği veri biçimleri.
 
-Bağımlılık yönü: HTTP katmanı orkestrasyonu çağırır; orkestrasyon uzmanların iç algoritmasını bilmez. Bu küçük ayrım, ileride bellekteki job deposunu SQLite ile değiştirmeyi kolaylaştırır.
+Bağımlılık yönü içe doğrudur: domain hiçbir katmanı bilmez, application yalnız domain ve portları bilir, uzmanların iç algoritması bilinmez. HTTP API ve SQLite kayıt biçimi D01 ile değişmedi; mevcut kayıtlar migration gerektirmez.
