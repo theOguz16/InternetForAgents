@@ -22,3 +22,9 @@ saveDemo('function-spec', demo.functionSpec);
 for (const [id, definitions] of Object.entries(demo.profiles)) {
   for (const [kind, schema] of Object.entries(definitions)) saveDemo(`${id.split('/')[1]}.${kind}`, schema);
 }
+
+// Deklaratif workflow şeması (D02) da çalışma anındaki tanımdan üretilir.
+const { workflowSchema } = require('../dist/services/shared/workflow-contract.js');
+writeFileSync(join(__dirname, '..', 'schemas', 'ifa-workflow.v1.schema.json'), JSON.stringify({
+  $schema: 'http://json-schema.org/draft-07/schema#', $id: 'https://internet-for-agents.local/schemas/ifa-workflow.v1.schema.json', ...workflowSchema,
+}, null, 2) + '\n');
