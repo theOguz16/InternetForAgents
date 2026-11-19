@@ -1,6 +1,7 @@
 import { type Manifest } from "../capabilities/manifest.js";
 import { CardValidationError, type RegistryCard } from "../capabilities/agent-card.js";
 import { profiles } from "../shared/contracts.js";
+import type { Lifecycle } from "./lifecycle.js";
 
 // Eski metin profilleri yalnızca manifestsiz legacy kayıt yoluna izole edilir;
 // manifest kaydı ve keşif filtrelemesi bu sabit listeye bağlı değildir.
@@ -41,7 +42,8 @@ export interface ManifestAgentRegistration {
 
 export type AgentRegistration = LegacyAgentRegistration | ManifestAgentRegistration;
 
-export interface BaseAgentEntry {
+/** Sahiplik ve yaşam döngüsü (C01) her kayıtta bulunur; eski kayıtlar okunurken tamamlanır. */
+export interface BaseAgentEntry extends Lifecycle {
   id: string;
   cardUrl: string;
   name: string;

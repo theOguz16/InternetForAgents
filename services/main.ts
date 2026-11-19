@@ -11,6 +11,8 @@ import { IdentityService } from "./identity/application/identity-service.js";
 import { SqliteIdentityStore } from "./identity/infrastructure/sqlite-identity-store.js";
 import { authenticate } from "./identity/http/authenticate.js";
 import { sessionRouter } from "./identity/http/session-router.js";
+import { assertSecret } from "./identity/infrastructure/principal-assertion.js";
+import { registryPrincipal } from "./registry/auth.js";
 import { SqliteTaskStore } from "./shared/task-store.js";
 import { personalRouter } from "./personal/router.js";
 import { mountSpecialist } from "./shared/a2a.js";
@@ -38,7 +40,12 @@ if (service === "registry") {
   const origins = new Set((process.env.ALLOWED_AGENT_ORIGINS ?? "http://127.0.0.1:4101,http://127.0.0.1:4102,http://127.0.0.1:4103").split(",").map(value => new URL(value.trim()).origin));
   const store = new RegistryStore(join(dataDir, "registry.sqlite"));
   storage = store;
-  app.use("/v1", registryRouter(origins, store));
+  const registryMode = process.env.AUTH_MODE ?? "required";
+  if (registryMode !== "required" && registryMode !== "local-demo") throw new Error("Geçersiz AUTH_MODE");
+  // Secret yalnız ortamdan okunur; loglanmaz, yanıtlara girmez.
+  const secret = assertSecret(process.env.REGISTRY_PRINCIPAL_SECRET);
+  if (registryMode === "required" && !secret) console.warn(JSON.stringify({ service, event: "registry_read_only", warning: "REGISTRY_PRINCIPAL_SECRET yok; kayıt değişiklikleri reddedilir." }));
+  app.use("/v1", registryPrincipal({ mode: registryMode, secret }), registryRouter(origins, store));
 }
 if (service === "personal") {
   const registry = new URL(process.env.REGISTRY_URL ?? "http://127.0.0.1:4001");
@@ -58,7 +65,7 @@ if (service === "personal") {
   if (authMode === "local-demo") console.warn(JSON.stringify({ service, event: "auth_local_demo", warning: "Kimlik bilgisi olmayan istekler demo principal'ına atanır; yalnız loopback'e bağlı yerel demo içindir." }));
   app.use("/v1", sessionRouter(identity, { secure: secureCookie }));
   app.use("/v1", auth, personalRouter(jobs));
-  app.use("/registry", auth, registryGateway(registry.origin));
+  app.use("/registry", auth, registryGateway(registry.origin, { secret: assertSecret(process.env.REGISTRY_PRINCIPAL_SECRET) }));
   app.use(express.static(join(process.cwd(), "dist", "web")));
 }
 if (specialist) {
