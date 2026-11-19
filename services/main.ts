@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { PersonalStore } from "./personal/infrastructure/sqlite-job-store.js";
 import { RegistryDirectory } from "./personal/infrastructure/registry-directory.js";
 import { A2ASpecialistGateway } from "./personal/infrastructure/a2a-specialist-gateway.js";
+import { JsonLineTelemetry } from "./personal/infrastructure/json-line-telemetry.js";
 import { systemClock } from "./personal/infrastructure/system-clock.js";
 import { JobService } from "./personal/application/job-service.js";
 import { IdentityService } from "./identity/application/identity-service.js";
@@ -53,7 +54,8 @@ if (service === "personal") {
   storage = { close: () => { store.close(); identityStore.close(); } };
   // Composition root: portların somut uygulamaları yalnız burada seçilir.
   const identity = new IdentityService(identityStore, systemClock);
-  const jobs = new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registry.origin), gateway: new A2ASpecialistGateway(), allowedOrigins: origins });
+  const telemetry = new JsonLineTelemetry();
+  const jobs = new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registry.origin), gateway: new A2ASpecialistGateway(), allowedOrigins: origins, telemetry });
   const auth = authenticate(identity, authMode);
   if (authMode === "local-demo") console.warn(JSON.stringify({ service, event: "auth_local_demo", warning: "Kimlik bilgisi olmayan istekler demo principal'ına atanır; yalnız loopback'e bağlı yerel demo içindir." }));
   app.use("/v1", sessionRouter(identity, { secure: secureCookie }));
