@@ -53,7 +53,7 @@ Uygulanan yerler: Personal job okuma, SSE ve gönderim; başkasının işi **404
 
 ## Kapsam dışı
 
-- Registry kaydının sahibine bağlanması ve başkasının kaydını güncellemenin reddi: **C01** (kural matriste tanımlı ve testli).
+- Registry kaydının sahipliği, durumları ve audit'i [registry-lifecycle.md](registry-lifecycle.md) (C01) içinde. Gateway principal'ı `REGISTRY_PRINCIPAL_SECRET` ile imzalayıp Registry'ye iletir.
 - Kullanıcı başına kota ve rate limit: **E04**. Servis kimliği ve Personal→uzman credential’ı: **E02**. Audit kaydı: **E10**.
 - UI giriş ekranı: **G03**. Operatör metadata uç noktası henüz yok.
 

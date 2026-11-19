@@ -48,3 +48,5 @@ Namespace sahipliği/auth (C01), pending/suspend/revision (C01/C02), arama/sayfa
 ## Kart eşlemesi
 
 Registry’nin kullandığı alanlar için typed Card doğrulaması ve hata/uyumluluk kuralları: [B03 uygulaması](agent-card-validation.md).
+
+Sahiplik, durumlar ve audit: [registry-lifecycle.md](registry-lifecycle.md) (C01).

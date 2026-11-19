@@ -18,7 +18,7 @@ Güncel tasarım tabanı: **S1.0 / 15 Ekim 2026**. Uygulama, çalışan yerel me
 
 ## Gerçekte çalışan uygulama
 
-[Yerel geliştirme](development/local.md), [Registry/A2A](development/registry-a2a.md), [Personal](development/personal-agent.md), [kimlik/oturum](development/identity.md), [workflow tanımı](development/workflow-definition.md), [gözlemlenebilirlik](development/observability.md), [algoritmalar](development/text-algorithms.md), [kalıcılık](development/persistence.md), [UI](development/demo-ui.md), [15 Ekim Docker kanıtı](development/docker-demo-results.md). Bu raporlar yalnız belirtilen commit/test kapsamını kanıtlar.
+[Yerel geliştirme](development/local.md), [Registry/A2A](development/registry-a2a.md), [Personal](development/personal-agent.md), [kimlik/oturum](development/identity.md), [Registry yaşam döngüsü](development/registry-lifecycle.md), [workflow tanımı](development/workflow-definition.md), [gözlemlenebilirlik](development/observability.md), [algoritmalar](development/text-algorithms.md), [kalıcılık](development/persistence.md), [UI](development/demo-ui.md), [15 Ekim Docker kanıtı](development/docker-demo-results.md). Bu raporlar yalnız belirtilen commit/test kapsamını kanıtlar.
 
 ## Tarihçe
 
