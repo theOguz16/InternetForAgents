@@ -2,7 +2,11 @@ import express from "express";
 import { registryGateway } from "./personal/registry-gateway.js";
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { PersonalStore } from "./personal/store.js";
+import { PersonalStore } from "./personal/infrastructure/sqlite-job-store.js";
+import { RegistryDirectory } from "./personal/infrastructure/registry-directory.js";
+import { A2ASpecialistGateway } from "./personal/infrastructure/a2a-specialist-gateway.js";
+import { systemClock } from "./personal/infrastructure/system-clock.js";
+import { JobService } from "./personal/application/job-service.js";
 import { SqliteTaskStore } from "./shared/task-store.js";
 import { personalRouter } from "./personal/router.js";
 import { mountSpecialist } from "./shared/a2a.js";
@@ -38,7 +42,9 @@ if (service === "personal") {
   const origins = new Set((process.env.ALLOWED_AGENT_ORIGINS ?? "http://127.0.0.1:4101,http://127.0.0.1:4102,http://127.0.0.1:4103").split(",").map(value => new URL(value.trim()).origin));
   const store = new PersonalStore(join(dataDir, "personal.sqlite"));
   storage = store;
-  app.use("/v1", personalRouter(registry.origin, origins, store));
+  // Composition root: portların somut uygulamaları yalnız burada seçilir.
+  const jobs = new JobService({ repository: store, clock: systemClock, directory: new RegistryDirectory(registry.origin), gateway: new A2ASpecialistGateway(), allowedOrigins: origins });
+  app.use("/v1", personalRouter(jobs));
   app.use("/registry", registryGateway(registry.origin));
   app.use(express.static(join(process.cwd(), "dist", "web")));
 }
