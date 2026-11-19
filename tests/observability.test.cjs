@@ -225,12 +225,13 @@ test('H02 kısmi başarı ve hata yolları: tek traceId korunur; gönderim önce
 test('H02 TH06 negatif test: secrets, metin, çıktı, cookie, CSRF ve ownerId loglarda geçmez; allowlist dışı alan atılır', async t => {
   const lines = [];
   const telemetry = new JsonLineTelemetry({ write: line => lines.push(line) });
-  const secretText = 'GIZLI_KULLANICI_METNI_9911';
-  const secretOutput = 'GIZLI_ARTIFACT_SONUCU_8822';
-  const secretPrincipalName = 'GizliPrincipalAdi7733';
+  // Gizli tarayıcı yanlış pozitiflerini önlemek için düşük entropili sentinel değerleri kullanılır.
+  const sentinelText = 'sentinel-user-text';
+  const sentinelOutput = 'sentinel-artifact-output';
+  const sentinelPrincipalName = 'sentinel-principal-name';
 
   const identity = new IdentityService(new SqliteIdentityStore(':memory:'), { now: () => new Date('2026-11-19T12:00:00.000Z') });
-  const { principal, token } = identity.createPrincipal(secretPrincipalName, 'user');
+  const { principal, token } = identity.createPrincipal(sentinelPrincipalName, 'user');
 
   const directory = {
     async find(profile) { return [{ id: `a-${profile}`, name: 'Uzman', endpoint: 'http://agent.test/a2a', profiles: [profile] }]; },
@@ -241,7 +242,7 @@ test('H02 TH06 negatif test: secrets, metin, çıktı, cookie, CSRF ve ownerId l
         async execute(_text, hooks) {
           hooks.taskIdentified(`rt-${profile}`);
           hooks.progressed();
-          return { terminal: 'completed', result: { profile, mode: 'deterministic', output: { summary: secretOutput } } };
+          return { terminal: 'completed', result: { profile, mode: 'deterministic', output: { summary: sentinelOutput } } };
         },
       };
     },
@@ -268,7 +269,7 @@ test('H02 TH06 negatif test: secrets, metin, çıktı, cookie, CSRF ve ownerId l
   const r1 = await fetch(`${base}/v1/jobs`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${token}`, 'Idempotency-Key': 'bearer-1' },
-    body: JSON.stringify({ text: secretText, skills: ['summary'] }),
+    body: JSON.stringify({ text: sentinelText, skills: ['summary'] }),
   });
   assert.equal(r1.status, 202);
   const j1 = await r1.json();
@@ -289,17 +290,17 @@ test('H02 TH06 negatif test: secrets, metin, çıktı, cookie, CSRF ve ownerId l
   const r2 = await fetch(`${base}/v1/jobs`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', cookie: cookiePair, 'x-csrf-token': csrfToken, 'Idempotency-Key': 'cookie-1' },
-    body: JSON.stringify({ text: secretText, skills: ['summary'] }),
+    body: JSON.stringify({ text: sentinelText, skills: ['summary'] }),
   });
   assert.equal(r2.status, 202);
   const j2 = await r2.json();
   await finished(jobs, j2.id, principal);
 
   assert.ok(lines.length >= 10, 'iki işin tüm trace olayları kaydedilmiş olmalı');
-  const forbiddenValues = [secretText, secretOutput, token, sessionCookieValue, csrfToken, secretPrincipalName, principal.id];
+  const forbiddenValues = [sentinelText, sentinelOutput, token, sessionCookieValue, csrfToken, sentinelPrincipalName, principal.id];
   for (const line of lines) {
-    for (const secret of forbiddenValues) {
-      assert.equal(line.includes(secret), false, `log satırı gizli değer sızdırmamalı: ${secret}`);
+    for (const forbidden of forbiddenValues) {
+      assert.equal(line.includes(forbidden), false, `log satırı gizli değer sızdırmamalı: ${forbidden}`);
     }
     const obj = JSON.parse(line);
     for (const key of Object.keys(obj)) assert.ok(ALLOWED_KEYS.has(key), `allowlist dışı alan: ${key}`);
@@ -317,13 +318,13 @@ test('H02 TH06 negatif test: secrets, metin, çıktı, cookie, CSRF ve ownerId l
     agentId: 'a-1',
     remoteTaskId: 'x'.repeat(500),
     outcome: 'identified',
-    text: secretText,
-    output: { leak: secretOutput },
+    text: sentinelText,
+    output: { leak: sentinelOutput },
     token,
     cookie: sessionCookieValue,
     csrfToken,
     ownerId: principal.id,
-    principal: { id: principal.id, name: secretPrincipalName },
+    principal: { id: principal.id, name: sentinelPrincipalName },
     authorization: `Bearer ${token}`,
     service: 'personal',
     extraField: 'yasak',
