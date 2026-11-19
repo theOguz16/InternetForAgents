@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "zero_out_negative_subarrays_sum",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Boş olmayan bitişik alt diziler arasındaki en büyük toplamı döndür.",
+    "Tüm elemanlar negatifse en büyük (sıfıra en yakın) tek negatif elemanı döndür; 0 döndürme.",
+    "Yalnızca boş liste için 0 döndür."
+  ]
+}

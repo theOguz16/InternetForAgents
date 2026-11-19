@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "intervals_covered_length",
+  "parameters": [
+    {
+      "name": "starts",
+      "type": "list[int]"
+    },
+    {
+      "name": "ends",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "len(starts) != len(ends) ise -1 döndür.",
+    "Her indeks i bir yarı-açık aralığı [starts[i], ends[i]) temsil eder; ends[i] <= starts[i] olan boş veya ters aralıklar yok sayılır.",
+    "Örtüşen ve bitişik aralıkları birleştirip toplam kaplanan uzunluğu döndür.",
+    "Geçerli aralık yoksa 0 döndür; negatif koordinatları destekle."
+  ]
+}

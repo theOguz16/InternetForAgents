@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "normalize_spaces_ascii",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Baş ve sondaki tüm ASCII boşluk karakterlerini (\" \", \"\\t\", \"\\n\", \"\\r\") temizle.",
+    "İçerideki ardışık bir veya daha fazla ASCII boşluğu tek bir \" \" karakterine indirge.",
+    "Boş veya yalnızca ASCII boşluklarından oluşan metin için \"\" döndür."
+  ]
+}

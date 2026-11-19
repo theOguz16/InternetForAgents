@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "camel_to_snake_ascii",
+  "parameters": [
+    {
+      "name": "name",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Boş metin için \"\" döndür.",
+    "Soldan sağa işlerken indeks > 0 konumundaki bir ASCII büyük harfin (A-Z) önüne, bir önceki karakter küçük ASCII harf veya rakam ise VEYA bir önceki karakter büyük ASCII harf ve bir sonraki karakter küçük ASCII harf ise \"_\" ekle.",
+    "Tüm ASCII büyük harfleri küçük harfe çevir; rakamları ve mevcut \"_\" karakterlerini koru.",
+    "Örnek: \"parseHTTPCode\" -> \"parse_http_code\", \"user2Name\" -> \"user2_name\"."
+  ]
+}

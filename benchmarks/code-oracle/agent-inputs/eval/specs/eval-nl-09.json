@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "difference_consecutive",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Uzunluğu 2 den küçük listeler için boş liste döndür.",
+    "Her i (0 <= i < len(values) - 1) için values[i + 1] - values[i] farklarını yeni listede döndür.",
+    "Negatif sonuçlar ve sıfır farklar olduğu gibi korunur; girdi listesini değiştirme."
+  ]
+}

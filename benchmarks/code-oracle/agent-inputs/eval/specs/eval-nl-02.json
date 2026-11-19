@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "longest_increasing_run",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Kesin artan (values[i] > values[i - 1]) en uzun bitişik alt dizinin uzunluğunu döndür.",
+    "Boş liste için 0, tek elemanlı liste için 1 döndür.",
+    "Ardışık eşit elemanlar artışı bozar ve yeni koşu 1 uzunlukla başlar.",
+    "Negatif tam sayıları destekle."
+  ]
+}

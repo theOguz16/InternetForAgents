@@ -1,0 +1,20 @@
+{
+  "language": "python",
+  "functionName": "strip_matching_prefix",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    },
+    {
+      "name": "prefix",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "prefix boşsa veya text prefix ile başlamıyorsa text değerini aynen döndür.",
+    "text prefix ile başlıyorsa yalnızca baştaki tek bir prefix eşleşmesini kaldır.",
+    "Karşılaştırma büyük/küçük harf duyarlıdır."
+  ]
+}

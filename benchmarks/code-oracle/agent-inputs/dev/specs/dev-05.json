@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "count_consonants_ascii",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Yalnızca ASCII İngilizce harfler (A-Z, a-z) arasından ünlü (a, e, i, o, u; büyük/küçük duyarsız) olmayanların sayısını döndür.",
+    "Rakam, boşluk, noktalama ve ASCII dışı karakterler sayılmaz.",
+    "Boş metin için 0 döndür."
+  ]
+}

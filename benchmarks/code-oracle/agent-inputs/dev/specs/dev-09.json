@@ -1,0 +1,24 @@
+{
+  "language": "python",
+  "functionName": "safe_floor_div",
+  "parameters": [
+    {
+      "name": "numerator",
+      "type": "int"
+    },
+    {
+      "name": "denominator",
+      "type": "int"
+    },
+    {
+      "name": "fallback",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "denominator 0 ise fallback değerini döndür.",
+    "denominator 0 değilse Python taban bölmesi (numerator // denominator) sonucunu döndür.",
+    "Negatif bölünen veya bölenlerde eksi sonsuza yuvarlama kuralı korunur."
+  ]
+}

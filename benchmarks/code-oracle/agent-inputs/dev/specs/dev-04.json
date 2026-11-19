@@ -1,0 +1,25 @@
+{
+  "language": "python",
+  "functionName": "filter_in_closed_range",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "low",
+      "type": "int"
+    },
+    {
+      "name": "high",
+      "type": "int"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "low > high ise boş liste döndür.",
+    "low <= x <= high koşulunu sağlayan elemanları orijinal sırayla yeni listede döndür.",
+    "Tekrarlı elemanlar korunur; sınır değerleri (low ve high) dahildir.",
+    "Girdi listesini değiştirme."
+  ]
+}

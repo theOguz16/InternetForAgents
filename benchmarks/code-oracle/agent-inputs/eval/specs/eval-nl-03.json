@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "dedupe_keep_last",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Tekrarlı tam sayıların yalnızca en son göründüğü konumu koruyarak yeni liste döndür.",
+    "Örnek: [1, 2, 1, 3, 2] için [1, 3, 2] döndürülür.",
+    "Boş liste için boş liste döndür; negatif ve sıfır değerleri destekle.",
+    "Girdi listesini değiştirme."
+  ]
+}

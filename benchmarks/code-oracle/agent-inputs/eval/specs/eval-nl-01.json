@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "count_strict_peaks",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "İki komşusundan da kesin büyük olan (values[i - 1] < values[i] > values[i + 1]) iç elemanların sayısını döndür.",
+    "İlk ve son eleman tepe noktası sayılmaz.",
+    "Uzunluğu 3 ten küçük listeler için 0 döndür.",
+    "Eşit komşular (plato) kesin tepe sayılmaz; negatif sayılar desteklenir."
+  ]
+}

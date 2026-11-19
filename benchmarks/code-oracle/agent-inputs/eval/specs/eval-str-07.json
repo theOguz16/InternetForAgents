@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "reverse_word_order",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Metni ASCII boşluklarına (\" \", \"\\t\", \"\\n\", \"\\r\") göre kelimelere ayır ve boş parçaları at.",
+    "Kelime sırasını tersine çevirerek tek \" \" ile birleştir.",
+    "Kelime içindeki karakterlerin sırası değişmez.",
+    "Kelime yoksa \"\" döndür."
+  ]
+}

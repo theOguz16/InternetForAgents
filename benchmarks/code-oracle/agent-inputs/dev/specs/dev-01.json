@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "count_positive_multiples",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "divisor",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "divisor 0 veya negatif ise 0 döndür.",
+    "values içinde 0 dan kesin büyük ve divisor ile tam bölünen elemanların sayısını döndür.",
+    "0 değeri ve negatif elemanlar pozitif olmadığı için sayılmaz.",
+    "Boş liste için 0 döndür; girdi listesini değiştirme."
+  ]
+}
