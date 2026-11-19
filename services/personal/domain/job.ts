@@ -17,6 +17,8 @@ export interface Child {
 }
 export interface Job {
   id: string;
+  /** İşi oluşturan principal. Sahip dışındaki herkes için iş yokmuş gibi davranılır. */
+  ownerId: string;
   status: JobStatus;
   revision: number;
   createdAt: string;
@@ -24,16 +26,38 @@ export interface Job {
 }
 export interface IdempotencyRecord { hash: string; jobId: string }
 export interface SavedState {
+  /** 2: işler sahipli, idempotency anahtarları sahibe göre ayrık. Yoksa E01 öncesi biçim. */
+  version?: 2;
   jobs: [string, Job][];
   keys: [string, IdempotencyRecord][];
+}
+
+/** E01 öncesi kayıtlar anonim yerel demoda oluşturuldu; sahipleri local-demo principal'ıdır. */
+export const LEGACY_OWNER_ID = "local-demo";
+
+/**
+ * Idempotency anahtarı çağıran principal'a göre ayrılır (TH05): iki kullanıcının
+ * aynı anahtarı çatışmaz ve 409 yanıtı başkasının işinin varlığını sızdırmaz.
+ * Anahtar karakter kümesi boşluk içermediği için ayraç belirsiz değildir.
+ */
+export function scopedKey(ownerId: string, key: string): string { return `${ownerId} ${key}`; }
+
+/** Eski biçimdeki kaydı yerinde dönüştürür; zaten güncelse dokunmaz. */
+export function migrateSavedState(state: SavedState): SavedState {
+  if (state.version === 2) return state;
+  return {
+    version: 2,
+    jobs: state.jobs.map(([id, job]) => [id, { ...job, ownerId: job.ownerId ?? LEGACY_OWNER_ID }]),
+    keys: state.keys.map(([key, record]) => [scopedKey(LEGACY_OWNER_ID, key), record]),
+  };
 }
 
 export const JOB_RETENTION_MS = 86_400_000;
 export const MAX_STORED_JOBS = 100;
 export const MAX_RUNNING_JOBS = 8;
 
-export function createJob(id: string, createdAt: Date, skills: readonly Specialist[]): Job {
-  return { id, status: "running", revision: 0, createdAt: createdAt.toISOString(), children: skills.map(skill => ({ skill, state: "discovering" })) };
+export function createJob(id: string, ownerId: string, createdAt: Date, skills: readonly Specialist[]): Job {
+  return { id, ownerId, status: "running", revision: 0, createdAt: createdAt.toISOString(), children: skills.map(skill => ({ skill, state: "discovering" })) };
 }
 
 /** Tüm çocuklar bittikten sonra işin birleşik durumu. */

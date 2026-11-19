@@ -16,7 +16,7 @@ Registry adres rehberidir; kullanıcı metni Registry’ye gönderilmez. Persona
 Önce [Registry rehberindeki](registry-a2a.md) gibi servisleri açıp üç kartı kaydet. Docker dışında Personal için ayrı terminal:
 
 ```sh
-SERVICE_NAME=personal PORT=4002 npm run dev:service
+AUTH_MODE=local-demo SERVICE_NAME=personal PORT=4002 npm run dev:service
 ```
 
 Görev oluştur:
@@ -55,7 +55,7 @@ Uzman akışı hata verirse, görev kimliği biliniyor ve zaman bütçesi dolmam
 
 ## Sınırlar
 
-Dil ve anahtar kelime uzmanları deterministik metin analizi yapar; özet fixture üretir. LLM çağrısı yoktur. [Algoritma açıklamaları](text-algorithms.md). Registry kayıtları, Personal işleri ve idempotency SQLite’ta saklanır. [Yeniden açılma davranışı](persistence.md). Kimlik/sahiplik tamamlanana kadar yerel demo kapsamındadır. Idempotency anahtarları bu yerel tek kullanıcı kapsamındadır.
+Dil ve anahtar kelime uzmanları deterministik metin analizi yapar; özet fixture üretir. LLM çağrısı yoktur. [Algoritma açıklamaları](text-algorithms.md). Registry kayıtları, Personal işleri ve idempotency SQLite’ta saklanır. [Yeniden açılma davranışı](persistence.md). İşler sahiplidir; başkasının işi 404 döner ve idempotency anahtarları çağırana göre ayrılır. Kimlik, oturum ve roller: [identity.md](identity.md).
 
 Tek parça JSON artifact desteklenir; parçalı artifact birleştirme yoktur. İnteraktif ek girdi/auth isteyen uzman profilleri desteklenmez. Ağ hataları kullanıcı metnini veya uzak hata ayrıntısını açığa çıkarmayan kodlarla gösterilir. React demo arayüzü eklendi; [çalıştırma rehberi](demo-ui.md).
 
