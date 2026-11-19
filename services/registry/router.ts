@@ -1,9 +1,16 @@
 import { Router } from "express";
 import { RegistryStore, RegistryCapacityError, CapabilityVersionConflict, type Entry } from "./store.js";
-import { validateManifest, ManifestError, type Manifest } from "../capabilities/manifest.js";
+import { validateManifest, ManifestError } from "../capabilities/manifest.js";
 import { fetchJson } from "./fetch-json.js";
 import { validateRegistryCard, CardValidationError } from "../capabilities/agent-card.js";
-import { profiles } from "../shared/contracts.js";
+import {
+  createLegacyRegistration,
+  createManifestRegistration,
+  matchesProfileFilter,
+  parseRegistrationRequest,
+  RegistrationRequestError,
+  type RegistrationRequest,
+} from "./registration.js";
 
 // Yalnızca operatörün seçtiği sabit origin'lere erişilir; redirect takip edilmez.
 // Yerel geliştirme politikasıdır; paylaşılan ağ için DNS/IP sabitleme ve kimlik gerekir.
@@ -16,30 +23,33 @@ export function registryRouter(allowedOrigins: Set<string>, store: RegistryStore
     catch { return false; }
   };
   router.post("/agents", async (req, res) => {
-    const body = req.body;
-    if (!body || typeof body.cardUrl !== "string" || Object.keys(body).some(key => !["cardUrl", "manifestUrl"].includes(key))) {
-      res.status(400).json({ error: "invalid_registration" }); return;
+    let request: RegistrationRequest;
+    try {
+      request = parseRegistrationRequest(req.body, allowedOrigins);
+    } catch (error) {
+      if (error instanceof RegistrationRequestError) {
+        res.status(error.status).json({ error: error.code });
+        return;
+      }
+      res.status(422).json({ error: "card_validation_failed" });
+      return;
     }
     try {
-      const url = new URL(body.cardUrl);
-      if (!allowedOrigins.has(url.origin) || url.username || url.password || url.pathname !== "/.well-known/agent-card.json" || url.search || url.hash) {
-        res.status(422).json({ error: "card_url_not_allowed" }); return;
-      }
-      const card = validateRegistryCard(await fetchJson(url, 65536), url);
-      let manifest: Manifest | undefined;
-      let manifestUrl: string | undefined;
-      if (body.manifestUrl !== undefined) {
-        if (typeof body.manifestUrl !== "string") throw new Error("invalid_manifest_url");
-        const target = new URL(body.manifestUrl);
-        if (target.origin !== url.origin || target.username || target.password || target.pathname !== "/ifa/capabilities.json" || target.search || target.hash) throw new Error("invalid_manifest_url");
-        manifest = validateManifest(await fetchJson(target, 131072), card.skillIds);
-        manifestUrl = target.href;
-      }
-      const legacyProfiles: readonly string[] = Object.values(profiles);
-      const supported = manifest ? manifest.capabilities.map(cap => cap.id) : card.skillIds.filter(id => legacyProfiles.includes(id));
-      if (!supported.length) throw new CardValidationError("no_supported_skill", "/card/skills");
+      const card = validateRegistryCard(await fetchJson(request.cardUrl, 65536), request.cardUrl);
+      const registeredAt = new Date().toISOString();
+      // Legacy metin kaydı ile manifest kaydı ayrı DTO kurucularıyla işlenir;
+      // böylece manifest akışı eski profil listesine hiç dokunmaz.
+      const registration = request.kind === "manifest"
+        ? createManifestRegistration(
+            card,
+            request.cardUrl,
+            validateManifest(await fetchJson(request.manifestUrl, 131072), card.skillIds),
+            request.manifestUrl,
+            registeredAt,
+          )
+        : createLegacyRegistration(card, request.cardUrl, registeredAt);
       try {
-        const { entry, created } = store.save({ cardUrl: url.href, name: card.name, profiles: supported, endpoint: card.endpoint, registeredAt: new Date().toISOString(), ...(manifest ? { manifest, manifestUrl } : {}) });
+        const { entry, created } = store.save(registration);
         res.status(created ? 201 : 200).json(entry);
       } catch (error) {
         // Disk hatası kartın geçersiz olduğu anlamına gelmez; istemciye ayrı hata döneriz.
@@ -55,7 +65,7 @@ export function registryRouter(allowedOrigins: Set<string>, store: RegistryStore
     if (profile !== undefined && (typeof profile !== "string" || profile.length < 1 || profile.length > 128)) { res.status(400).json({ error: "invalid_profile" }); return; }
     // Bu kayıt anındaki snapshot'tır; anlık erişilebilirlik veya güven puanı değildir.
     try {
-      res.json({ agents: store.list().filter(entry => visible(entry) && (!profile || entry.profiles.includes(profile))), storage: store.storage });
+      res.json({ agents: store.list().filter(entry => visible(entry) && (!profile || matchesProfileFilter(entry, profile))), storage: store.storage });
     } catch { res.status(503).json({ error: "registry_storage_unavailable" }); }
   });
   router.get("/agents/:id", (req, res) => {
