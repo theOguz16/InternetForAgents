@@ -28,10 +28,14 @@ async function serve(t, setup) {
 }
 /** Kartı isteğe bağlı bozulabilen gerçek bir uzman: resume yeniden doğrulamasını sınamak için. */
 async function agent(t) {
-  const state = { broken: false };
+  // hold: kart isteğini bir söz çözülene kadar bekletir; waiting kartın beklemeye girdiğini bildirir.
+  const state = { broken: false, hold: undefined, waiting: false };
   const { handler } = require('../dist/services/language/handler.js');
   const base = await serve(t, (app, url) => {
-    app.use((req, res, next) => { if (state.broken && req.path === '/.well-known/agent-card.json') res.status(500).json({ error: 'down' }); else next(); });
+    app.use(async (req, res, next) => {
+      if (req.path === '/.well-known/agent-card.json' && state.hold) { state.waiting = true; await state.hold; }
+      if (state.broken && req.path === '/.well-known/agent-card.json') res.status(500).json({ error: 'down' }); else next();
+    });
     mountSpecialist(app, 'language', url, handler);
   });
   return { base, state };
@@ -211,4 +215,31 @@ test('C01 HTTP: local-demo’da geçersiz imza 401; operatör kayıt oluşturama
   const anonymous = await fetch(`${demo}/v1/agents`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ cardUrl }) });
   assert.equal(anonymous.status, 201);
   assert.equal((await anonymous.json()).ownerId, 'local-demo');
+});
+
+test('C01 HTTP resume yarışı: doğrulama sürerken silinen kayıt 409 registration_changed döner', { timeout: 20000 }, async t => {
+  const { base: agentBase, state } = await agent(t);
+  const { base, store } = await registry(t, new Set([agentBase]));
+  const cardUrl = `${agentBase}/.well-known/agent-card.json`;
+  const { id } = await (await call(base, 'POST', '/v1/agents', alice, { cardUrl })).json();
+  await call(base, 'POST', `/v1/agents/${id}/suspend`, alice);
+  let release; state.hold = new Promise(r => { release = r; });
+  const resuming = call(base, 'POST', `/v1/agents/${id}/resume`, op);
+  for (let i = 0; i < 100 && !state.waiting; i++) await new Promise(r => setTimeout(r, 10));
+  assert.ok(state.waiting, 'resume kart doğrulamasında beklemeli');
+  assert.equal((await call(base, 'DELETE', `/v1/agents/${id}`, op)).status, 204);
+  state.hold = undefined; release();
+  const response = await resuming;
+  assert.equal(response.status, 409);
+  assert.equal((await response.json()).error, 'registration_changed');
+  assert.equal(store.list().length, 0, 'silinen kayıt resume ile geri gelmez');
+});
+
+test('C01 kapasite doluyken silinmiş kayıt için resume registry_capacity değil registration_changed verir', () => {
+  const { RegistrationChangedError } = require('../dist/services/registry/store.js');
+  const store = new RegistryStore(':memory:');
+  const reg = n => ({ kind: 'legacy', cardUrl: `http://agent-${n}/.well-known/agent-card.json`, name: `A${n}`, endpoint: `http://agent-${n}/a2a`, profiles: ['text-language.v1'], registeredAt: '2026-11-19' });
+  for (let n = 0; n < 100; n++) store.save(reg(n), alice);
+  assert.throws(() => store.save(reg('gone'), op, { resume: { id: 'deleted-id', ownerId: 'dev-alice' } }), RegistrationChangedError);
+  store.close();
 });

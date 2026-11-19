@@ -89,10 +89,12 @@ export class RegistryStore {
     return this.transaction(() => {
       const row = this.db.prepare("SELECT id, body FROM agents WHERE card_url=?").get(value.cardUrl);
       const previous = row ? parse(row.body) : undefined;
-      if (!previous && Number(this.db.prepare("SELECT COUNT(*) AS total FROM agents").get()?.total) >= 100) throw new RegistryCapacityError();
+      // Resume hiçbir zaman yeni kayıt yaratmaz; bu yüzden kapasite sınırından önce
+      // denetlenir ki silinmiş kayıt için doğru hata (registration_changed) dönsün.
       if (options.resume && (!previous || previous.id !== options.resume.id || previous.ownerId !== options.resume.ownerId)) {
         throw new RegistrationChangedError();
       }
+      if (!previous && Number(this.db.prepare("SELECT COUNT(*) AS total FROM agents").get()?.total) >= 100) throw new RegistryCapacityError();
       if (previous && !options.resume) {
         if (previous.ownerId !== actor.id) throw new NotOwnerError();
         // Askıdaki kayıt içerik yenilemesiyle sessizce yeniden açılamaz; açık resume gerekir.
