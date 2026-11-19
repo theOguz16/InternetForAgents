@@ -182,3 +182,33 @@ test('C01 migration: eski kayıt local-demo sahipli ve active okunur', () => {
     store.close();
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('C01 resume TOCTOU: doğrulama sürerken kayıt silinip başkası kaydettiyse yeni kayıt ezilmez', () => {
+  const { RegistrationChangedError } = require('../dist/services/registry/store.js');
+  const store = new RegistryStore(':memory:');
+  const registration = owner => ({ kind: 'legacy', cardUrl: 'http://agent/.well-known/agent-card.json', name: `Agent ${owner}`, endpoint: 'http://agent/a2a', profiles: ['text-language.v1'], registeredAt: '2026-11-19' });
+  const original = store.save(registration('alice'), alice).entry;
+  store.setStatus(original.id, 'suspended', alice);
+  // Resume'un ağ doğrulaması bitmeden: operatör siler, Bob aynı adresi kaydeder.
+  store.remove(original.id, op);
+  const replacement = store.save(registration('bob'), bob).entry;
+  assert.throws(() => store.save(registration('alice'), op, { resume: { id: original.id, ownerId: 'dev-alice' } }), RegistrationChangedError);
+  assert.deepEqual(store.get(replacement.id), replacement, 'yeni kayıt aynen korunur');
+  // Kayıt tamamen silindiyse de resume yeni kayıt yaratmaz.
+  store.remove(replacement.id, op);
+  assert.throws(() => store.save(registration('alice'), op, { resume: { id: original.id, ownerId: 'dev-alice' } }), RegistrationChangedError);
+  assert.equal(store.list().length, 0);
+  store.close();
+});
+
+test('C01 HTTP: local-demo’da geçersiz imza 401; operatör kayıt oluşturamaz', async t => {
+  const { base: agentBase } = await agent(t);
+  const demo = await serve(t, app => app.use('/v1', registryPrincipal({ mode: 'local-demo', secret: SECRET }), registryRouter(new Set([agentBase]))));
+  const cardUrl = `${agentBase}/.well-known/agent-card.json`;
+  const forged = await fetch(`${demo}/v1/agents`, { method: 'POST', headers: { 'content-type': 'application/json', [PRINCIPAL_HEADER]: 'v1.e30.x' }, body: JSON.stringify({ cardUrl }) });
+  assert.equal(forged.status, 401, 'bozuk imza demo principal’ına düşmez');
+  assert.equal((await call(demo, 'POST', '/v1/agents', op, { cardUrl })).status, 403, 'operatör kayıt yapamaz');
+  const anonymous = await fetch(`${demo}/v1/agents`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ cardUrl }) });
+  assert.equal(anonymous.status, 201);
+  assert.equal((await anonymous.json()).ownerId, 'local-demo');
+});

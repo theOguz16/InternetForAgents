@@ -10,6 +10,11 @@ export class CapabilityVersionConflict extends Error {}
 export class RegistryCapacityError extends Error {}
 export class NotOwnerError extends Error { constructor() { super("not_owner"); } }
 export class RegistrationSuspendedError extends Error { constructor() { super("registration_suspended"); } }
+/** Yeniden doğrulama sürerken kayıt silindi veya başka bir kayıtla değişti. */
+export class RegistrationChangedError extends Error { constructor() { super("registration_changed"); } }
+
+/** Resume'un yetkilendirildiği kaydın kimliği; transaction içinde hâlâ aynı kayıt olduğu doğrulanır. */
+export interface ResumeTarget { id: string; ownerId: string }
 
 export type AuditAction = "register" | "refresh" | "suspend" | "resume" | "reject" | "delete";
 export interface AuditRecord {
@@ -66,10 +71,12 @@ export class RegistryStore {
   /**
    * Kaydı oluşturur veya sahibi adına yeniler. Sahiplik kontrolü yazmayla aynı
    * transaction'dadır: kontrol ile yazma arasında başka geliştirici araya giremez.
-   * `resume` yalnız askıdaki/reddedilmiş kaydı yeniden etkinleştirmek içindir.
+   * `resume` yalnız askıdaki/reddedilmiş kaydı yeniden etkinleştirmek içindir ve
+   * yetkilendirilen kaydın kimliğini taşır: ağ doğrulaması sürerken kayıt silinip
+   * aynı adres başka biri tarafından kaydedildiyse yeni kayıt ezilmez (TOCTOU).
    * actor verilmezse local-demo kabul edilir; üretim router'ı her zaman actor verir.
    */
-  save(value: AgentRegistration, actor: Principal = LOCAL_DEMO_PRINCIPAL, options: { resume?: boolean } = {}): { entry: Entry; created: boolean } {
+  save(value: AgentRegistration, actor: Principal = LOCAL_DEMO_PRINCIPAL, options: { resume?: ResumeTarget } = {}): { entry: Entry; created: boolean } {
     // Tip sistemi dışından gelen çağrılarda eksik veya belirsiz kayıt türünü erken reddederiz.
     if (!value || (value.kind !== "legacy" && value.kind !== "manifest")) {
       throw new TypeError("invalid_registration_kind");
@@ -83,6 +90,9 @@ export class RegistryStore {
       const row = this.db.prepare("SELECT id, body FROM agents WHERE card_url=?").get(value.cardUrl);
       const previous = row ? parse(row.body) : undefined;
       if (!previous && Number(this.db.prepare("SELECT COUNT(*) AS total FROM agents").get()?.total) >= 100) throw new RegistryCapacityError();
+      if (options.resume && (!previous || previous.id !== options.resume.id || previous.ownerId !== options.resume.ownerId)) {
+        throw new RegistrationChangedError();
+      }
       if (previous && !options.resume) {
         if (previous.ownerId !== actor.id) throw new NotOwnerError();
         // Askıdaki kayıt içerik yenilemesiyle sessizce yeniden açılamaz; açık resume gerekir.

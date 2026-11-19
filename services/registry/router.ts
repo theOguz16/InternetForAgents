@@ -1,5 +1,5 @@
 import { Router, type Response } from "express";
-import { RegistryStore, RegistryCapacityError, CapabilityVersionConflict, NotOwnerError, RegistrationSuspendedError, type Entry } from "./store.js";
+import { RegistryStore, RegistryCapacityError, CapabilityVersionConflict, NotOwnerError, RegistrationSuspendedError, RegistrationChangedError, type Entry } from "./store.js";
 import { validateManifest, ManifestError } from "../capabilities/manifest.js";
 import { fetchJson } from "./fetch-json.js";
 import { validateRegistryCard, CardValidationError } from "../capabilities/agent-card.js";
@@ -54,6 +54,7 @@ export function registryRouter(allowedOrigins: Set<string>, store: RegistryStore
     // Disk hatası kartın geçersiz olduğu anlamına gelmez; istemciye ayrı hata döneriz.
     if (error instanceof NotOwnerError) { res.status(403).json({ error: "not_owner" }); return; }
     if (error instanceof RegistrationSuspendedError) { res.status(409).json({ error: "registration_suspended" }); return; }
+    if (error instanceof RegistrationChangedError) { res.status(409).json({ error: "registration_changed" }); return; }
     if (error instanceof RegistryCapacityError) { res.status(409).json({ error: "registry_capacity" }); return; }
     if (error instanceof CapabilityVersionConflict) { res.status(409).json({ error: "capability_version_conflict" }); return; }
     res.status(503).json({ error: "registry_storage_unavailable" });
@@ -113,10 +114,15 @@ export function registryRouter(allowedOrigins: Set<string>, store: RegistryStore
       registration = await validate(request);
     } catch (error) {
       const code = error instanceof ValidationFailure || error instanceof RegistrationRequestError ? error.code : "card_validation_failed";
-      try { store.setStatus(entry.id, "rejected", actor, code); } catch (storeError) { saveError(res, storeError); return; }
+      let rejected: Entry | undefined;
+      try { rejected = store.setStatus(entry.id, "rejected", actor, code); } catch (storeError) { saveError(res, storeError); return; }
+      // Doğrulama sürerken kayıt silindiyse reddedilecek kayıt kalmamıştır.
+      if (!rejected) { res.status(409).json({ error: "registration_changed" }); return; }
       res.status(422).json({ error: code, status: "rejected" }); return;
     }
-    try { res.json(store.save(registration, actor, { resume: true }).entry); }
+    // Ağ doğrulaması await'ten sonra biter; aradaki silme/yeniden kayıt yeni kaydı
+    // ezmesin diye yazma, yetkilendirilen kaydın kimliğiyle sınırlanır.
+    try { res.json(store.save(registration, actor, { resume: { id: entry.id, ownerId: entry.ownerId } }).entry); }
     catch (error) { saveError(res, error); }
   });
 
@@ -140,7 +146,7 @@ export function registryRouter(allowedOrigins: Set<string>, store: RegistryStore
     let entry: Entry | undefined;
     try { entry = store.get(req.params.id); }
     catch { res.status(503).json({ error: "registry_storage_unavailable" }); return; }
-    if (!entry || !visible(entry) || !readable(registryPrincipalOf(res), entry)) { res.status(404).json({ error: "agent_not_found" }); return; }
+    if (!entry || !visible(entry) || !readable(principal(res), entry)) { res.status(404).json({ error: "agent_not_found" }); return; }
     res.json(entry);
   });
   return router;
