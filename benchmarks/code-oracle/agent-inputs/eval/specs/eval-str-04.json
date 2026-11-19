@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "extract_digit_groups",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Metindeki ardışık ASCII rakam (0-9) gruplarını soldan sağa tam sayı (int) listesi olarak döndür.",
+    "Baştaki sıfırlar tam sayı dönüşümünde düşer (ör. \"007\" -> 7, \"00\" -> 0).",
+    "Eksi işareti (-) rakam grubuna dahil edilmez (ör. \"-12\" -> [12]).",
+    "Hiç ASCII rakam yoksa boş liste döndür."
+  ]
+}

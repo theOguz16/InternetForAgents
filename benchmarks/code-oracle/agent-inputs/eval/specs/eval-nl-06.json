@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "partition_even_odd_stable",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Tüm çift sayıları öne, tüm tek sayıları arkaya yerleştirerek yeni liste döndür.",
+    "Çift sayılar kendi içinde, tek sayılar kendi içinde orijinal sırasını korumalıdır.",
+    "0 çift sayıdır; negatif çift ve tek tam sayılar desteklenir.",
+    "Boş liste için boş liste döndür; girdi listesini değiştirme."
+  ]
+}

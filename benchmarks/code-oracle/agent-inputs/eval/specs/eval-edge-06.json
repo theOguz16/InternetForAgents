@@ -1,0 +1,20 @@
+{
+  "language": "python",
+  "functionName": "majority_element_strict",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "missing",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Listede kesin yarıdan fazla kez (count > len(values) // 2) görünen elemanı döndür.",
+    "Boş liste veya hiçbir elemanın kesin yarıyı aşmadığı durumlarda (tam yarı yarıya eşitlik dahil) missing döndür.",
+    "Negatif ve sıfır değerleri destekle."
+  ]
+}

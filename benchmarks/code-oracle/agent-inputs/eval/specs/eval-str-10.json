@@ -1,0 +1,25 @@
+{
+  "language": "python",
+  "functionName": "filter_words_by_bounds",
+  "parameters": [
+    {
+      "name": "words",
+      "type": "list[str]"
+    },
+    {
+      "name": "min_len",
+      "type": "int"
+    },
+    {
+      "name": "max_len",
+      "type": "int"
+    }
+  ],
+  "returnType": "list[str]",
+  "requirements": [
+    "min_len > max_len ise boş liste döndür.",
+    "Uzunluğu min_len <= len(w) <= max_len koşulunu sağlayan kelimeleri orijinal sırayla yeni listede döndür.",
+    "min_len negatifse 0 kabul edilir (boş metnin uzunluğu 0 dır).",
+    "Girdi listesini değiştirme."
+  ]
+}

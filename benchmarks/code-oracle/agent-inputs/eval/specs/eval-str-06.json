@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "mask_middle_chars",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    },
+    {
+      "name": "keep",
+      "type": "int"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "keep negatifse 0 kabul et.",
+    "len(text) <= 2 * keep ise text değerini değiştirmeden döndür.",
+    "Aksi halde baştan keep ve sondan keep karakteri koru, ortadaki her karakteri \"*\" ile değiştir.",
+    "keep == 0 ise metnin tüm karakterleri \"*\" olur (boş metin için \"\")."
+  ]
+}

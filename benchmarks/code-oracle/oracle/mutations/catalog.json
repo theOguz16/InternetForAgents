@@ -1,0 +1,343 @@
+{
+  "schemaVersion": "h06-mutation-catalog.v1",
+  "mutations": [
+    {
+      "id": "mut-01",
+      "problemId": "eval-nl-01",
+      "functionName": "count_strict_peaks",
+      "category": "numbers_lists",
+      "mutationOperator": "relational_operator_change",
+      "defectSummary": "Kesin büyüklük (>) yerine >= kullanır; plato ortasındaki eşit komşuları yanlışlıkla tepe sayar.",
+      "expectedFailingTests": [
+        "test_plateau_not_counted"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-01.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-02",
+      "problemId": "eval-nl-02",
+      "functionName": "longest_increasing_run",
+      "category": "numbers_lists",
+      "mutationOperator": "relational_operator_change",
+      "defectSummary": "Kesin artış (>) yerine >= kullanır; eşit ardışık elemanları artan koşuya katar.",
+      "expectedFailingTests": [
+        "test_equal_elements_break_run"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-02.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-03",
+      "problemId": "eval-nl-03",
+      "functionName": "dedupe_keep_last",
+      "category": "numbers_lists",
+      "mutationOperator": "traversal_direction_inversion",
+      "defectSummary": "Son görünen yerine ilk görünen elemanı korur.",
+      "expectedFailingTests": [
+        "test_keeps_last_occurrence_order"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-03.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-04",
+      "problemId": "eval-nl-04",
+      "functionName": "sum_between_extremes",
+      "category": "numbers_lists",
+      "mutationOperator": "off_by_one_boundary",
+      "defectSummary": "Ara toplamda üst uç indeksi hariç tutmak yerine toplama dahil eder.",
+      "expectedFailingTests": [
+        "test_min_before_max"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-04.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-05",
+      "problemId": "eval-nl-05",
+      "functionName": "rotate_list_right",
+      "category": "numbers_lists",
+      "mutationOperator": "direction_sign_inversion",
+      "defectSummary": "Listeyi sağa döndürmek yerine sola döndürür.",
+      "expectedFailingTests": [
+        "test_positive_rotation"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-05.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-06",
+      "problemId": "eval-nl-06",
+      "functionName": "partition_even_odd_stable",
+      "category": "numbers_lists",
+      "mutationOperator": "stability_violation",
+      "defectSummary": "Tek sayıları ters çevirerek grup içi kararlılık kuralını bozar.",
+      "expectedFailingTests": [
+        "test_preserves_relative_order"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-06.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-07",
+      "problemId": "eval-nl-07",
+      "functionName": "second_largest_distinct",
+      "category": "numbers_lists",
+      "mutationOperator": "missing_deduplication",
+      "defectSummary": "Tekrarlı değerleri tekilleştirmeden doğrudan sıralı listenin sondan ikinci elemanını döndürür.",
+      "expectedFailingTests": [
+        "test_duplicate_maximum"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-07.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-08",
+      "problemId": "eval-nl-08",
+      "functionName": "count_pairs_with_sum",
+      "category": "numbers_lists",
+      "mutationOperator": "self_pairing_bug",
+      "defectSummary": "Elemanı önce sayaca ekleyip sonra tamamlayıcısını aradığı için tek elemanı kendisiyle eşleştirir.",
+      "expectedFailingTests": [
+        "test_no_self_pairing"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-08.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-09",
+      "problemId": "eval-str-01",
+      "functionName": "compress_char_runs",
+      "category": "strings",
+      "mutationOperator": "branch_condition_removal",
+      "defectSummary": "Tekil karakterler için sayı gizleme kuralını atlar ve \"1\" ekler.",
+      "expectedFailingTests": [
+        "test_single_characters_omit_one"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-09.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-10",
+      "problemId": "eval-str-02",
+      "functionName": "normalize_spaces_ascii",
+      "category": "strings",
+      "mutationOperator": "narrowed_charset",
+      "defectSummary": "Yalnızca boşluk (\" \") karakterini ayırıcı sayar; \\t, \\n ve \\r karakterlerini birleştirmez.",
+      "expectedFailingTests": [
+        "test_tabs_and_newlines_collapsed"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-10.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-11",
+      "problemId": "eval-str-03",
+      "functionName": "longest_common_prefix_list",
+      "category": "strings",
+      "mutationOperator": "case_sensitivity_loss",
+      "defectSummary": "Karakter karşılaştırmasını küçük harfe indirgediği için büyük/küçük harf duyarlılığını bozar.",
+      "expectedFailingTests": [
+        "test_case_sensitive"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-11.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-12",
+      "problemId": "eval-str-04",
+      "functionName": "extract_digit_groups",
+      "category": "strings",
+      "mutationOperator": "missing_tail_flush",
+      "defectSummary": "Döngü sonunda açık kalan son rakam grubunu sonuca eklemeyi unutur.",
+      "expectedFailingTests": [
+        "test_trailing_digit_group"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-12.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-13",
+      "problemId": "eval-str-05",
+      "functionName": "is_anagram_ascii_letters",
+      "category": "strings",
+      "mutationOperator": "overbroad_character_filter",
+      "defectSummary": "Rakamları da karşılaştırmaya dahil eder; yalnızca ASCII harf kuralını ihlal eder.",
+      "expectedFailingTests": [
+        "test_digits_are_ignored"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-13.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-14",
+      "problemId": "eval-str-06",
+      "functionName": "mask_middle_chars",
+      "category": "strings",
+      "mutationOperator": "zero_slice_trap",
+      "defectSummary": "keep == 0 özel durumunu ayırmadan text[-keep:] kullanır; text[-0:] metnin tamamını geri ekler.",
+      "expectedFailingTests": [
+        "test_keep_zero_masks_all"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-14.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-15",
+      "problemId": "eval-str-08",
+      "functionName": "count_non_overlapping_sub",
+      "category": "strings",
+      "mutationOperator": "step_size_error",
+      "defectSummary": "Eşleşme sonrası indeksi len(needle) yerine 1 artırarak örtüşen geçişleri de sayar.",
+      "expectedFailingTests": [
+        "test_overlapping_pattern_counted_greedily_left_to_right"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-15.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-16",
+      "problemId": "eval-str-09",
+      "functionName": "camel_to_snake_ascii",
+      "category": "strings",
+      "mutationOperator": "missing_acronym_branch",
+      "defectSummary": "Ardışık büyük harf sonrası küçük harf geçiş kuralını atlar; kısaltmaları sonraki kelimeyle birleştirir.",
+      "expectedFailingTests": [
+        "test_acronym_boundary"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-16.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-17",
+      "problemId": "eval-edge-01",
+      "functionName": "merge_sorted_unique",
+      "category": "edge_cases",
+      "mutationOperator": "missing_deduplication",
+      "defectSummary": "Birleştirme sırasında tekrarlı elemanları elemez.",
+      "expectedFailingTests": [
+        "test_removes_cross_and_internal_duplicates"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-17.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-18",
+      "problemId": "eval-edge-02",
+      "functionName": "binary_search_first_ge",
+      "category": "edge_cases",
+      "mutationOperator": "relational_operator_change",
+      "defectSummary": ">= yerine > kullanır; lower bound yerine upper bound döndürür.",
+      "expectedFailingTests": [
+        "test_exact_match_and_duplicates"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-18.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-19",
+      "problemId": "eval-edge-03",
+      "functionName": "are_brackets_balanced",
+      "category": "edge_cases",
+      "mutationOperator": "stack_replaced_by_counter",
+      "defectSummary": "Yığın yerine tek toplam sayaç kullanır; farklı parantez türlerinin yanlış iç içe kapanmasını yakalayamaz.",
+      "expectedFailingTests": [
+        "test_mismatched_type_false"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-19.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-20",
+      "problemId": "eval-edge-04",
+      "functionName": "intervals_covered_length",
+      "category": "edge_cases",
+      "mutationOperator": "missing_interval_merge",
+      "defectSummary": "Örtüşen aralıkları birleştirmeden her geçerli aralığın uzunluğunu doğrudan toplar.",
+      "expectedFailingTests": [
+        "test_overlapping_and_contained"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-20.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-21",
+      "problemId": "eval-edge-05",
+      "functionName": "decode_run_length_safe",
+      "category": "edge_cases",
+      "mutationOperator": "leading_zero_validation_omitted",
+      "defectSummary": "İlk rakamın 1-9 arası olmasını zorunlu kılmaz; \"a03\" gibi sıfırla başlayan sayıları kabul eder.",
+      "expectedFailingTests": [
+        "test_leading_zero_and_zero_count_rejected"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-21.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-22",
+      "problemId": "eval-edge-06",
+      "functionName": "majority_element_strict",
+      "category": "edge_cases",
+      "mutationOperator": "relational_operator_change",
+      "defectSummary": "Kesin çoğunluk (>) yerine >= kullanır; çift uzunluklu listede tam yarı yarıya eşitlikte yanlış eleman döndürür.",
+      "expectedFailingTests": [
+        "test_exact_half_not_majority"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-22.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-23",
+      "problemId": "eval-edge-07",
+      "functionName": "slice_with_clamped_bounds",
+      "category": "edge_cases",
+      "mutationOperator": "missing_negative_clamp",
+      "defectSummary": "Negatif indeksleri 0 a sıkıştırmadan Python dilimlemesine verir; sondan indeksleme hatası üretir.",
+      "expectedFailingTests": [
+        "test_negative_start_clamped_to_zero"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-23.py",
+      "manuallyVerified": true
+    },
+    {
+      "id": "mut-24",
+      "problemId": "eval-edge-09",
+      "functionName": "zero_out_negative_subarrays_sum",
+      "category": "edge_cases",
+      "mutationOperator": "zero_floor_on_all_negative",
+      "defectSummary": "En iyi toplamı 0 dan başlattığı için tüm elemanları negatif listelerde yanlışlıkla 0 döndürür.",
+      "expectedFailingTests": [
+        "test_all_negative_returns_largest_negative"
+      ],
+      "variantPath": "oracle/mutations/variants/mut-24.py",
+      "manuallyVerified": true
+    }
+  ],
+  "excluded": [
+    {
+      "id": "eq-mut-01",
+      "problemId": "eval-nl-01",
+      "functionName": "count_strict_peaks",
+      "mutationOperator": "explicit_default_step",
+      "summary": "range(1, len(values) - 1) yerine range(1, len(values) - 1, 1) kullanımı.",
+      "exclusionReason": "Python range() varsayılan adımı zaten 1 olduğundan tüm list[int] girdilerinde referans çözümle birebir aynı sonucu üretir; eşdeğer mutation olduğu için aktif kümeden dışlandı."
+    },
+    {
+      "id": "eq-mut-02",
+      "problemId": "eval-str-03",
+      "functionName": "longest_common_prefix_list",
+      "mutationOperator": "remove_early_return_on_empty_prefix",
+      "summary": "Ortak ön ek boş kaldığında erken return \"\" ifadesinin kaldırılıp döngüye boş ön ekle devam edilmesi.",
+      "exclusionReason": "Boş ön ek ile sonraki kelimeler karşılaştırıldığında limit=0 olduğundan sonuç yine \"\" olur; yalnızca çalışma süresi değişir, çıktı anlamsal olarak özdeş olduğu için dışlandı."
+    },
+    {
+      "id": "eq-mut-03",
+      "problemId": "eval-edge-06",
+      "functionName": "majority_element_strict",
+      "mutationOperator": "equivalent_arithmetic_threshold",
+      "summary": "new_count > len(values) // 2 yerine new_count * 2 > len(values) koşulunun kullanılması.",
+      "exclusionReason": "Tüm negatif olmayan tam sayı n ve k değerleri için k > n // 2 ile 2 * k > n matematiksel olarak eşdeğerdir; hiçbir oracle testinde ayrışamayacağı için dışlandı."
+    }
+  ]
+}

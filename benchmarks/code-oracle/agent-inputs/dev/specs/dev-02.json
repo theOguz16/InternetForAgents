@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "running_maximum",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Boş liste için boş liste döndür.",
+    "Her i indeksi için values[0..i] aralığındaki en büyük elemanı içeren yeni liste döndür.",
+    "Negatif ve tekrarlı tam sayıları destekle.",
+    "Girdi listesini değiştirme."
+  ]
+}

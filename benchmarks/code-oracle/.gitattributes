@@ -1,0 +1,4 @@
+# Benchmark dosyalarının SHA-256 hash manifesti Windows ve Linux CI ortamlarında
+# bayt düzeyinde özdeş kalması için satır sonlarını LF olarak sabitle.
+*.json text eol=lf
+*.py text eol=lf

@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "h06-agent-index.v1",
+  "split": "eval",
+  "problems": [
+    {
+      "id": "eval-nl-01",
+      "category": "numbers_lists",
+      "functionName": "count_strict_peaks",
+      "specPath": "specs/eval-nl-01.json"
+    },
+    {
+      "id": "eval-nl-02",
+      "category": "numbers_lists",
+      "functionName": "longest_increasing_run",
+      "specPath": "specs/eval-nl-02.json"
+    },
+    {
+      "id": "eval-nl-03",
+      "category": "numbers_lists",
+      "functionName": "dedupe_keep_last",
+      "specPath": "specs/eval-nl-03.json"
+    },
+    {
+      "id": "eval-nl-04",
+      "category": "numbers_lists",
+      "functionName": "sum_between_extremes",
+      "specPath": "specs/eval-nl-04.json"
+    },
+    {
+      "id": "eval-nl-05",
+      "category": "numbers_lists",
+      "functionName": "rotate_list_right",
+      "specPath": "specs/eval-nl-05.json"
+    },
+    {
+      "id": "eval-nl-06",
+      "category": "numbers_lists",
+      "functionName": "partition_even_odd_stable",
+      "specPath": "specs/eval-nl-06.json"
+    },
+    {
+      "id": "eval-nl-07",
+      "category": "numbers_lists",
+      "functionName": "second_largest_distinct",
+      "specPath": "specs/eval-nl-07.json"
+    },
+    {
+      "id": "eval-nl-08",
+      "category": "numbers_lists",
+      "functionName": "count_pairs_with_sum",
+      "specPath": "specs/eval-nl-08.json"
+    },
+    {
+      "id": "eval-nl-09",
+      "category": "numbers_lists",
+      "functionName": "difference_consecutive",
+      "specPath": "specs/eval-nl-09.json"
+    },
+    {
+      "id": "eval-nl-10",
+      "category": "numbers_lists",
+      "functionName": "weighted_prefix_score",
+      "specPath": "specs/eval-nl-10.json"
+    },
+    {
+      "id": "eval-str-01",
+      "category": "strings",
+      "functionName": "compress_char_runs",
+      "specPath": "specs/eval-str-01.json"
+    },
+    {
+      "id": "eval-str-02",
+      "category": "strings",
+      "functionName": "normalize_spaces_ascii",
+      "specPath": "specs/eval-str-02.json"
+    },
+    {
+      "id": "eval-str-03",
+      "category": "strings",
+      "functionName": "longest_common_prefix_list",
+      "specPath": "specs/eval-str-03.json"
+    },
+    {
+      "id": "eval-str-04",
+      "category": "strings",
+      "functionName": "extract_digit_groups",
+      "specPath": "specs/eval-str-04.json"
+    },
+    {
+      "id": "eval-str-05",
+      "category": "strings",
+      "functionName": "is_anagram_ascii_letters",
+      "specPath": "specs/eval-str-05.json"
+    },
+    {
+      "id": "eval-str-06",
+      "category": "strings",
+      "functionName": "mask_middle_chars",
+      "specPath": "specs/eval-str-06.json"
+    },
+    {
+      "id": "eval-str-07",
+      "category": "strings",
+      "functionName": "reverse_word_order",
+      "specPath": "specs/eval-str-07.json"
+    },
+    {
+      "id": "eval-str-08",
+      "category": "strings",
+      "functionName": "count_non_overlapping_sub",
+      "specPath": "specs/eval-str-08.json"
+    },
+    {
+      "id": "eval-str-09",
+      "category": "strings",
+      "functionName": "camel_to_snake_ascii",
+      "specPath": "specs/eval-str-09.json"
+    },
+    {
+      "id": "eval-str-10",
+      "category": "strings",
+      "functionName": "filter_words_by_bounds",
+      "specPath": "specs/eval-str-10.json"
+    },
+    {
+      "id": "eval-edge-01",
+      "category": "edge_cases",
+      "functionName": "merge_sorted_unique",
+      "specPath": "specs/eval-edge-01.json"
+    },
+    {
+      "id": "eval-edge-02",
+      "category": "edge_cases",
+      "functionName": "binary_search_first_ge",
+      "specPath": "specs/eval-edge-02.json"
+    },
+    {
+      "id": "eval-edge-03",
+      "category": "edge_cases",
+      "functionName": "are_brackets_balanced",
+      "specPath": "specs/eval-edge-03.json"
+    },
+    {
+      "id": "eval-edge-04",
+      "category": "edge_cases",
+      "functionName": "intervals_covered_length",
+      "specPath": "specs/eval-edge-04.json"
+    },
+    {
+      "id": "eval-edge-05",
+      "category": "edge_cases",
+      "functionName": "decode_run_length_safe",
+      "specPath": "specs/eval-edge-05.json"
+    },
+    {
+      "id": "eval-edge-06",
+      "category": "edge_cases",
+      "functionName": "majority_element_strict",
+      "specPath": "specs/eval-edge-06.json"
+    },
+    {
+      "id": "eval-edge-07",
+      "category": "edge_cases",
+      "functionName": "slice_with_clamped_bounds",
+      "specPath": "specs/eval-edge-07.json"
+    },
+    {
+      "id": "eval-edge-08",
+      "category": "edge_cases",
+      "functionName": "compare_semver_basic",
+      "specPath": "specs/eval-edge-08.json"
+    },
+    {
+      "id": "eval-edge-09",
+      "category": "edge_cases",
+      "functionName": "zero_out_negative_subarrays_sum",
+      "specPath": "specs/eval-edge-09.json"
+    },
+    {
+      "id": "eval-edge-10",
+      "category": "edge_cases",
+      "functionName": "stable_top_k_indices",
+      "specPath": "specs/eval-edge-10.json"
+    }
+  ]
+}

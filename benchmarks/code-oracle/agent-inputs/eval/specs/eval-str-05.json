@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "is_anagram_ascii_letters",
+  "parameters": [
+    {
+      "name": "first",
+      "type": "str"
+    },
+    {
+      "name": "second",
+      "type": "str"
+    }
+  ],
+  "returnType": "bool",
+  "requirements": [
+    "Her iki metinden yalnız ASCII harflerini (A-Z, a-z) alıp küçük harfe çevir.",
+    "Boşluk, rakam, noktalama ve ASCII dışı karakterler yok sayılır.",
+    "Kalan harflerin sıklıkları (multiset) birebir eşitse True, aksi halde False döndür.",
+    "Her iki metinde de hiç ASCII harf yoksa True döndür."
+  ]
+}
