@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "binary_search_first_ge",
+  "parameters": [
+    {
+      "name": "sorted_values",
+      "type": "list[int]"
+    },
+    {
+      "name": "target",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Azalmayan sırada verilen sorted_values içinde değeri target tan büyük veya eşit (x >= target) olan ilk indeksi döndür.",
+    "Tüm elemanlar target tan küçükse len(sorted_values) döndür.",
+    "Boş liste için 0 döndür.",
+    "Tekrarlı target değerlerinde en soldaki (en küçük) indeksi döndür."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "compare_semver_basic",
+  "parameters": [
+    {
+      "name": "left",
+      "type": "str"
+    },
+    {
+      "name": "right",
+      "type": "str"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "left ve right \"MAJOR.MINOR.PATCH\" biçiminde tam olarak 3 nokta ayrılmış negatif olmayan ASCII rakam grubundan oluşmalıdır.",
+    "Herhangi bir parametre geçersiz biçimdeyse (eksik/fazla parça, boş parça, harf/boşluk/işaret) -2 döndür.",
+    "Parçalar sayısal olarak karşılaştırılır (baştaki sıfırlar sayısal değerini değiştirmez).",
+    "left < right için -1, eşitse 0, left > right için 1 döndür."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "weighted_prefix_score",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "1 tabanlı konum ağırlığıyla sum((i + 1) * values[i]) toplamını döndür.",
+    "Boş liste için 0 döndür.",
+    "Negatif ve sıfır elemanları destekle."
+  ]
+}

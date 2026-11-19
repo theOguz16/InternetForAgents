@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "compress_char_runs",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Ardışık aynı karakter dizilerini sıkıştır: tekrar sayısı 2 veya daha fazlaysa <karakter><sayı>, 1 ise yalnızca <karakter> yaz.",
+    "Örnek: \"aaabcc\" için \"a3bc2\" döndür.",
+    "Boş metin için boş metin döndür; karşılaştırma büyük/küçük harf duyarlıdır."
+  ]
+}

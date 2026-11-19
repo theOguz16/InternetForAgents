@@ -1,0 +1,24 @@
+{
+  "language": "python",
+  "functionName": "slice_with_clamped_bounds",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "start",
+      "type": "int"
+    },
+    {
+      "name": "end",
+      "type": "int"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Python negatif indekslemesi yapmadan start ve end değerlerini [0, len(values)] aralığına sıkıştır (negatifler 0, uzunluktan büyükler len(values) olur).",
+    "Sıkıştırma sonrası start >= end ise boş liste döndür.",
+    "Aksi halde values[start:end] aralığını yeni liste olarak döndür; girdi listesini değiştirme."
+  ]
+}

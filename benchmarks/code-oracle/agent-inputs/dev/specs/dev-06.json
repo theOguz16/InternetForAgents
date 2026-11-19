@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "join_non_empty",
+  "parameters": [
+    {
+      "name": "parts",
+      "type": "list[str]"
+    },
+    {
+      "name": "sep",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Boş (\"\") veya yalnızca ASCII boşluk karakterleri (\" \", \"\\t\", \"\\n\", \"\\r\") içeren öğeleri çıkar.",
+    "Kalan öğeleri kırpmadan (içindeki boşlukları koruyarak) orijinal sırayla sep ile birleştir.",
+    "Tüm öğeler elenirse veya liste boşsa boş metin (\"\") döndür.",
+    "Girdi listesini değiştirme."
+  ]
+}

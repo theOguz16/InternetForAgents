@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "stable_top_k_indices",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "k",
+      "type": "int"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "k <= 0 veya values boşsa boş liste döndür.",
+    "En büyük k elemanın indekslerini değer azalan sırada döndür (k > len(values) ise tüm elemanların indeksleri döner).",
+    "Eşit değerli elemanlar arasında daha küçük indeks önce gelir.",
+    "Negatif değerleri destekle; girdi listesini değiştirme."
+  ]
+}

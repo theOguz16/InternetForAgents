@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "rotate_list_right",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "steps",
+      "type": "int"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "values listesini sağa steps adım döndürerek yeni liste döndür.",
+    "Boş liste için boş liste döndür.",
+    "steps değeri liste uzunluğundan büyük veya negatif olabilir; steps % len(values) ile normalize edilir (negatif steps sola döndürmeye eşdeğerdir).",
+    "Girdi listesini değiştirme."
+  ]
+}

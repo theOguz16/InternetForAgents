@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "merge_sorted_unique",
+  "parameters": [
+    {
+      "name": "left",
+      "type": "list[int]"
+    },
+    {
+      "name": "right",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Azalmayan sırada verilen left ve right listelerini tek bir kesin artan (tekrarsız) listede birleştir.",
+    "Aynı değer tek bir girdi içinde veya her iki girdide de tekrarlanabilir; sonuçta yalnız bir kez yer alır.",
+    "Boş listeleri ve negatif tam sayıları destekle.",
+    "Girdi listelerini değiştirme."
+  ]
+}

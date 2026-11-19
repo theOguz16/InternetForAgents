@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "second_largest_distinct",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "missing",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Listedeki en büyük ikinci benzersiz (farklı) tam sayıyı döndür.",
+    "Listede 2 den az farklı değer varsa (boş, tek elemanlı veya tüm elemanlar eşit) missing değerini döndür.",
+    "En büyük değerin birden çok kez tekrarlanması ikinci en büyük değerin en büyükle aynı olmasına yol açmamalıdır.",
+    "Negatif sayılar desteklenir; girdi listesini değiştirme."
+  ]
+}

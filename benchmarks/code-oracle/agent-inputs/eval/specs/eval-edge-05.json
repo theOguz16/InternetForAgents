@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "decode_run_length_safe",
+  "parameters": [
+    {
+      "name": "encoded",
+      "type": "str"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Boş metin için \"\" döndür.",
+    "Metin bir veya daha fazla <ASCII harf><pozitif tam sayı> parçasından oluşmalıdır (ör. \"a3B2\" -> \"aaaBB\").",
+    "Rakamla başlama, sayısı eksik harf, ASCII harf/rakam dışı karakter veya \"0\" ile başlayan tekrar sayısı (\"a0\", \"a03\") geçersizdir.",
+    "Herhangi bir biçim hatasında \"\" döndür."
+  ]
+}

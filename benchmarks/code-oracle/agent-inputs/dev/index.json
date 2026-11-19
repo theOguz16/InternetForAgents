@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "h06-agent-index.v1",
+  "split": "dev",
+  "problems": [
+    {
+      "id": "dev-01",
+      "category": "numbers_lists",
+      "functionName": "count_positive_multiples",
+      "specPath": "specs/dev-01.json"
+    },
+    {
+      "id": "dev-02",
+      "category": "numbers_lists",
+      "functionName": "running_maximum",
+      "specPath": "specs/dev-02.json"
+    },
+    {
+      "id": "dev-03",
+      "category": "numbers_lists",
+      "functionName": "pair_sums_adjacent",
+      "specPath": "specs/dev-03.json"
+    },
+    {
+      "id": "dev-04",
+      "category": "numbers_lists",
+      "functionName": "filter_in_closed_range",
+      "specPath": "specs/dev-04.json"
+    },
+    {
+      "id": "dev-05",
+      "category": "strings",
+      "functionName": "count_consonants_ascii",
+      "specPath": "specs/dev-05.json"
+    },
+    {
+      "id": "dev-06",
+      "category": "strings",
+      "functionName": "join_non_empty",
+      "specPath": "specs/dev-06.json"
+    },
+    {
+      "id": "dev-07",
+      "category": "strings",
+      "functionName": "strip_matching_prefix",
+      "specPath": "specs/dev-07.json"
+    },
+    {
+      "id": "dev-08",
+      "category": "edge_cases",
+      "functionName": "clamp_value",
+      "specPath": "specs/dev-08.json"
+    },
+    {
+      "id": "dev-09",
+      "category": "edge_cases",
+      "functionName": "safe_floor_div",
+      "specPath": "specs/dev-09.json"
+    },
+    {
+      "id": "dev-10",
+      "category": "edge_cases",
+      "functionName": "is_strictly_alternating_signs",
+      "specPath": "specs/dev-10.json"
+    }
+  ]
+}

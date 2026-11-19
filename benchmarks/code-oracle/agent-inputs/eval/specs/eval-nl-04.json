@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "sum_between_extremes",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "Listedeki ilk görülen en küçük eleman ile ilk görülen en büyük elemanın indeksleri arasında (uç indeksler hariç) kalan elemanların toplamını döndür.",
+    "Maksimum indeks minimum indeksten önce gelebilir; iki indeks arasındaki açık aralık toplanır.",
+    "Uzunluğu 3 ten küçük listelerde veya iki indeks aynı/bitişik ise 0 döndür.",
+    "Negatif değerler desteklenir; girdi listesini değiştirme."
+  ]
+}

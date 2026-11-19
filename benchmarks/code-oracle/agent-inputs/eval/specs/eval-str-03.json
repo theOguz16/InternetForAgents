@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "longest_common_prefix_list",
+  "parameters": [
+    {
+      "name": "words",
+      "type": "list[str]"
+    }
+  ],
+  "returnType": "str",
+  "requirements": [
+    "Liste boşsa \"\" döndür.",
+    "Listedeki tüm metinlerin paylaştığı en uzun ortak ön eki döndür.",
+    "Karşılaştırma büyük/küçük harf duyarlıdır.",
+    "Tek elemanlı listede o elemanı döndür; boş eleman varsa sonuç \"\" olur."
+  ]
+}

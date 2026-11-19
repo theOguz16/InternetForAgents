@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "pair_sums_adjacent",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "list[int]",
+  "requirements": [
+    "Uzunluğu 2 den küçük listeler için boş liste döndür.",
+    "Her ardışık çift için values[i] + values[i + 1] toplamını yeni listede döndür.",
+    "Negatif ve sıfır değerleri destekle; girdi listesini değiştirme."
+  ]
+}

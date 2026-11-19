@@ -1,0 +1,17 @@
+{
+  "language": "python",
+  "functionName": "are_brackets_balanced",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    }
+  ],
+  "returnType": "bool",
+  "requirements": [
+    "Yalnızca (), [] ve {} parantez karakterlerinin doğru iç içe açılıp kapandığını denetle.",
+    "Parantez dışındaki tüm karakterler yok sayılır.",
+    "Parantez içermeyen (boş metin dahil) girdiler için True döndür.",
+    "Ters sırada, eşleşmeyen türde veya kapanmamış parantez varsa False döndür."
+  ]
+}

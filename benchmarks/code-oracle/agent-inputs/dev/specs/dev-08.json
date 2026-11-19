@@ -1,0 +1,24 @@
+{
+  "language": "python",
+  "functionName": "clamp_value",
+  "parameters": [
+    {
+      "name": "value",
+      "type": "int"
+    },
+    {
+      "name": "lower",
+      "type": "int"
+    },
+    {
+      "name": "upper",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "lower > upper ise alt ve üst sınırları takas ederek küçük olanı alt sınır, büyük olanı üst sınır kabul et.",
+    "value alt sınırdan küçükse alt sınırı, üst sınırdan büyükse üst sınırı, aralıktaysa value değerini döndür.",
+    "Negatif sayıları ve eşit sınırları destekle."
+  ]
+}

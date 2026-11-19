@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "h06-oracle-index.v1",
+  "entries": [
+    {
+      "id": "dev-01",
+      "split": "dev",
+      "category": "numbers_lists",
+      "functionName": "count_positive_multiples",
+      "specPath": "agent-inputs/dev/specs/dev-01.json",
+      "referencePath": "oracle/dev/references/dev-01.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_01.py"
+    },
+    {
+      "id": "dev-02",
+      "split": "dev",
+      "category": "numbers_lists",
+      "functionName": "running_maximum",
+      "specPath": "agent-inputs/dev/specs/dev-02.json",
+      "referencePath": "oracle/dev/references/dev-02.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_02.py"
+    },
+    {
+      "id": "dev-03",
+      "split": "dev",
+      "category": "numbers_lists",
+      "functionName": "pair_sums_adjacent",
+      "specPath": "agent-inputs/dev/specs/dev-03.json",
+      "referencePath": "oracle/dev/references/dev-03.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_03.py"
+    },
+    {
+      "id": "dev-04",
+      "split": "dev",
+      "category": "numbers_lists",
+      "functionName": "filter_in_closed_range",
+      "specPath": "agent-inputs/dev/specs/dev-04.json",
+      "referencePath": "oracle/dev/references/dev-04.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_04.py"
+    },
+    {
+      "id": "dev-05",
+      "split": "dev",
+      "category": "strings",
+      "functionName": "count_consonants_ascii",
+      "specPath": "agent-inputs/dev/specs/dev-05.json",
+      "referencePath": "oracle/dev/references/dev-05.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_05.py"
+    },
+    {
+      "id": "dev-06",
+      "split": "dev",
+      "category": "strings",
+      "functionName": "join_non_empty",
+      "specPath": "agent-inputs/dev/specs/dev-06.json",
+      "referencePath": "oracle/dev/references/dev-06.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_06.py"
+    },
+    {
+      "id": "dev-07",
+      "split": "dev",
+      "category": "strings",
+      "functionName": "strip_matching_prefix",
+      "specPath": "agent-inputs/dev/specs/dev-07.json",
+      "referencePath": "oracle/dev/references/dev-07.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_07.py"
+    },
+    {
+      "id": "dev-08",
+      "split": "dev",
+      "category": "edge_cases",
+      "functionName": "clamp_value",
+      "specPath": "agent-inputs/dev/specs/dev-08.json",
+      "referencePath": "oracle/dev/references/dev-08.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_08.py"
+    },
+    {
+      "id": "dev-09",
+      "split": "dev",
+      "category": "edge_cases",
+      "functionName": "safe_floor_div",
+      "specPath": "agent-inputs/dev/specs/dev-09.json",
+      "referencePath": "oracle/dev/references/dev-09.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_09.py"
+    },
+    {
+      "id": "dev-10",
+      "split": "dev",
+      "category": "edge_cases",
+      "functionName": "is_strictly_alternating_signs",
+      "specPath": "agent-inputs/dev/specs/dev-10.json",
+      "referencePath": "oracle/dev/references/dev-10.py",
+      "oracleTestPath": "oracle/dev/tests/test_dev_10.py"
+    },
+    {
+      "id": "eval-nl-01",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "count_strict_peaks",
+      "specPath": "agent-inputs/eval/specs/eval-nl-01.json",
+      "referencePath": "oracle/eval/references/eval-nl-01.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_01.py"
+    },
+    {
+      "id": "eval-nl-02",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "longest_increasing_run",
+      "specPath": "agent-inputs/eval/specs/eval-nl-02.json",
+      "referencePath": "oracle/eval/references/eval-nl-02.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_02.py"
+    },
+    {
+      "id": "eval-nl-03",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "dedupe_keep_last",
+      "specPath": "agent-inputs/eval/specs/eval-nl-03.json",
+      "referencePath": "oracle/eval/references/eval-nl-03.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_03.py"
+    },
+    {
+      "id": "eval-nl-04",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "sum_between_extremes",
+      "specPath": "agent-inputs/eval/specs/eval-nl-04.json",
+      "referencePath": "oracle/eval/references/eval-nl-04.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_04.py"
+    },
+    {
+      "id": "eval-nl-05",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "rotate_list_right",
+      "specPath": "agent-inputs/eval/specs/eval-nl-05.json",
+      "referencePath": "oracle/eval/references/eval-nl-05.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_05.py"
+    },
+    {
+      "id": "eval-nl-06",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "partition_even_odd_stable",
+      "specPath": "agent-inputs/eval/specs/eval-nl-06.json",
+      "referencePath": "oracle/eval/references/eval-nl-06.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_06.py"
+    },
+    {
+      "id": "eval-nl-07",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "second_largest_distinct",
+      "specPath": "agent-inputs/eval/specs/eval-nl-07.json",
+      "referencePath": "oracle/eval/references/eval-nl-07.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_07.py"
+    },
+    {
+      "id": "eval-nl-08",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "count_pairs_with_sum",
+      "specPath": "agent-inputs/eval/specs/eval-nl-08.json",
+      "referencePath": "oracle/eval/references/eval-nl-08.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_08.py"
+    },
+    {
+      "id": "eval-nl-09",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "difference_consecutive",
+      "specPath": "agent-inputs/eval/specs/eval-nl-09.json",
+      "referencePath": "oracle/eval/references/eval-nl-09.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_09.py"
+    },
+    {
+      "id": "eval-nl-10",
+      "split": "eval",
+      "category": "numbers_lists",
+      "functionName": "weighted_prefix_score",
+      "specPath": "agent-inputs/eval/specs/eval-nl-10.json",
+      "referencePath": "oracle/eval/references/eval-nl-10.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_nl_10.py"
+    },
+    {
+      "id": "eval-str-01",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "compress_char_runs",
+      "specPath": "agent-inputs/eval/specs/eval-str-01.json",
+      "referencePath": "oracle/eval/references/eval-str-01.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_01.py"
+    },
+    {
+      "id": "eval-str-02",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "normalize_spaces_ascii",
+      "specPath": "agent-inputs/eval/specs/eval-str-02.json",
+      "referencePath": "oracle/eval/references/eval-str-02.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_02.py"
+    },
+    {
+      "id": "eval-str-03",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "longest_common_prefix_list",
+      "specPath": "agent-inputs/eval/specs/eval-str-03.json",
+      "referencePath": "oracle/eval/references/eval-str-03.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_03.py"
+    },
+    {
+      "id": "eval-str-04",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "extract_digit_groups",
+      "specPath": "agent-inputs/eval/specs/eval-str-04.json",
+      "referencePath": "oracle/eval/references/eval-str-04.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_04.py"
+    },
+    {
+      "id": "eval-str-05",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "is_anagram_ascii_letters",
+      "specPath": "agent-inputs/eval/specs/eval-str-05.json",
+      "referencePath": "oracle/eval/references/eval-str-05.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_05.py"
+    },
+    {
+      "id": "eval-str-06",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "mask_middle_chars",
+      "specPath": "agent-inputs/eval/specs/eval-str-06.json",
+      "referencePath": "oracle/eval/references/eval-str-06.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_06.py"
+    },
+    {
+      "id": "eval-str-07",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "reverse_word_order",
+      "specPath": "agent-inputs/eval/specs/eval-str-07.json",
+      "referencePath": "oracle/eval/references/eval-str-07.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_07.py"
+    },
+    {
+      "id": "eval-str-08",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "count_non_overlapping_sub",
+      "specPath": "agent-inputs/eval/specs/eval-str-08.json",
+      "referencePath": "oracle/eval/references/eval-str-08.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_08.py"
+    },
+    {
+      "id": "eval-str-09",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "camel_to_snake_ascii",
+      "specPath": "agent-inputs/eval/specs/eval-str-09.json",
+      "referencePath": "oracle/eval/references/eval-str-09.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_09.py"
+    },
+    {
+      "id": "eval-str-10",
+      "split": "eval",
+      "category": "strings",
+      "functionName": "filter_words_by_bounds",
+      "specPath": "agent-inputs/eval/specs/eval-str-10.json",
+      "referencePath": "oracle/eval/references/eval-str-10.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_str_10.py"
+    },
+    {
+      "id": "eval-edge-01",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "merge_sorted_unique",
+      "specPath": "agent-inputs/eval/specs/eval-edge-01.json",
+      "referencePath": "oracle/eval/references/eval-edge-01.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_01.py"
+    },
+    {
+      "id": "eval-edge-02",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "binary_search_first_ge",
+      "specPath": "agent-inputs/eval/specs/eval-edge-02.json",
+      "referencePath": "oracle/eval/references/eval-edge-02.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_02.py"
+    },
+    {
+      "id": "eval-edge-03",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "are_brackets_balanced",
+      "specPath": "agent-inputs/eval/specs/eval-edge-03.json",
+      "referencePath": "oracle/eval/references/eval-edge-03.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_03.py"
+    },
+    {
+      "id": "eval-edge-04",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "intervals_covered_length",
+      "specPath": "agent-inputs/eval/specs/eval-edge-04.json",
+      "referencePath": "oracle/eval/references/eval-edge-04.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_04.py"
+    },
+    {
+      "id": "eval-edge-05",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "decode_run_length_safe",
+      "specPath": "agent-inputs/eval/specs/eval-edge-05.json",
+      "referencePath": "oracle/eval/references/eval-edge-05.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_05.py"
+    },
+    {
+      "id": "eval-edge-06",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "majority_element_strict",
+      "specPath": "agent-inputs/eval/specs/eval-edge-06.json",
+      "referencePath": "oracle/eval/references/eval-edge-06.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_06.py"
+    },
+    {
+      "id": "eval-edge-07",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "slice_with_clamped_bounds",
+      "specPath": "agent-inputs/eval/specs/eval-edge-07.json",
+      "referencePath": "oracle/eval/references/eval-edge-07.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_07.py"
+    },
+    {
+      "id": "eval-edge-08",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "compare_semver_basic",
+      "specPath": "agent-inputs/eval/specs/eval-edge-08.json",
+      "referencePath": "oracle/eval/references/eval-edge-08.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_08.py"
+    },
+    {
+      "id": "eval-edge-09",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "zero_out_negative_subarrays_sum",
+      "specPath": "agent-inputs/eval/specs/eval-edge-09.json",
+      "referencePath": "oracle/eval/references/eval-edge-09.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_09.py"
+    },
+    {
+      "id": "eval-edge-10",
+      "split": "eval",
+      "category": "edge_cases",
+      "functionName": "stable_top_k_indices",
+      "specPath": "agent-inputs/eval/specs/eval-edge-10.json",
+      "referencePath": "oracle/eval/references/eval-edge-10.py",
+      "oracleTestPath": "oracle/eval/tests/test_eval_edge_10.py"
+    }
+  ]
+}

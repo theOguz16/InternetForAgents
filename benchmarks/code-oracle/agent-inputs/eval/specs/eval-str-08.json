@@ -1,0 +1,20 @@
+{
+  "language": "python",
+  "functionName": "count_non_overlapping_sub",
+  "parameters": [
+    {
+      "name": "text",
+      "type": "str"
+    },
+    {
+      "name": "needle",
+      "type": "str"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "needle boş metin (\"\") ise 0 döndür.",
+    "text içinde needle alt metninin soldan sağa örtüşmeyen (non-overlapping) geçiş sayısını döndür.",
+    "Karşılaştırma büyük/küçük harf duyarlıdır."
+  ]
+}

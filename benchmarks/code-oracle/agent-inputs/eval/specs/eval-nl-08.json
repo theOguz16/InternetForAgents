@@ -1,0 +1,21 @@
+{
+  "language": "python",
+  "functionName": "count_pairs_with_sum",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    },
+    {
+      "name": "target",
+      "type": "int"
+    }
+  ],
+  "returnType": "int",
+  "requirements": [
+    "i < j ve values[i] + values[j] == target koşulunu sağlayan (i, j) indeks çiftlerinin sayısını döndür.",
+    "Bir eleman kendisiyle (i == j) eşleştirilemez.",
+    "Aynı değerin farklı indekslerde tekrarlanması her geçerli indeks çifti için ayrı sayılır.",
+    "Uzunluğu 2 den küçük listeler için 0 döndür."
+  ]
+}

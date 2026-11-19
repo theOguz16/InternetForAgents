@@ -1,0 +1,16 @@
+{
+  "language": "python",
+  "functionName": "is_strictly_alternating_signs",
+  "parameters": [
+    {
+      "name": "values",
+      "type": "list[int]"
+    }
+  ],
+  "returnType": "bool",
+  "requirements": [
+    "Listede 0 elemanı varsa False döndür.",
+    "Boş liste veya 0 olmayan tek elemanlı liste için True döndür.",
+    "Ardışık her iki elemanın işaretleri kesin zıt ise (biri pozitif diğeri negatif) True, aksi halde False döndür."
+  ]
+}
